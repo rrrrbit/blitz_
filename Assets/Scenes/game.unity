@@ -155,7 +155,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d917bd0d88a726248838624e57839765, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -176,7 +176,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d917bd0d88a726248838624e57839765, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6abfef1c345b449b283490c2ad09e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lrSpeed: 100
 --- !u!1 &1235208193
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,68 +6,66 @@
             "id": "bc9fe5c0-a1c6-46c3-a7ba-8edef35cfa96",
             "actions": [
                 {
-                    "name": "l/r",
+                    "name": "lr",
                     "type": "Value",
                     "id": "f86a6d60-3a05-428c-9d44-f7a2d480e3cd",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "jump",
+                    "type": "Button",
+                    "id": "7e3c31b9-dfa3-432b-9d41-ec839b5adf68",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
-                    "id": "cdb84882-a788-478b-9a26-c59d5c3740ab",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "05a85ddf-542b-4e66-a943-26fb51a2ee91",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "l/r",
+                    "action": "jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "22bb44df-289f-4037-a31d-21b71c810f21",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "lr",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "a40bffd6-39ac-4565-8925-8cb78c09c932",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "l/r",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "9f69e620-6ead-4b37-9cfe-901a5d704119",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "l/r",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "871d4c42-11fb-48d2-a50d-a85572aad289",
+                    "name": "negative",
+                    "id": "c68d0ef3-8b4d-49eb-83cc-1d6254ca1c16",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "l/r",
+                    "groups": "",
+                    "action": "lr",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "9afaa6ea-a34a-4ad7-a52d-d8b39fe07e3e",
+                    "name": "positive",
+                    "id": "0955f524-dcbf-492b-b989-9ccc01debd0e",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "l/r",
+                    "groups": "",
+                    "action": "lr",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
