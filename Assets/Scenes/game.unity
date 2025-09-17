@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 634814817}
+  - component: {fileID: 634814819}
   - component: {fileID: 634814818}
   - component: {fileID: 634814816}
   - component: {fileID: 634814815}
@@ -301,9 +302,47 @@ MonoBehaviour:
   accel: 50
   jumpHeight: 5
   jumpTime: 0.75
+  boostForce: 30
   jumpForce: 0
   grav: 0
   grounded: 0
+  jumps: 0
+--- !u!114 &634814819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634814813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb7cc0abb67ceb45a7fefde78e95dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  squashOverVel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 50
+      value: 1
+      inSlope: 0.01
+      outSlope: 0.01
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 100
+      value: 1.5
+      inSlope: 0.01
+      outSlope: 0.01
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &714505904
 GameObject:
   m_ObjectHideFlags: 0

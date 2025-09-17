@@ -274,6 +274,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "58380f0d64004302b106258535622383"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "02b02ccd09e2400a9f17d7bb36885506"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "594a9c843f67458fabdc0a4ef0ea9620"
                 },
                 "m_SlotId": 2
@@ -372,34 +386,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "7c020a081d8f44428caa08175f04c8ee"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "17a3750788e94b0490e1ab77fd778e18"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "7c020a081d8f44428caa08175f04c8ee"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "43a3b3ee184f4fd7ba2396cde4ec5680"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "81461b74b4f74b5dac671c5ff585aa6e"
                 },
                 "m_SlotId": 2
@@ -442,6 +428,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "a3cdaebbf37942b1a956244204de299b"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "85273c1f37334990a85b3f9b88ffdddb"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "c8c29eb9aaf54b94b40f344c18a2f45f"
                 },
                 "m_SlotId": 1
@@ -465,6 +465,34 @@
                     "m_Id": "0886cf00751c44aabb7114715cb1d4ef"
                 },
                 "m_SlotId": 2
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "fe87e81d260845f28604a653411aaa6b"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "17a3750788e94b0490e1ab77fd778e18"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "fe87e81d260845f28604a653411aaa6b"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "43a3b3ee184f4fd7ba2396cde4ec5680"
+                },
+                "m_SlotId": 1
             }
         }
     ],
@@ -1714,7 +1742,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "X",
     "m_StageCapability": 3,
-    "m_Value": 0.0,
+    "m_Value": -0.5,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -2285,7 +2313,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "85ac2f0521fe405eb9cded7f410e6a5e",
     "m_Id": 0,
-    "m_DisplayName": "squashAmt",
+    "m_DisplayName": "squashRatio",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2366,8 +2394,8 @@
     "m_ObjectId": "8b9798bf7808487195b3fba694068d53",
     "m_Title": "squash",
     "m_Position": {
-        "x": -1084.0001220703125,
-        "y": -521.0000610351563
+        "x": -1084.0,
+        "y": -520.9999389648438
     }
 }
 
@@ -2524,10 +2552,10 @@
     "m_Guid": {
         "m_GuidSerialized": "983ac768-5802-4ff5-9c9b-a75b12e3afe1"
     },
-    "m_Name": "squashAmt",
+    "m_Name": "squashRatio",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "squashAmt",
-    "m_DefaultReferenceName": "_squashAmt",
+    "m_RefNameGeneratedByDisplayName": "squashRatio",
+    "m_DefaultReferenceName": "_squashRatio",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -2537,7 +2565,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -2643,8 +2671,8 @@
     "m_ObjectId": "b77eedf392b7408a875ce3d20706f4fe",
     "m_Title": "shear",
     "m_Position": {
-        "x": -642.9998779296875,
-        "y": -477.0
+        "x": -642.9999389648438,
+        "y": -477.0000305175781
     }
 }
 
@@ -3435,10 +3463,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1509.0,
-            "y": -147.99998474121095,
-            "width": 145.0,
-            "height": 34.00001525878906
+            "x": -1537.9998779296875,
+            "y": -147.00001525878907,
+            "width": 144.9998779296875,
+            "height": 34.000022888183597
         }
     },
     "m_Slots": [

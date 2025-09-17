@@ -13,18 +13,22 @@ public class PLAYER_baseMvt : MonoBehaviour
     [SerializeField] float jumpHeight = 10f;
     [SerializeField] float jumpTime = 0.75f;
 
+    [SerializeField] float boostForce;
+    [Space]
     [SerializeField] float jumpForce;
     [SerializeField] float grav;
 
+
+    int maxJumps = 1;
+
     Rigidbody2D rb;
 
-    InputAction lr;
-    InputAction jump;
-    InputAction brake;
-    InputAction boost;
-    InputAction down;
+    InputSystem_Actions.PlayerActions actions;
+
     float lrControl;
+
     [SerializeField] bool grounded;
+    [SerializeField] int jumps = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,8 +41,8 @@ public class PLAYER_baseMvt : MonoBehaviour
         jumpForce = 4f / jumpTime * jumpHeight;
         grav = -8f / jumpTime / jumpTime * jumpHeight;
 
-        lr = InputSystem.actions.FindAction("lr");
-        jump = InputSystem.actions.FindAction("jump");
+        actions = new InputSystem_Actions().player;
+        actions.Enable();
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -67,15 +71,46 @@ public class PLAYER_baseMvt : MonoBehaviour
 
         }
 
+        if (grounded)
+        {
+            jumps = maxJumps;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        lrControl = lr.ReadValue<float>();
-        if (jump.WasPressedThisFrame() && grounded)
+        lrControl = actions.lr.ReadValue<float>();
+        if (actions.jump.WasPressedThisFrame() && jumps > 0)
         {
             rb.linearVelocityY = jumpForce;
+            jumps -= 1;
         }
+
+        if (actions.brake.WasPressedThisFrame())
+        {
+            rb.linearVelocityX -= boostForce;
+        }
+
+        if (actions.boost.WasPressedThisFrame())
+        {
+            rb.linearVelocityX += boostForce;
+        }
+
+        if (actions.down.WasPressedThisFrame())
+        {
+            rb.linearVelocityY = -jumpForce;
+        }
+
+        if (grounded)
+        {
+            GetComponent<PLAYER_anim>().state = PLAYER_anim.States.ground;
+        } else
+        {
+            GetComponent<PLAYER_anim>().state = PLAYER_anim.States.air;
+
+        }
+
     }
 }
