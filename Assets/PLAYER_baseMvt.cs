@@ -22,12 +22,13 @@ public class PLAYER_baseMvt : MonoBehaviour
     int maxJumps = 1;
 
     Rigidbody2D rb;
+	PLAYER_anim anim;
 
     InputSystem_Actions.PlayerActions actions;
 
     float lrControl;
 
-    [SerializeField] bool grounded;
+    public bool grounded;
     [SerializeField] int jumps = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +46,7 @@ public class PLAYER_baseMvt : MonoBehaviour
         actions.Enable();
 
         rb = GetComponent<Rigidbody2D>();
+		anim = GetComponent<PLAYER_anim>();
 
         rb.gravityScale = grav / Physics2D.gravity.y;
     }
@@ -71,11 +73,7 @@ public class PLAYER_baseMvt : MonoBehaviour
 
         }
 
-        if (grounded)
-        {
-            jumps = maxJumps;
-        }
-
+        if (grounded) { jumps = maxJumps; }
     }
 
     // Update is called once per frame
@@ -87,30 +85,11 @@ public class PLAYER_baseMvt : MonoBehaviour
             rb.linearVelocityY = jumpForce;
             jumps -= 1;
         }
+		
+        if (actions.brake.WasPressedThisFrame()) { rb.linearVelocityX -= boostForce; }
+        if (actions.boost.WasPressedThisFrame()) { rb.linearVelocityX += boostForce; }
+        if (actions.down.WasPressedThisFrame()) { rb.linearVelocityY = -jumpForce; }
 
-        if (actions.brake.WasPressedThisFrame())
-        {
-            rb.linearVelocityX -= boostForce;
-        }
-
-        if (actions.boost.WasPressedThisFrame())
-        {
-            rb.linearVelocityX += boostForce;
-        }
-
-        if (actions.down.WasPressedThisFrame())
-        {
-            rb.linearVelocityY = -jumpForce;
-        }
-
-        if (grounded)
-        {
-            GetComponent<PLAYER_anim>().state = PLAYER_anim.States.ground;
-        } else
-        {
-            GetComponent<PLAYER_anim>().state = PLAYER_anim.States.air;
-
-        }
-
+		anim.state = grounded ? PLAYER_anim.States.ground : PLAYER_anim.States.air;
     }
 }
