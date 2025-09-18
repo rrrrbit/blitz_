@@ -6,20 +6,19 @@ using UnityEngine.InputSystem;
 public class PLAYER_baseMvt : MonoBehaviour
 {
     [SerializeField] Collider2D groundCheck;
-    
+
+    [Header("Speed & Accel")]
     [SerializeField] float maxSpeed = 100f;
     [SerializeField] float accel = 50f;
-
+    [Header("Jump")]
     [SerializeField] float jumpHeight = 10f;
     [SerializeField] float jumpTime = 0.75f;
-
+    [SerializeField] float coyoteTime;
+    [Header("Other Mvt")]
     [SerializeField] float boostForce;
-    [Space]
+    [Header("(Internal)")]
     [SerializeField] float jumpForce;
     [SerializeField] float grav;
-
-
-    int maxJumps = 1;
 
     Rigidbody2D rb;
 	PLAYER_anim anim;
@@ -29,7 +28,6 @@ public class PLAYER_baseMvt : MonoBehaviour
     float lrControl;
 
     public bool grounded;
-    [SerializeField] int jumps = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -72,18 +70,15 @@ public class PLAYER_baseMvt : MonoBehaviour
                 );
 
         }
-
-        if (grounded) { jumps = maxJumps; }
     }
 
     // Update is called once per frame
     void Update()
     {
         lrControl = actions.lr.ReadValue<float>();
-        if (actions.jump.WasPressedThisFrame() && jumps > 0)
+        if (actions.jump.IsPressed() && grounded)
         {
             rb.linearVelocityY = jumpForce;
-            jumps -= 1;
         }
 		
         if (actions.brake.WasPressedThisFrame()) { rb.linearVelocityX -= boostForce; }
