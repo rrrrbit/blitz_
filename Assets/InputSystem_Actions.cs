@@ -135,6 +135,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""slash"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa7cb371-9260-4794-8fbb-1b7c5f23b80d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e1df29c-f2c9-4130-ba17-0bee908406cf"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""slash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,6 +308,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_player_boost = m_player.FindAction("boost", throwIfNotFound: true);
         m_player_brake = m_player.FindAction("brake", throwIfNotFound: true);
         m_player_down = m_player.FindAction("down", throwIfNotFound: true);
+        m_player_slash = m_player.FindAction("slash", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -373,6 +394,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_player_boost;
     private readonly InputAction m_player_brake;
     private readonly InputAction m_player_down;
+    private readonly InputAction m_player_slash;
     /// <summary>
     /// Provides access to input actions defined in input action map "player".
     /// </summary>
@@ -404,6 +426,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "player/down".
         /// </summary>
         public InputAction @down => m_Wrapper.m_player_down;
+        /// <summary>
+        /// Provides access to the underlying input action "player/slash".
+        /// </summary>
+        public InputAction @slash => m_Wrapper.m_player_slash;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -445,6 +471,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @down.started += instance.OnDown;
             @down.performed += instance.OnDown;
             @down.canceled += instance.OnDown;
+            @slash.started += instance.OnSlash;
+            @slash.performed += instance.OnSlash;
+            @slash.canceled += instance.OnSlash;
         }
 
         /// <summary>
@@ -471,6 +500,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @down.started -= instance.OnDown;
             @down.performed -= instance.OnDown;
             @down.canceled -= instance.OnDown;
+            @slash.started -= instance.OnSlash;
+            @slash.performed -= instance.OnSlash;
+            @slash.canceled -= instance.OnSlash;
         }
 
         /// <summary>
@@ -611,5 +643,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDown(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "slash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSlash(InputAction.CallbackContext context);
     }
 }
