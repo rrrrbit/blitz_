@@ -7,10 +7,14 @@ public class PLAYER_slash : MonoBehaviour
 {
     [SerializeField] Transform slashBoxPivot;
     [SerializeField] Collider2D slashBox;
-    
+
+    [SerializeField] float checkTime;
     [SerializeField] float comboTime;
 
+    float checkTimer;
     float comboTImer;
+
+    bool checking;
 
     InputSystem_Actions.PlayerActions actions;
 
@@ -32,9 +36,7 @@ public class PLAYER_slash : MonoBehaviour
 
         slashBoxPivot.right = closest.position - transform.position;
 
-        List<Collider2D> overlap = new List<Collider2D>();
-        ContactFilter2D contactFilter = new ContactFilter2D();
-        slashBox.Overlap(overlap);
+        checkTimer = checkTime;
     }
 
     void Setup()
@@ -55,6 +57,24 @@ public class PLAYER_slash : MonoBehaviour
         if (actions.slash.WasPressedThisFrame())
         {
             Slash();
+        }
+
+        if (checkTimer > 0)
+        {
+            slashBox.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, .5f);
+
+            List<Collider2D> overlap = new List<Collider2D>();
+            slashBox.Overlap(overlap);
+            foreach (Collider2D obj in overlap)
+            {
+                Interactable interactable = obj.GetComponent<Interactable>();
+                if (interactable != null)
+                {
+                    interactable.Slash(gameObject);
+                }
+            }
+
+            checkTimer = Mathf.Max(0, checkTimer - Time.deltaTime);
         }
     }
 }

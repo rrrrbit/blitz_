@@ -37,14 +37,22 @@ public class PLAYER_anim : MonoBehaviour
 
     Vector2 visualVel;
 
+    // precalculated lerp factors
+    float lfA, lfB, lfC;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         material = GetComponent<Renderer>().material;
         rb = GetComponent<Rigidbody2D>();
+
+        lfA = GLOBAL.LerpdF(.5f, .05f);
+        lfB = GLOBAL.LerpdF(.5f, .03f);
+        lfC = GLOBAL.LerpdF(.3f, .05f);
+
     }
 
-    void UpdateShader()
+    void UpdateShader(float d)
     {
 
 
@@ -58,7 +66,7 @@ public class PLAYER_anim : MonoBehaviour
             if (last == States.air) 
             {
                 squashDir = targetSquashDir;
-                squashRatio = 1.5f;
+                squashRatio = 1.3f;
             }
         }
         else
@@ -69,13 +77,13 @@ public class PLAYER_anim : MonoBehaviour
 
         float targetSquashRatio = 1f;
 
-        if (!GetComponent<PLAYER_baseMvt>().grounded)
+        if (state == States.air)
         {
             targetSquashRatio = squashOverVel.Evaluate(visualVel.magnitude);
         }
 
-        squashDir = Lerpd(squashDir, targetSquashDir, .5f, .05f, Time.deltaTime);
-        squashRatio = Lerpd(squashRatio, targetSquashRatio, .3f, .05f, Time.deltaTime);
+        squashDir = GLOBAL.Lerpd(squashDir, targetSquashDir, lfA, d);
+        squashRatio = GLOBAL.Lerpd(squashRatio, targetSquashRatio, lfC, d);
 
         float targetShearOrigin = 0;
         float targetShearAmt = 0;
@@ -85,48 +93,32 @@ public class PLAYER_anim : MonoBehaviour
             targetShearAmt = shearOverVelX.Evaluate(Mathf.Abs(visualVel.x)) * Mathf.Sign(visualVel.y);
         }
 
-        shearAmt = Lerpd(shearAmt, targetShearAmt, .5f, .03f, Time.deltaTime);
-        shearOrigin = Lerpd(shearOrigin, targetShearOrigin, .5f, .03f, Time.deltaTime);
+        shearAmt =  GLOBAL.Lerpd(shearAmt, targetShearAmt, lfB, d);
+        shearOrigin = GLOBAL.Lerpd(shearOrigin, targetShearOrigin, lfB, d);
     }
 
-    void UpdateFace()
+    void UpdateFace(float d)
     {
         Vector2 targetPos = new Vector2(
             faceOffsOverVelX.Evaluate(visualVel.x), 
             faceOffsOverVelY.Evaluate(visualVel.y)
             );
 
-        if (state == States.ground && last == States.air) { face.transform.localPosition += Vector3.down * .1f; }
-        else { face.transform.localPosition = Lerpd(face.transform.localPosition, targetPos, .5f, .05f, Time.deltaTime); }
+        if (state == States.ground && last == States.air) { face.transform.localPosition += Vector3.down * .075f; }
+        else { face.transform.localPosition = GLOBAL.Lerpd(face.transform.localPosition, targetPos, lfC, d); }
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        float d = Time.deltaTime;
         visualVel = rb.linearVelocity + visualVelOffs;
-        UpdateShader();
-        UpdateFace();
+        UpdateShader(d);
+        UpdateFace(d);
         ParticleSystem.EmissionModule em = groundParticle.emission;
         em.enabled = state == States.ground;
 
         last = state;
     }
-	
-	float Lerpd(float a, float b, float k, float t, float d) 
-	{ 
-		return Mathf.Lerp(
-			a, b, 
-			1 - Mathf.Pow(
-				1 - k, 
-				d / t)); 
-	}
-    Vector2 Lerpd(Vector2 a, Vector2 b, float k, float t, float d) 
-	{ 
-		return Vector2.Lerp(
-			a, b, 
-			1 - Mathf.Pow(
-				1 - k, 
-				d / t));
-	}
 }

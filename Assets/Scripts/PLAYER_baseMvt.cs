@@ -78,7 +78,7 @@ public class PLAYER_baseMvt : MonoBehaviour
         lrControl = actions.lr.ReadValue<float>();
         if (actions.jump.IsPressed() && grounded)
         {
-            rb.linearVelocityY = jumpForce;
+            Jump();
         }
 		
         if (actions.brake.WasPressedThisFrame()) { rb.linearVelocityX -= boostForce; }
@@ -86,5 +86,10 @@ public class PLAYER_baseMvt : MonoBehaviour
         if (actions.down.WasPressedThisFrame()) { rb.linearVelocityY = -jumpForce; }
 
 		anim.state = grounded ? PLAYER_anim.States.ground : PLAYER_anim.States.air;
+    }
+
+    public void Jump()
+    {
+        rb.linearVelocityY = jumpForce;
     }
 }

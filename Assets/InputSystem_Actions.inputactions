@@ -148,6 +148,17 @@
                     "action": "slash",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "559dcb45-a7a3-4f30-b4d0-353fd7f43a30",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "slash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
