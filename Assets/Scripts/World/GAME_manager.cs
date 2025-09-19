@@ -7,8 +7,12 @@ public class GAME_manager : MonoBehaviour
 {
     public static GAME_manager manager {  get; private set; }
     
+    public GAME_spawns spawns { get; private set; }
+
     public int score = 0;
-    public int speed = 50;
+    public float baseSpeed = 40;
+    public float speedMult = 0;
+    public float speed;
 
     public List<GameObject> interactables = new List<GameObject>();
 
@@ -19,15 +23,14 @@ public class GAME_manager : MonoBehaviour
 
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        spawns = GetComponent<GAME_spawns>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        speedMult = GLOBAL.Lerpd(speedMult, 1, .5f, .75f, Time.deltaTime);
+        speed = baseSpeed * speedMult;
     }
 }

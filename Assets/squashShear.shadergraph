@@ -1607,7 +1607,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "X",
     "m_StageCapability": 3,
-    "m_Value": 1.0,
+    "m_Value": 2.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -2631,7 +2631,7 @@
     "m_Title": "squash",
     "m_Position": {
         "x": -1084.0,
-        "y": -521.0
+        "y": -520.9999389648438
     }
 }
 
@@ -3055,7 +3055,7 @@
     "m_Title": "shear",
     "m_Position": {
         "x": -643.0,
-        "y": -476.9999694824219
+        "y": -477.0
     }
 }
 
@@ -3191,7 +3191,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "X",
     "m_StageCapability": 3,
-    "m_Value": 0.0,
+    "m_Value": 0.6399999856948853,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }

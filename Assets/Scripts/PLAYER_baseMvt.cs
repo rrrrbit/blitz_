@@ -15,7 +15,7 @@ public class PLAYER_baseMvt : MonoBehaviour
     [SerializeField] float jumpTime = 0.75f;
     [SerializeField] float coyoteTime;
     [Header("Other Mvt")]
-    [SerializeField] float boostForce;
+    public float boostForce;
     [Header("(Internal)")]
     [SerializeField] float jumpForce;
     [SerializeField] float grav;
