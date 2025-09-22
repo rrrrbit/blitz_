@@ -4,9 +4,17 @@ public class OBJ_window : GAME_obj
 {
     public Vector2 size;
     public GameObject child;
+	public GameObject contents;
 
     SpriteRenderer sprite;
     BoxCollider2D col;
+
+	[SerializeField] Sprite[] sprites;
+
+	Transform contentsTransform;
+	Sprite icon;
+
+	bool hasIcon = false;
 
     private void UpdateSize()
     {
@@ -15,6 +23,19 @@ public class OBJ_window : GAME_obj
         child.transform.localPosition = size / 2 * new Vector2(1,-1);
 		length = size.x;
 
+    }
+
+	void SetContents()
+	{
+        float aspectRatio = size.y / size.x;
+
+        hasIcon = aspectRatio > 0.9f && aspectRatio < 1.1f;
+
+        if (hasIcon)
+        {
+            icon = sprites[Random.Range(0, sprites.Length)];
+            print("has icon");
+        }
     }
 
     private void Start()
@@ -26,6 +47,14 @@ public class OBJ_window : GAME_obj
     private void Update()
     {
         UpdateSize();
+        if (hasIcon)
+        {
+            contents.transform.localPosition = size / 2 * new Vector2(1, -1) + Vector2.down * 13 / 16;
+            contents.GetComponent<SpriteRenderer>().sprite = icon;
+            
+            contents.transform.localScale = Vector2.one * Mathf.Min(size.x, size.y) * .7f;
+            print("has icon");
+        }		
     }
 
 	public override void Spawn()
@@ -55,7 +84,11 @@ public class OBJ_window : GAME_obj
 		}
 
 		GAME.spawns.queue.Insert(0, gameObject);
-	}
+
+
+		SetContents();
+        
+    }
 
 	public override void SpawnStart()
 	{
@@ -77,5 +110,9 @@ public class OBJ_window : GAME_obj
 			var offsV = new Vector3(randomOffset, -Mathf.Pow(2 * randomOffset / GAME.mgr.speed / mvt.jumpTime, 2) * mvt.jumpHeight);
 			GAME.spawns.nextSpawnOffs = offsV;
 		}
-	}
+
+        GAME.spawns.queue.Insert(0, gameObject);
+		SetContents();
+
+    }
 }

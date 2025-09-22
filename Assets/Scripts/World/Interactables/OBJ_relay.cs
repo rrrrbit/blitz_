@@ -4,6 +4,7 @@ using UnityEngine;
 public class OBJ_relay : Interactable
 {
     [SerializeField] bool repeatable;
+    [SerializeField] float rotateSpeed;
     public override void Slash(GameObject context)
     {
         PLAYER_baseMvt mvt = context.GetComponent<PLAYER_baseMvt>();
@@ -16,7 +17,20 @@ public class OBJ_relay : Interactable
         beenSlashed = true;
     }
 
-	public override void Spawn()
+    void Update()
+    {
+        transform.eulerAngles += Vector3.forward * rotateSpeed * Time.deltaTime;
+
+
+    }
+
+    protected override void Start()
+    {
+        transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
+        base.Start();
+    }
+
+    public override void Spawn()
 	{
 		var mvt = GAME.spawns.mvt;
 

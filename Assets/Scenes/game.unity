@@ -10449,7 +10449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 634814813}
-  lkahdMult: 0.25
+  lkahdMult: 0.3
   k: 0.5
   t: 0.1
 --- !u!1 &1441140819
@@ -10843,6 +10843,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 704472445200479320, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2514058948175288592, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6022639007220960579, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
