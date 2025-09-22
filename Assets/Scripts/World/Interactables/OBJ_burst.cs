@@ -10,8 +10,8 @@ public class OBJ_burst : Interactable
         if (mvt != null && (!beenSlashed || repeatable))
         {
             mvt.gameObject.GetComponent<Rigidbody2D>().linearVelocityX += mvt.boostForce * .5f;
-            GAME_manager.manager.speedMult = 2f;
-            GAME_manager.manager.baseSpeed += 1;
+            GAME.mgr.speedMult = 2f;
+            GAME.mgr.baseSpeed += 1;
         }
 
         beenSlashed = true;

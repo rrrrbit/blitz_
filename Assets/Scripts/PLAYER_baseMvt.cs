@@ -11,8 +11,8 @@ public class PLAYER_baseMvt : MonoBehaviour
     [SerializeField] float maxSpeed = 100f;
     [SerializeField] float accel = 50f;
     [Header("Jump")]
-    [SerializeField] float jumpHeight = 10f;
-    [SerializeField] float jumpTime = 0.75f;
+    [SerializeField] public float jumpHeight = 10f;
+    [SerializeField] public float jumpTime = 0.75f;
     [SerializeField] float coyoteTime;
     [Header("Other Mvt")]
     public float boostForce;

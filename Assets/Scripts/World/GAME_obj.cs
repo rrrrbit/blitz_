@@ -1,14 +1,32 @@
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class GAME_obj : MonoBehaviour
 {
-    protected virtual void FixedUpdate()
+	public float length;
+	
+	protected virtual void FixedUpdate()
     {
-        transform.position += Vector3.left * GAME_manager.manager.speed * Time.fixedDeltaTime;
+        transform.position += Vector3.left * GAME.mgr.speed * Time.fixedDeltaTime;
 
-        if (transform.position.x < GAME_manager.manager.spawns.deleteThreshhold)
+        if (transform.position.x < GAME.spawns.deleteThreshhold)
         {
-            Destroy(gameObject);
+            GAME.spawns.queue.Remove(gameObject);
+			if (GAME.mgr.interactables.Contains(gameObject))
+			{
+				GAME.mgr.interactables.Remove(gameObject);
+			}
+			Destroy(gameObject);
         }
     }
+
+	public virtual void Spawn()
+	{
+		
+	}
+
+	public virtual void SpawnStart()
+	{
+
+	}
 }

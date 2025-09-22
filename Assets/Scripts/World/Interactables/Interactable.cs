@@ -10,6 +10,8 @@ public class Interactable : GAME_obj
 
     protected virtual void Start()
     {
-        GAME_manager.manager.interactables.Add(gameObject);
+        GAME.mgr.interactables.Add(gameObject);
     }
+
+	
 }

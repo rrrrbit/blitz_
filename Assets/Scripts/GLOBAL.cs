@@ -30,8 +30,15 @@ public static class GLOBAL
             a, b,
             1 - Mathf.Pow(f, d));
     }
-    public static float LerpdF(float k, float t)
-    {
-        return Mathf.Pow(1 - k, 1 / t);
-    }
+	public static float LerpdF(float k, float t)
+	{
+		return Mathf.Pow(1 - k, 1 / t);
+	}
+	public static void DrawCross(Vector3 pos, float size = 10, Color? color = null)
+	{
+		var c = color ?? Color.white;
+
+		Debug.DrawLine(pos + Vector3.left * size / 2, pos + Vector3.right * size / 2, c);
+		Debug.DrawLine(pos + Vector3.up * size / 2, pos + Vector3.down * size / 2, c);
+	}
 }
