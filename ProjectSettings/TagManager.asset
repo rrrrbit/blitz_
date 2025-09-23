@@ -47,5 +47,8 @@ TagManager:
   - name: player
     uniqueID: 953482165
     locked: 0
+  - name: blitz
+    uniqueID: 1337011621
+    locked: 0
   m_RenderingLayers:
   - Default

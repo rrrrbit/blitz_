@@ -49,10 +49,10 @@ public class OBJ_window : GAME_obj
         UpdateSize();
         if (hasIcon)
         {
-            contents.transform.localPosition = size / 2 * new Vector2(1, -1) + Vector2.down * 13 / 16;
+            contents.transform.localPosition = size / 2 * new Vector2(1, -1);
             contents.GetComponent<SpriteRenderer>().sprite = icon;
             
-            contents.transform.localScale = Vector2.one * Mathf.Min(size.x, size.y) * .7f;
+            contents.transform.localScale = Vector2.one * Mathf.Min(size.x, size.y) * .6f;
             print("has icon");
         }		
     }
