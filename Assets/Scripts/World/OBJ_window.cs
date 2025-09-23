@@ -29,7 +29,7 @@ public class OBJ_window : GAME_obj
 	{
         float aspectRatio = size.y / size.x;
 
-        hasIcon = aspectRatio > 0.9f && aspectRatio < 1.1f;
+        hasIcon = aspectRatio > 0.9f && aspectRatio < 1.2f;
 
         if (hasIcon)
         {

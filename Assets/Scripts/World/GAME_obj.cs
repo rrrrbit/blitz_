@@ -7,7 +7,8 @@ public class GAME_obj : MonoBehaviour
 	
 	protected virtual void FixedUpdate()
     {
-        transform.position += Vector3.left * GAME.mgr.speed * Time.fixedDeltaTime;
+
+		GetComponent<Rigidbody2D>().linearVelocityX = -GAME.mgr.speed;
 
         if (transform.position.x < GAME.spawns.deleteThreshhold)
         {

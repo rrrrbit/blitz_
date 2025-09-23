@@ -231,6 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 704472445200479320}
   - component: {fileID: 6022639007220960579}
+  - component: {fileID: 7620281436057903282}
   m_Layer: 0
   m_Name: window
   m_TagString: Untagged
@@ -274,3 +275,30 @@ MonoBehaviour:
   sprites:
   - {fileID: -4087377375887406748, guid: 6af33073984d05e4db964fd44106f79f, type: 3}
   - {fileID: 5120940934649208145, guid: 26dab37138f429b4d81c5756376169ed, type: 3}
+--- !u!50 &7620281436057903282
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8164759381850711129}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

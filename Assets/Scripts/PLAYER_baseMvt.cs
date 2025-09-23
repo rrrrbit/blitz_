@@ -23,6 +23,8 @@ public class PLAYER_baseMvt : MonoBehaviour
     Rigidbody2D rb;
 	PLAYER_anim anim;
 
+    public Camera cam;
+
     InputSystem_Actions.PlayerActions actions;
 
     float lrControl;

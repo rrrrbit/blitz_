@@ -27,7 +27,7 @@ public class CAMERA : MonoBehaviour
 
 		p.y = GLOBAL.Lerpd(transform.position.y, target.transform.position.y + lookahead, k, t, Time.deltaTime);
 		transform.position = p;
-
+		return;
 		Debug.DrawLine(new(p.x - 100, p.y, 0), new(p.x + 100, p.y, 0), Color.red);
 		Debug.DrawLine(new(p.x-100, target.transform.position.y, 0), new(p.x + 100, target.transform.position.y, 0), Color.blue);
 		Debug.DrawLine(new(p.x-100, target.transform.position.y + lookahead, 0), new(p.x + 100, target.transform.position.y + lookahead, 0), Color.green);

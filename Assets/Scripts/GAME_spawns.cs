@@ -28,7 +28,7 @@ public class GAME_spawns : MonoBehaviour
         window
     }
 
-    void Spawns()
+    void Spawn()
     {
 		Instantiate(objTypes[Random.Range(0, objTypes.Length)]).GetComponent<GAME_obj>().Spawn();
 		spawnPos.x = queue[0].transform.position.x + queue[0].GetComponent<GAME_obj>().length;
@@ -54,9 +54,9 @@ public class GAME_spawns : MonoBehaviour
 
 		while (queue.Count < maxObjs && spawnPos.x < start)
         {
-            Spawns();
+            Spawn();
         }
-
+		return;
 		GLOBAL.DrawCross(spawnPos, 10, Color.green);
 
 		Debug.DrawLine(spawnPos, spawnPos + nextSpawnOffs, Color.blue);
