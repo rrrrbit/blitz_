@@ -20,6 +20,8 @@ public class PLAYER_baseMvt : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] float grav;
 
+    public float gravityMult = 1f;
+
     Rigidbody2D rb;
 	PLAYER_anim anim;
 
@@ -87,7 +89,9 @@ public class PLAYER_baseMvt : MonoBehaviour
         if (actions.boost.WasPressedThisFrame()) { rb.linearVelocityX += boostForce; }
         if (actions.down.WasPressedThisFrame()) { rb.linearVelocityY = -jumpForce; }
 
-		anim.state = grounded ? PLAYER_anim.States.ground : PLAYER_anim.States.air;
+        rb.gravityScale = grav * gravityMult / Physics2D.gravity.y;
+
+        anim.state = grounded ? PLAYER_anim.States.ground : PLAYER_anim.States.air;
     }
 
     public void Jump()

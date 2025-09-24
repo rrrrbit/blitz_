@@ -34,7 +34,6 @@ public class OBJ_window : GAME_obj
         if (hasIcon)
         {
             icon = sprites[Random.Range(0, sprites.Length)];
-            print("has icon");
         }
     }
 
@@ -71,16 +70,16 @@ public class OBJ_window : GAME_obj
 		{
 			
 			var randomOffset = Random.Range(-jumpLength / 2, jumpLength / 2);
-			var offsV = new Vector3(randomOffset, -4 * randomOffset / GAME.mgr.speed / mvt.jumpTime * mvt.jumpHeight * (1 + randomOffset / GAME.mgr.speed / mvt.jumpTime));
+			var offsV = new Vector3(randomOffset, -4 * randomOffset / jumpLength * mvt.jumpHeight * (1 + randomOffset / jumpLength));
 			GAME.spawns.nextSpawnOffs = Vector3.right * jumpLength + offsV;
-			size = new Vector2(Random.Range(10f, 50f), Random.Range(10f, 50f));
+			size = new Vector2(Random.Range(10f, 50f), Random.Range(10f, 50f)) + Vector2.right * GAME.spawns.grace;
 		}
 		else
 		{
 			var randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
-			var offsV = new Vector3(randomOffset, -Mathf.Pow(2 * randomOffset / GAME.mgr.speed / mvt.jumpTime, 2) * mvt.jumpHeight);
+			var offsV = new Vector3(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
 			GAME.spawns.nextSpawnOffs = offsV;
-			size = new Vector2(Random.Range(10f, 20f), Random.Range(10f, 20f));
+			size = new Vector2(Random.Range(10f, 20f), Random.Range(10f, 20f)) + Vector2.right * GAME.spawns.grace;
 		}
 
 		GAME.spawns.queue.Insert(0, gameObject);
@@ -94,20 +93,20 @@ public class OBJ_window : GAME_obj
 	{
 		var mvt = GAME.spawns.mvt;
 
-		var jumpLength = mvt.jumpTime * GAME.mgr.speed;
+		var jumpLength = mvt.jumpTime * GAME.mgr.baseSpeed;
 
 		bool shouldJump = Random.value < 0.75f;
 
 		if (shouldJump)
 		{
 			var randomOffset = Random.Range(-jumpLength / 2, jumpLength / 2);
-			var offsV = new Vector3(randomOffset, -4 * randomOffset / GAME.mgr.speed / mvt.jumpTime * mvt.jumpHeight * (1 + randomOffset / GAME.mgr.speed / mvt.jumpTime));
+			var offsV = new Vector3(randomOffset, -4 * randomOffset / jumpLength * mvt.jumpHeight * (1 + randomOffset / jumpLength));
 			GAME.spawns.nextSpawnOffs = Vector3.right * jumpLength + offsV;
 		}
 		else
 		{
 			var randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
-			var offsV = new Vector3(randomOffset, -Mathf.Pow(2 * randomOffset / GAME.mgr.speed / mvt.jumpTime, 2) * mvt.jumpHeight);
+			var offsV = new Vector3(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
 			GAME.spawns.nextSpawnOffs = offsV;
 		}
 

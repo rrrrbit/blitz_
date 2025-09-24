@@ -34,12 +34,12 @@ public class OBJ_relay : Interactable
 	{
 		var mvt = GAME.spawns.mvt;
 
-		var jumpLength = mvt.jumpTime * GAME.mgr.speed;
+		var jumpLength = mvt.jumpTime * GAME.mgr.baseSpeed;
 
 		transform.position = GAME.spawns.spawnPos + GAME.spawns.nextSpawnOffs;
 
 		var randomOffset = Random.Range(jumpLength / 2, jumpLength * 1.5f);
-		var offsV = new Vector3(randomOffset, 4 * randomOffset / GAME.mgr.speed / mvt.jumpTime * mvt.jumpHeight * (1 - randomOffset / GAME.mgr.speed / mvt.jumpTime));
+		var offsV = new Vector3(randomOffset, 4 * randomOffset / jumpLength * mvt.jumpHeight * (1 - randomOffset / jumpLength));
 		GAME.spawns.nextSpawnOffs = offsV;
 
 		GAME.spawns.queue.Insert(0, gameObject);

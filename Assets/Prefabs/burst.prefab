@@ -103,7 +103,7 @@ GameObject:
   m_Layer: 6
   m_Name: burst
   m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -230,6 +230,7 @@ MonoBehaviour:
   repeatable: 0
   inner: {fileID: 3441426079424117010}
   rotateSpeed: {x: 60, y: -25}
+  boostTime: 0.35
 --- !u!50 &4331534405134151618
 Rigidbody2D:
   serializedVersion: 5

@@ -73,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 953482165
-  m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingLayerID: 1006733119
+  m_SortingLayer: -1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,7 +97,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6141680274112709978}
   - component: {fileID: 6740289892786547810}
-  - component: {fileID: 3318141266778853032}
   m_Layer: 3
   m_Name: windowChild
   m_TagString: Untagged
@@ -161,11 +160,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1006733119
+  m_SortingLayer: -1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 3922244624772197832, guid: 6c59e2dd3e2a8c64d87bc451a604bd63, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -175,52 +174,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3318141266778853032
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3776264596628374788}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0.28125, y: 0.28125, z: 0.3125, w: 1.625}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8, y: 8}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &8164759381850711129
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,12 +183,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704472445200479320}
-  - component: {fileID: 6022639007220960579}
+  - component: {fileID: 4539293625462340268}
   - component: {fileID: 7620281436057903282}
   m_Layer: 0
-  m_Name: window
+  m_Name: bgWindow
   m_TagString: Untagged
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -248,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 8164759381850711129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -256,7 +209,7 @@ Transform:
   - {fileID: 2654272025459086881}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6022639007220960579
+--- !u!114 &4539293625462340268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,7 +218,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8164759381850711129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17bd4845aadfa074fa58e69b8a762002, type: 3}
+  m_Script: {fileID: 11500000, guid: e324203f3c7513548b20e90e4a1c0302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   length: 0
@@ -273,8 +226,8 @@ MonoBehaviour:
   child: {fileID: 3776264596628374788}
   contents: {fileID: 3643219870374601754}
   sprites:
-  - {fileID: -4087377375887406748, guid: 6af33073984d05e4db964fd44106f79f, type: 3}
   - {fileID: 5120940934649208145, guid: 26dab37138f429b4d81c5756376169ed, type: 3}
+  - {fileID: -4087377375887406748, guid: 6af33073984d05e4db964fd44106f79f, type: 3}
 --- !u!50 &7620281436057903282
 Rigidbody2D:
   serializedVersion: 5

@@ -56,7 +56,7 @@ public class GAME_spawns : MonoBehaviour
         {
             Spawn();
         }
-		return;
+		//return;
 		GLOBAL.DrawCross(spawnPos, 10, Color.green);
 
 		Debug.DrawLine(spawnPos, spawnPos + nextSpawnOffs, Color.blue);
