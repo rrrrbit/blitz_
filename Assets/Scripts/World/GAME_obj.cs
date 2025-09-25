@@ -21,7 +21,7 @@ public class GAME_obj : MonoBehaviour
         }
     }
 
-	public virtual void Spawn()
+	public virtual void Spawn(GAME_spawns.QueuedSpawn ctx)
 	{
 		
 	}

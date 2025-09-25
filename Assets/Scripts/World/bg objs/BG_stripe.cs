@@ -8,7 +8,7 @@ public class BG_stripe : GAME_obj
         
     }
 
-    public override void Spawn()
+    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
     {
         GetComponent<SpriteRenderer>().size = new(Random.Range(1.5f, 12f), Random.Range(1.5f, 12f));
 

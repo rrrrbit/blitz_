@@ -461,7 +461,7 @@ MonoBehaviour:
   deleteThreshhold: -250
   start: 50
   grace: 5
-  maxObjs: 40
+  maxObjs: 10
   objTypes:
   - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
   - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}

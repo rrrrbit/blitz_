@@ -55,7 +55,7 @@ public class BG_window : GAME_obj
         }
     }
 
-    public override void Spawn()
+    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
     {
         size = new Vector2(Random.Range(10f, 50f), Random.Range(10f, 50f));
         SetContents();

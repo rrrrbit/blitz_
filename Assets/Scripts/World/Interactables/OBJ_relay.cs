@@ -30,24 +30,23 @@ public class OBJ_relay : Interactable
         base.Start();
     }
 
-    public override void Spawn()
+    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
 	{
 		var mvt = GAME.spawns.mvt;
 
 		var jumpLength = mvt.jumpTime * GAME.mgr.baseSpeed;
 
-		transform.position = GAME.spawns.spawnPos + GAME.spawns.nextSpawnOffs;
+		//transform.position = ctx.offset;
 
 		var randomOffset = Random.Range(jumpLength / 2, jumpLength * 1.5f);
 		var offsV = new Vector3(randomOffset, 4 * randomOffset / jumpLength * mvt.jumpHeight * (1 - randomOffset / jumpLength));
 
-        GAME_spawns.QueuedSpawn spawn = new();
-        spawn.origin = transform;
-        spawn.pos = offsV;
-        spawn.possibleObjs.Add(GAME.spawns.window, 4);
-        spawn.possibleObjs.Add(GAME.spawns.relay, 2);
-        spawn.possibleObjs.Add(GAME.spawns.burst, 1);
-        GAME.spawns.QueueSpawn(spawn);
+        GAME.spawns.QueueSpawn(new(transform, offsV, new()
+        {
+            {GAME.spawns.window, 4 },
+            {GAME.spawns.relay, 2 },
+            {GAME.spawns.burst, 1 }
+        }));
 
         GAME.spawns.objs.Insert(0, gameObject);
 	}

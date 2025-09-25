@@ -49,24 +49,23 @@ public class OBJ_burst : Interactable
         inner.eulerAngles.Set(0, 0, Random.Range(0, 60));
     }
 
-    public override void Spawn()
+    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
     {
         var mvt = GAME.spawns.mvt;
 
         var jumpLength = mvt.jumpTime * GAME.mgr.baseSpeed;
 
-        transform.position = GAME.spawns.spawnPos + GAME.spawns.nextSpawnOffs;
+        //transform.position = ctx.offset;
 
         var randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
         var offsV = new Vector2(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
 
-        GAME_spawns.QueuedSpawn spawn = new();
-        spawn.origin = transform;
-        spawn.pos = offsV + Vector2.right * GAME.mgr.speed * boostTime;
-        spawn.possibleObjs.Add(GAME.spawns.window, 4);
-        spawn.possibleObjs.Add(GAME.spawns.relay, 2);
-        spawn.possibleObjs.Add(GAME.spawns.burst, 1);
-        GAME.spawns.QueueSpawn(spawn);
+        GAME.spawns.QueueSpawn(new(transform, offsV + Vector2.right * GAME.mgr.speed * boostTime, new()
+        {
+            {GAME.spawns.window, 4 },
+            {GAME.spawns.relay, 2 },
+            {GAME.spawns.burst, 1 }
+        }));
 
         GAME.spawns.objs.Insert(0, gameObject);
     }

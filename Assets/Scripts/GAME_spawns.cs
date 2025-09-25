@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 
 public class GAME_spawns : MonoBehaviour
 {
@@ -30,25 +31,7 @@ public class GAME_spawns : MonoBehaviour
     public GameObject player;
 	public PLAYER_baseMvt mvt;
 
-
-	
-	public Vector2 spawnPos = new();
-
 	public float furthest = 0f;
-
-	public Vector2 nextSpawnOffs = new();
-
-    enum ObjTypeEnum
-    {
-        window
-    }
-
-    void Spawn()
-    {
-		Instantiate(objTypes[Random.Range(0, objTypes.Length)]).GetComponent<GAME_obj>().Spawn();
-		spawnPos.x = objs[0].transform.position.x + objs[0].GetComponent<GAME_obj>().length;
-		spawnPos.y = objs[0].transform.position.y;
-	}
 
 	void Spawn(QueuedSpawn spawn)
 	{
@@ -64,8 +47,8 @@ public class GAME_spawns : MonoBehaviour
 			p -= item.Value;
 		}
 		var objInst = Instantiate(obj);
-		objInst.GetComponent<GAME_obj>().Spawn();
-		objInst.transform.position = (Vector2)spawn.origin.position + spawn.pos;
+		objInst.transform.position = spawn.origin.position + spawn.offset;
+		objInst.GetComponent<GAME_obj>().Spawn(spawn);
     }
 
 	public void QueueSpawn(QueuedSpawn spawn)
@@ -73,56 +56,56 @@ public class GAME_spawns : MonoBehaviour
 		spawnQueue.Enqueue(spawn);
 	}
 
-	public class QueuedSpawn
+	public struct QueuedSpawn
 	{
+		public QueuedSpawn(Transform Origin, Vector3 Offset, Dictionary<GameObject, int> PossibleObjs)
+		{
+			origin = Origin;
+			offset = Offset;
+			possibleObjs = PossibleObjs;
+		}
+		
 		public Transform origin;
-		public Vector2 pos;
-		public Dictionary<GameObject, int> possibleObjs = new();
+		public Vector3 offset;
+		public Dictionary<GameObject, int> possibleObjs;
 	}
 
     private void Start()
     {
-        //queue.Add(Instantiate(objTypes[(int)ObjTypeEnum.window]));
-		spawnPos.x = start;
 		mvt = player.GetComponent<PLAYER_baseMvt>();
 
-		foreach (var obj in objs)
-		{
-			obj.GetComponent<GAME_obj>().SpawnStart();
-		}
+		Invoke("StartDelayed", 0.01f);
+    }
+
+	void StartDelayed()
+	{
+        foreach (var obj in objs)
+        {
+            obj.GetComponent<GAME_obj>().SpawnStart();
+        }
     }
 
     private void Update()
     {
-		foreach(var queued in spawnQueue)
-		{
-			queued.pos += Vector2.left * GAME.mgr.speed * Time.deltaTime;
-		}
 
 		furthest = objs.ConvertAll(x => x.transform.position.x + x.GetComponent<GAME_obj>().length).Max();
 		
-		spawnPos.x = objs[0].transform.position.x + objs[0].GetComponent<GAME_obj>().length;
-		spawnPos.y = objs[0].transform.position.y;
 
-		while (objs.Count < maxObjs && furthest < start)
+		if (objs.Count < maxObjs && furthest < start)
         {
-            //Spawn();
-
 			Spawn(spawnQueue.Dequeue());
+            furthest = objs.ConvertAll(x => x.transform.position.x + x.GetComponent<GAME_obj>().length).Max();
         }
 		//return;
 
-		Debug.DrawLine(spawnPos, spawnPos + nextSpawnOffs, Color.blue);
-
-		GLOBAL.DrawCross(spawnPos, 10, Color.green);
-		GLOBAL.DrawCross(spawnPos + nextSpawnOffs);
-
 		foreach (var queued in spawnQueue)
 		{
-            GLOBAL.DrawCross(queued.pos);
+            GLOBAL.DrawCross(queued.origin.position + queued.offset);
+            GLOBAL.DrawCross(queued.origin.position + queued.origin.gameObject.GetComponent<GAME_obj>().length * Vector3.right, 10, Color.blue);
+			Debug.DrawLine(queued.origin.position + queued.offset, queued.origin.position + queued.origin.gameObject.GetComponent<GAME_obj>().length * Vector3.right, Color.purple);
         }
 
-		Debug.DrawLine(new Vector3(deleteThreshhold, 100, 0), new Vector3(deleteThreshhold, -100, 0), Color.red);
+        Debug.DrawLine(new Vector3(deleteThreshhold, 100, 0), new Vector3(deleteThreshhold, -100, 0), Color.red);
 		Debug.DrawLine(new Vector3(start, 100, 0), new Vector3(start, -100, 0), Color.green);
 		Debug.DrawLine(new Vector3(furthest, 100, 0), new Vector3(furthest, -100, 0), Color.blue);
 
