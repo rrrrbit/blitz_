@@ -44,13 +44,15 @@ public class BG_spawn : MonoBehaviour
             Spawn();
         }
 
+        var objNxt = objs;
         foreach (var obj in objs)
         {
             if (obj.transform.position.x < deleteThreshhold)
             {
                 Destroy(obj);
-                objs.Remove(obj);
+                objNxt.Remove(obj);
             }
         }
+        objs = objNxt;
     }
 }

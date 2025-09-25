@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OBJ_window : GAME_obj
@@ -52,7 +53,6 @@ public class OBJ_window : GAME_obj
             contents.GetComponent<SpriteRenderer>().sprite = icon;
             
             contents.transform.localScale = Vector2.one * Mathf.Min(size.x, size.y) * .6f;
-            print("has icon");
         }		
     }
 
@@ -82,7 +82,7 @@ public class OBJ_window : GAME_obj
 			size = new Vector2(Random.Range(10f, 20f), Random.Range(10f, 20f)) + Vector2.right * GAME.spawns.grace;
 		}
 
-		GAME.spawns.queue.Insert(0, gameObject);
+		GAME.spawns.objs.Insert(0, gameObject);
 
 
 		SetContents();
@@ -101,16 +101,32 @@ public class OBJ_window : GAME_obj
 		{
 			var randomOffset = Random.Range(-jumpLength / 2, jumpLength / 2);
 			var offsV = new Vector3(randomOffset, -4 * randomOffset / jumpLength * mvt.jumpHeight * (1 + randomOffset / jumpLength));
-			GAME.spawns.nextSpawnOffs = Vector3.right * jumpLength + offsV;
+
+			GAME_spawns.QueuedSpawn spawn = new();
+			spawn.origin = transform;
+			spawn.pos = Vector3.right * jumpLength + offsV;
+			spawn.possibleObjs.Add(GAME.spawns.window, 4);
+			spawn.possibleObjs.Add(GAME.spawns.relay, 2);
+			spawn.possibleObjs.Add(GAME.spawns.burst, 1);
+            GAME.spawns.QueueSpawn(spawn);
+
+			//GAME.spawns.nextSpawnOffs = ;
 		}
 		else
 		{
 			var randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
 			var offsV = new Vector3(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
-			GAME.spawns.nextSpawnOffs = offsV;
-		}
 
-        GAME.spawns.queue.Insert(0, gameObject);
+            GAME_spawns.QueuedSpawn spawn = new();
+            spawn.origin = transform;
+            spawn.pos = offsV;
+            spawn.possibleObjs.Add(GAME.spawns.window, 4);
+            spawn.possibleObjs.Add(GAME.spawns.relay, 2);
+            spawn.possibleObjs.Add(GAME.spawns.burst, 1);
+            GAME.spawns.QueueSpawn(spawn);
+        }
+
+        GAME.spawns.objs.Insert(0, gameObject);
 		SetContents();
 
     }

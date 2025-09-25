@@ -59,8 +59,15 @@ public class OBJ_burst : Interactable
 
         var randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
         var offsV = new Vector2(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
-        GAME.spawns.nextSpawnOffs = offsV + Vector2.right * GAME.mgr.speed * boostTime;
 
-        GAME.spawns.queue.Insert(0, gameObject);
+        GAME_spawns.QueuedSpawn spawn = new();
+        spawn.origin = transform;
+        spawn.pos = offsV + Vector2.right * GAME.mgr.speed * boostTime;
+        spawn.possibleObjs.Add(GAME.spawns.window, 4);
+        spawn.possibleObjs.Add(GAME.spawns.relay, 2);
+        spawn.possibleObjs.Add(GAME.spawns.burst, 1);
+        GAME.spawns.QueueSpawn(spawn);
+
+        GAME.spawns.objs.Insert(0, gameObject);
     }
 }

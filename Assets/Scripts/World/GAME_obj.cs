@@ -12,12 +12,12 @@ public class GAME_obj : MonoBehaviour
 
         if (transform.position.x < GAME.spawns.deleteThreshhold)
         {
-            GAME.spawns.queue.Remove(gameObject);
+            GAME.spawns.objs.Remove(gameObject);
 			if (GAME.mgr.interactables.Contains(gameObject))
 			{
 				GAME.mgr.interactables.Remove(gameObject);
 			}
-			Destroy(gameObject);
+			Destroy(gameObject, 0.1f);
         }
     }
 

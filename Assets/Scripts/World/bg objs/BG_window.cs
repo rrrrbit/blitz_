@@ -52,7 +52,6 @@ public class BG_window : GAME_obj
             contents.GetComponent<SpriteRenderer>().color = sprite.color;
 
             contents.transform.localScale = Vector2.one * Mathf.Min(size.x, size.y) * .6f;
-            print("has icon");
         }
     }
 

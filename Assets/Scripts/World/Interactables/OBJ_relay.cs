@@ -40,8 +40,15 @@ public class OBJ_relay : Interactable
 
 		var randomOffset = Random.Range(jumpLength / 2, jumpLength * 1.5f);
 		var offsV = new Vector3(randomOffset, 4 * randomOffset / jumpLength * mvt.jumpHeight * (1 - randomOffset / jumpLength));
-		GAME.spawns.nextSpawnOffs = offsV;
 
-		GAME.spawns.queue.Insert(0, gameObject);
+        GAME_spawns.QueuedSpawn spawn = new();
+        spawn.origin = transform;
+        spawn.pos = offsV;
+        spawn.possibleObjs.Add(GAME.spawns.window, 4);
+        spawn.possibleObjs.Add(GAME.spawns.relay, 2);
+        spawn.possibleObjs.Add(GAME.spawns.burst, 1);
+        GAME.spawns.QueueSpawn(spawn);
+
+        GAME.spawns.objs.Insert(0, gameObject);
 	}
 }

@@ -19,4 +19,9 @@ public class GAME_manager : MonoBehaviour
         speed = baseSpeed * speedMult;
 		baseSpeed += 1f / 6 * Time.deltaTime;
     }
+
+    public void AddScore(int amt)
+    {
+        score += amt;
+    }
 }

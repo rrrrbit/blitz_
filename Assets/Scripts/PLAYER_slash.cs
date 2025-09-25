@@ -71,6 +71,10 @@ public class PLAYER_slash : MonoBehaviour
                 if (interactable != null)
                 {
                     interactable.Slash(gameObject);
+                    if (interactable.GetType() == typeof(Destructible))
+                    {
+                        checkTimer = checkTime;
+                    }
                 }
             }
 

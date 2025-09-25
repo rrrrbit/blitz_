@@ -13,13 +13,28 @@ public class GAME_spawns : MonoBehaviour
 
     public GameObject[] objTypes;
 
-    public List<GameObject> queue = new();
+	[Header("object type refs")]
+	public GameObject window;
+	public GameObject relay;
+	public GameObject burst;
+	public GameObject proxy;
+	public GameObject kblitz;
+	public GameObject node;
+    public GameObject wall;
+	[Space]
+
+    public List<GameObject> objs = new();
+
+	public Queue<QueuedSpawn> spawnQueue = new();
 
     public GameObject player;
-
 	public PLAYER_baseMvt mvt;
 
+
+	
 	public Vector2 spawnPos = new();
+
+	public float furthest = 0f;
 
 	public Vector2 nextSpawnOffs = new();
 
@@ -31,8 +46,38 @@ public class GAME_spawns : MonoBehaviour
     void Spawn()
     {
 		Instantiate(objTypes[Random.Range(0, objTypes.Length)]).GetComponent<GAME_obj>().Spawn();
-		spawnPos.x = queue[0].transform.position.x + queue[0].GetComponent<GAME_obj>().length;
-		spawnPos.y = queue[0].transform.position.y;
+		spawnPos.x = objs[0].transform.position.x + objs[0].GetComponent<GAME_obj>().length;
+		spawnPos.y = objs[0].transform.position.y;
+	}
+
+	void Spawn(QueuedSpawn spawn)
+	{
+		GameObject obj = null;
+		int p = Random.Range(0, spawn.possibleObjs.Values.Sum());
+		foreach (var item in spawn.possibleObjs)
+		{
+			if (p <= item.Value)
+			{
+				obj = item.Key;
+				break;
+			}
+			p -= item.Value;
+		}
+		var objInst = Instantiate(obj);
+		objInst.GetComponent<GAME_obj>().Spawn();
+		objInst.transform.position = (Vector2)spawn.origin.position + spawn.pos;
+    }
+
+	public void QueueSpawn(QueuedSpawn spawn)
+	{
+		spawnQueue.Enqueue(spawn);
+	}
+
+	public class QueuedSpawn
+	{
+		public Transform origin;
+		public Vector2 pos;
+		public Dictionary<GameObject, int> possibleObjs = new();
 	}
 
     private void Start()
@@ -41,7 +86,7 @@ public class GAME_spawns : MonoBehaviour
 		spawnPos.x = start;
 		mvt = player.GetComponent<PLAYER_baseMvt>();
 
-		foreach (var obj in queue)
+		foreach (var obj in objs)
 		{
 			obj.GetComponent<GAME_obj>().SpawnStart();
 		}
@@ -49,23 +94,38 @@ public class GAME_spawns : MonoBehaviour
 
     private void Update()
     {
-		spawnPos.x = queue[0].transform.position.x + queue[0].GetComponent<GAME_obj>().length;
-		spawnPos.y = queue[0].transform.position.y;
+		foreach(var queued in spawnQueue)
+		{
+			queued.pos += Vector2.left * GAME.mgr.speed * Time.deltaTime;
+		}
 
-		while (queue.Count < maxObjs && spawnPos.x < start)
+		furthest = objs.ConvertAll(x => x.transform.position.x + x.GetComponent<GAME_obj>().length).Max();
+		
+		spawnPos.x = objs[0].transform.position.x + objs[0].GetComponent<GAME_obj>().length;
+		spawnPos.y = objs[0].transform.position.y;
+
+		while (objs.Count < maxObjs && furthest < start)
         {
-            Spawn();
+            //Spawn();
+
+			Spawn(spawnQueue.Dequeue());
         }
 		//return;
-		GLOBAL.DrawCross(spawnPos, 10, Color.green);
 
 		Debug.DrawLine(spawnPos, spawnPos + nextSpawnOffs, Color.blue);
 
+		GLOBAL.DrawCross(spawnPos, 10, Color.green);
 		GLOBAL.DrawCross(spawnPos + nextSpawnOffs);
+
+		foreach (var queued in spawnQueue)
+		{
+            GLOBAL.DrawCross(queued.pos);
+        }
 
 		Debug.DrawLine(new Vector3(deleteThreshhold, 100, 0), new Vector3(deleteThreshhold, -100, 0), Color.red);
 		Debug.DrawLine(new Vector3(start, 100, 0), new Vector3(start, -100, 0), Color.green);
+		Debug.DrawLine(new Vector3(furthest, 100, 0), new Vector3(furthest, -100, 0), Color.blue);
 
-	}
+    }
 
 }

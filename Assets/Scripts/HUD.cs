@@ -4,6 +4,7 @@ using UnityEngine;
 public class HUD : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI speedText;
+    [SerializeField] TextMeshProUGUI scoreText;
 
 
     float visualSpeed;
@@ -19,5 +20,6 @@ public class HUD : MonoBehaviour
         visualSpeed = GLOBAL.Lerpd(visualSpeed, GAME.mgr.speed, 0.5f, 0.1f, Time.deltaTime);
         
         speedText.text = "speed: " + Mathf.RoundToInt(visualSpeed * 3.6f) + "k/h";
+        scoreText.text = GAME.mgr.score.ToString();
     }
 }
