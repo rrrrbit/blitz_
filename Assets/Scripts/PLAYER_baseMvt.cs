@@ -53,7 +53,6 @@ public class PLAYER_baseMvt : MonoBehaviour
         rb.gravityScale = grav / Physics2D.gravity.y;
     }
 
-
     private void FixedUpdate()
     {
         float targetVelX = lrControl * maxSpeed;
@@ -98,4 +97,7 @@ public class PLAYER_baseMvt : MonoBehaviour
     {
         rb.linearVelocityY = jumpForce;
     }
+
+    public float JumpLength() => jumpTime * GAME.mgr.speed;
+    public float Trajectory(float startFactor, float dist) => (1 - 2 * startFactor + dist / JumpLength()) * 4 * jumpHeight * dist / JumpLength();
 }

@@ -33,36 +33,21 @@ public class OBJ_relay : Interactable
     public override void Spawn(GAME_spawns.QueuedSpawn ctx)
 	{
 		var mvt = GAME.spawns.mvt;
+        var randomOffset = mvt.JumpLength() * Random.Range(.5f, 1.5f);
+        Vector3 offsV = new(randomOffset, mvt.Trajectory(0, randomOffset));
 
-		var jumpLength = mvt.jumpTime * GAME.mgr.baseSpeed;
-
-		//transform.position = ctx.offset;
-
-
-        if (GAME.spawns.spawnQueue.Count > 1 && Random.value < 0.3f)
-        {
-            if(Random.value < 0.6f)
+        if (GAME.spawns.spawnQueue.Count > 1)
+        { 
+            GAME.spawns.QueueSpawn(new(transform, offsV, new()
             {
-                GAME.spawns.QueueSpawn(new(transform, Vector2.zero, null));
-            } 
-            else
-            {
-                var randomOffset = Random.Range(jumpLength / 2, jumpLength * 1.5f);
-                var offsV = new Vector3(randomOffset, 4 * randomOffset / jumpLength * mvt.jumpHeight * (1 - randomOffset / jumpLength));
-                GAME.spawns.QueueSpawn(new(transform, offsV, new()
-                {
-                    {GAME.spawns.window, 4 },
-                    {GAME.spawns.relay, 2 },
-                    {GAME.spawns.burst, 1 },
-                    {GAME.spawns.empty, 2 }
-                }));
-            }
-            
+                {GAME.spawns.window, 4 },
+                {GAME.spawns.relay, 2 },
+                {GAME.spawns.burst, 1 },
+                {GAME.spawns.empty, 2 }
+            }));
         }
         else
         {
-		    var randomOffset = Random.Range(jumpLength / 2, jumpLength * 1.5f);
-		    var offsV = new Vector3(randomOffset, 4 * randomOffset / jumpLength * mvt.jumpHeight * (1 - randomOffset / jumpLength));
             GAME.spawns.QueueSpawn(new(transform, offsV, new()
             {
                 {GAME.spawns.window, 4 },

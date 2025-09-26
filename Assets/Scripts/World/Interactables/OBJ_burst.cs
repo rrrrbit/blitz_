@@ -52,13 +52,8 @@ public class OBJ_burst : Interactable
     public override void Spawn(GAME_spawns.QueuedSpawn ctx)
     {
         var mvt = GAME.spawns.mvt;
-
-        var jumpLength = mvt.jumpTime * GAME.mgr.baseSpeed;
-
-        //transform.position = ctx.offset;
-
-        var randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
-        var offsV = new Vector2(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
+        var randomOffset = mvt.JumpLength() * Random.Range(.25f, .5f);
+        Vector2 offsV = new(randomOffset, mvt.Trajectory(.5f, randomOffset));
 
         GAME.spawns.QueueSpawn(new(transform, offsV + Vector2.right * GAME.mgr.speed * boostTime, new()
         {
