@@ -38,16 +38,40 @@ public class OBJ_relay : Interactable
 
 		//transform.position = ctx.offset;
 
-		var randomOffset = Random.Range(jumpLength / 2, jumpLength * 1.5f);
-		var offsV = new Vector3(randomOffset, 4 * randomOffset / jumpLength * mvt.jumpHeight * (1 - randomOffset / jumpLength));
 
-        GAME.spawns.QueueSpawn(new(transform, offsV, new()
+        if (GAME.spawns.spawnQueue.Count > 1 && Random.value < 0.3f)
         {
-            {GAME.spawns.window, 4 },
-            {GAME.spawns.relay, 2 },
-            {GAME.spawns.burst, 1 }
-        }));
+            if(Random.value < 0.6f)
+            {
+                GAME.spawns.QueueSpawn(new(transform, Vector2.zero, null));
+            } 
+            else
+            {
+                var randomOffset = Random.Range(jumpLength / 2, jumpLength * 1.5f);
+                var offsV = new Vector3(randomOffset, 4 * randomOffset / jumpLength * mvt.jumpHeight * (1 - randomOffset / jumpLength));
+                GAME.spawns.QueueSpawn(new(transform, offsV, new()
+                {
+                    {GAME.spawns.window, 4 },
+                    {GAME.spawns.relay, 2 },
+                    {GAME.spawns.burst, 1 },
+                    {GAME.spawns.empty, 2 }
+                }));
+            }
+            
+        }
+        else
+        {
+		    var randomOffset = Random.Range(jumpLength / 2, jumpLength * 1.5f);
+		    var offsV = new Vector3(randomOffset, 4 * randomOffset / jumpLength * mvt.jumpHeight * (1 - randomOffset / jumpLength));
+            GAME.spawns.QueueSpawn(new(transform, offsV, new()
+            {
+                {GAME.spawns.window, 4 },
+                {GAME.spawns.relay, 2 },
+                {GAME.spawns.burst, 1 }
+            }));
+        }
 
-        GAME.spawns.objs.Insert(0, gameObject);
+
+        GAME.spawns.objs.Add(gameObject);
 	}
 }

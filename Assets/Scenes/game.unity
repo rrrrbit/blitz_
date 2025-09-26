@@ -461,7 +461,7 @@ MonoBehaviour:
   deleteThreshhold: -250
   start: 50
   grace: 5
-  maxObjs: 10
+  maxObjs: 50
   objTypes:
   - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
   - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
@@ -477,13 +477,11 @@ MonoBehaviour:
   kblitz: {fileID: 0}
   node: {fileID: 3657978883164431491, guid: 3ead752729c5dfc498169fd2f05c2efd, type: 3}
   wall: {fileID: 0}
+  empty: {fileID: 4701189408267180690, guid: eae60b12ef5c6494fbbdd1b737506210, type: 3}
   objs:
   - {fileID: 118081401}
   player: {fileID: 634814813}
   mvt: {fileID: 634814818}
-  spawnPos: {x: 0, y: 0}
-  furthest: 0
-  nextSpawnOffs: {x: 0, y: 0}
 --- !u!114 &467681794
 MonoBehaviour:
   m_ObjectHideFlags: 0

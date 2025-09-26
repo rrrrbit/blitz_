@@ -67,6 +67,6 @@ public class OBJ_burst : Interactable
             {GAME.spawns.burst, 1 }
         }));
 
-        GAME.spawns.objs.Insert(0, gameObject);
+        GAME.spawns.objs.Add(gameObject);
     }
 }

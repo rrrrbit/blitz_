@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class GAME_spawns : MonoBehaviour
 {
@@ -22,16 +23,17 @@ public class GAME_spawns : MonoBehaviour
 	public GameObject kblitz;
 	public GameObject node;
     public GameObject wall;
+	public GameObject empty;
 	[Space]
 
     public List<GameObject> objs = new();
 
-	public Queue<QueuedSpawn> spawnQueue = new();
+	public List<QueuedSpawn> spawnQueue = new();
 
     public GameObject player;
 	public PLAYER_baseMvt mvt;
 
-	public float furthest = 0f;
+	public QueuedSpawn nearest;
 
 	void Spawn(QueuedSpawn spawn)
 	{
@@ -53,7 +55,7 @@ public class GAME_spawns : MonoBehaviour
 
 	public void QueueSpawn(QueuedSpawn spawn)
 	{
-		spawnQueue.Enqueue(spawn);
+		spawnQueue.Add(spawn);
 	}
 
 	public struct QueuedSpawn
@@ -65,6 +67,8 @@ public class GAME_spawns : MonoBehaviour
 			possibleObjs = PossibleObjs;
 		}
 		
+		public Vector3 AbsPos() => origin.transform.position + offset;
+
 		public Transform origin;
 		public Vector3 offset;
 		public Dictionary<GameObject, int> possibleObjs;
@@ -82,23 +86,23 @@ public class GAME_spawns : MonoBehaviour
         foreach (var obj in objs)
         {
             obj.GetComponent<GAME_obj>().SpawnStart();
-        }
+        }	
     }
-
+	
     private void Update()
     {
+		nearest = spawnQueue.OrderBy(x => x.origin.position.x + x.offset.x).First();
 
-		furthest = objs.ConvertAll(x => x.transform.position.x + x.GetComponent<GAME_obj>().length).Max();
-		
 
-		if (objs.Count < maxObjs && furthest < start)
+        if (objs.Count < maxObjs && nearest.AbsPos().x < start)
         {
-			Spawn(spawnQueue.Dequeue());
-            furthest = objs.ConvertAll(x => x.transform.position.x + x.GetComponent<GAME_obj>().length).Max();
+            Spawn(nearest);
+			spawnQueue.Remove(nearest);
+            nearest = spawnQueue.OrderBy(x => x.origin.position.x + x.offset.x).First();
         }
-		//return;
+        //return;
 
-		foreach (var queued in spawnQueue)
+        foreach (var queued in spawnQueue)
 		{
             GLOBAL.DrawCross(queued.origin.position + queued.offset);
             GLOBAL.DrawCross(queued.origin.position + queued.origin.gameObject.GetComponent<GAME_obj>().length * Vector3.right, 10, Color.blue);
@@ -107,7 +111,7 @@ public class GAME_spawns : MonoBehaviour
 
         Debug.DrawLine(new Vector3(deleteThreshhold, 100, 0), new Vector3(deleteThreshhold, -100, 0), Color.red);
 		Debug.DrawLine(new Vector3(start, 100, 0), new Vector3(start, -100, 0), Color.green);
-		Debug.DrawLine(new Vector3(furthest, 100, 0), new Vector3(furthest, -100, 0), Color.blue);
+		Debug.DrawLine(new Vector3(nearest.AbsPos().x, 100, 0), new Vector3(nearest.AbsPos().x, -100, 0), Color.blue);
 
     }
 

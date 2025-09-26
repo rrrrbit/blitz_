@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OBJ_window : GAME_obj
@@ -59,57 +58,49 @@ public class OBJ_window : GAME_obj
 	public override void Spawn(GAME_spawns.QueuedSpawn ctx)
 	{
 		var mvt = GAME.spawns.mvt;
-
 		var jumpLength = mvt.jumpTime * GAME.mgr.speed;
-
 		bool shouldJump = Random.value < 0.5f;
-
 		transform.position += Vector3.left * GAME.spawns.grace;
 
-        float randomOffset = shouldJump ? 
-            Random.Range(-jumpLength / 2, jumpLength / 2) : 
-            Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
-
-        Vector3 offsV = new(randomOffset, shouldJump ? 
-            (-4 * randomOffset / jumpLength * mvt.jumpHeight * (1 + randomOffset / jumpLength)) : 
-            (-Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight)
-            );
-
-        size = (shouldJump ?
-            new(Random.Range(10f, 50f), Random.Range(10f, 50f)) :
-            new(Random.Range(10f, 20f), Random.Range(10f, 20f)))
-            + Vector2.right * GAME.spawns.grace;
-
-        GAME.spawns.QueueSpawn(new(transform, (shouldJump ? Vector3.right : Vector3.zero) * jumpLength + offsV + Vector3.right * size.x, new()
-            {
-                {GAME.spawns.window, 4 },
-                {GAME.spawns.relay, 2 },
-                {GAME.spawns.burst, 1 }
-            }));
-
-        /*if (Random.value < 0.9f)
+        if (shouldJump)
         {
-            randomOffset = shouldJump ?
-            Random.Range(jumpLength * 0.25f, jumpLength * 0.75f) :
-            Random.Range(-jumpLength / 2, jumpLength / 2);
-
-            offsV = new(randomOffset, shouldJump ?
-            (-Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight) :
-            (-4 * randomOffset / jumpLength * mvt.jumpHeight * (1 + randomOffset / jumpLength)));
-
-            GAME.spawns.QueueSpawn(new(transform, (shouldJump ? Vector3.zero : Vector3.right) * jumpLength + offsV + Vector3.right * size.x, new()
-            {
+            size = new Vector2(Random.Range(5, 30), Random.Range(5, 20)) + Vector2.right * GAME.spawns.grace;
+            float randomOffset = Random.Range(-jumpLength / 2, jumpLength / 2);
+            Vector3 offsV = new(randomOffset, -4 * randomOffset / jumpLength * mvt.jumpHeight * (1 + randomOffset / jumpLength));
+            GAME.spawns.QueueSpawn(new(transform, Vector3.right * jumpLength + offsV + Vector3.right * size.x, new() {
                 {GAME.spawns.window, 4 },
                 {GAME.spawns.relay, 2 },
                 {GAME.spawns.burst, 1 }
             }));
-        }*/
-
-		GAME.spawns.objs.Insert(0, gameObject);
-
-
+        }
+        else
+        {
+            size = new Vector2(Random.Range(5, 30), Random.Range(5, 20)) + Vector2.right * GAME.spawns.grace;
+            if (Random.value < 0.325f && GAME.spawns.spawnQueue.Count < 2)
+            {
+                GAME.spawns.QueueSpawn(new(transform, Vector3.right * jumpLength + Vector3.right * size.x, new() {
+                    {GAME.spawns.relay, 2 },
+                    {GAME.spawns.burst, 1 }
+                }));
+                float randomOffset = Random.Range(jumpLength * 0.75f, jumpLength);
+                Vector3 offsV = new(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
+                GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
+                    {GAME.spawns.window, 1 }
+                }));
+            }
+            else
+            {
+                float randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
+                Vector3 offsV = new(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
+                GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
+                    {GAME.spawns.window, 4 },
+                    {GAME.spawns.relay, 2 },
+                    {GAME.spawns.burst, 1 }
+                }));
+            }
+        }
+		GAME.spawns.objs.Add(gameObject);
 		SetContents();
-        
     }
 
 	public override void SpawnStart()
@@ -118,37 +109,44 @@ public class OBJ_window : GAME_obj
 
 		var jumpLength = mvt.jumpTime * GAME.mgr.baseSpeed;
 
-		bool shouldJump = Random.value < 0.75f;
+		bool shouldJump = Random.value < 0.5f;
 
-		if (shouldJump)
-		{
-			var randomOffset = Random.Range(-jumpLength / 2, jumpLength / 2);
-			var offsV = new Vector3(randomOffset, -4 * randomOffset / jumpLength * mvt.jumpHeight * (1 + randomOffset / jumpLength));
-
-            GAME.spawns.QueueSpawn(new(transform, Vector3.right * jumpLength + offsV + Vector3.right * size.x, new()
-            {
-                {GAME.spawns.window, 4 },
-                {GAME.spawns.relay, 2 },
-                {GAME.spawns.burst, 1 }
-            }));
-
-			//GAME.spawns.nextSpawnOffs = ;
-		}
-		else
-		{
-			var randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
-			var offsV = new Vector3(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
-
-            GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new()
-            {
+        if (shouldJump)
+        {
+            float randomOffset = Random.Range(-jumpLength / 2, jumpLength / 2);
+            Vector3 offsV = new(randomOffset, -4 * randomOffset / jumpLength * mvt.jumpHeight * (1 + randomOffset / jumpLength));
+            GAME.spawns.QueueSpawn(new(transform, Vector3.right * jumpLength + offsV + Vector3.right * size.x, new() {
                 {GAME.spawns.window, 4 },
                 {GAME.spawns.relay, 2 },
                 {GAME.spawns.burst, 1 }
             }));
         }
-
-        //GAME.spawns.objs.Insert(0, gameObject);
-		SetContents();
+        else
+        {
+            if (Random.value < 0.325f && GAME.spawns.spawnQueue.Count < 2)
+            {
+                GAME.spawns.QueueSpawn(new(transform, Vector3.right * jumpLength + Vector3.right * size.x, new() {
+                    {GAME.spawns.relay, 2 },
+                    {GAME.spawns.burst, 1 }
+                }));
+                float randomOffset = Random.Range(jumpLength * 0.75f, jumpLength);
+                Vector3 offsV = new(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
+                GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
+                    {GAME.spawns.window, 1 }
+                }));
+            }
+            else
+            {
+                float randomOffset = Random.Range(jumpLength * 0.25f, jumpLength * 0.75f);
+                Vector3 offsV = new(randomOffset, -Mathf.Pow(2 * randomOffset / jumpLength, 2) * mvt.jumpHeight);
+                GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
+                    {GAME.spawns.window, 4 },
+                    {GAME.spawns.relay, 2 },
+                    {GAME.spawns.burst, 1 }
+                }));
+            }
+        }
+        SetContents();
 
     }
 }
