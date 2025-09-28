@@ -163,13 +163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7edd70fe83138c488a4166ff0f9183a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deleteThreshhold: -250
   start: 200
   maxObjs: 10
   objType: {fileID: 8859951952461382712, guid: 253cd4b18aa08e543ba00b6a64f851ca, type: 3}
   nxtSpwnDstBounds: {x: 100, y: 200}
   nextSpawnDist: 0
-  objs: []
 --- !u!1 &35220075
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,13 +212,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7edd70fe83138c488a4166ff0f9183a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deleteThreshhold: -250
   start: 200
   maxObjs: 10
   objType: {fileID: 239127719976214773, guid: 4be38c3154101374c888115506720974, type: 3}
   nxtSpwnDstBounds: {x: 50, y: 200}
   nextSpawnDist: 0
-  objs: []
 --- !u!1 &118081401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
@@ -357,9 +353,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 741378787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -203, y: -199.75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 107.63, y: 24.13}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &210723650
@@ -426,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  baseSpeed: 40
+  baseSpeed: 50
   speedMult: 1
   speed: 40
   interactables: []
@@ -458,8 +454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276b410bc293c754a929f98d2a6ac55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deleteThreshhold: -250
-  start: 50
+  deleteThreshhold: -100
+  start: 100
   grace: 5
   maxObjs: 50
   objTypes:
@@ -653,7 +649,7 @@ Transform:
   m_GameObject: {fileID: 634814813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.4, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5703,9 +5699,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 741378787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -203, y: -149}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 103.17, y: 73.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741132426
@@ -10882,13 +10878,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7edd70fe83138c488a4166ff0f9183a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deleteThreshhold: -250
   start: 200
   maxObjs: 10
   objType: {fileID: 8164759381850711129, guid: 2467721e9c09eef4d81dac99785a7760, type: 3}
   nxtSpwnDstBounds: {x: 50, y: 200}
   nextSpawnDist: 0
-  objs: []
 --- !u!1 &1143458996
 GameObject:
   m_ObjectHideFlags: 0
@@ -15760,7 +15754,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152732336}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15921,6 +15915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 634814813}
+  offset: {x: 0, y: 0, z: -25}
   lkahdMult: 0.3
   k: 0.5
   t: 0.1
@@ -16353,7 +16348,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 35.72, y: 20}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -16588,7 +16583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6022639007220960579, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
       propertyPath: size.x
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 6022639007220960579, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
       propertyPath: size.y
@@ -16596,6 +16591,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6022639007220960579, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
       propertyPath: startSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6022639007220960579, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
+      propertyPath: presentAtStart
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6740289892786547810, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}

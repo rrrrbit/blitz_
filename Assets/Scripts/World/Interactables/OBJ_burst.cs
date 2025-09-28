@@ -57,10 +57,11 @@ public class OBJ_burst : Interactable
 
         GAME.spawns.QueueSpawn(new(transform, offsV + Vector2.right * GAME.mgr.speed * boostTime, new()
         {
-            {GAME.spawns.window, 4 },
-            {GAME.spawns.relay, 2 },
+            {GAME.spawns.window, 8 },
+            {GAME.spawns.relay, 1 },
             {GAME.spawns.burst, 1 }
-        }));
+        },
+		Random.Range(5f, 30f)));
 
         GAME.spawns.objs.Add(gameObject);
     }

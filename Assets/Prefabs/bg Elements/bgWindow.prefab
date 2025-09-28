@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6141680274112709978}
   - component: {fileID: 6740289892786547810}
   m_Layer: 3
-  m_Name: windowChild
+  m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   length: 0
   size: {x: 0, y: 0}
-  child: {fileID: 3776264596628374788}
+  body: {fileID: 3776264596628374788}
   contents: {fileID: 3643219870374601754}
   sprites:
   - {fileID: 5120940934649208145, guid: 26dab37138f429b4d81c5756376169ed, type: 3}

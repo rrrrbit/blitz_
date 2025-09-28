@@ -99,5 +99,5 @@ public class PLAYER_baseMvt : MonoBehaviour
     }
 
     public float JumpLength() => jumpTime * GAME.mgr.speed;
-    public float Trajectory(float startFactor, float dist) => (1 - 2 * startFactor + dist / JumpLength()) * 4 * jumpHeight * dist / JumpLength();
+	public float Trajectory(float startFactor, float dist) => 4*jumpHeight*dist/JumpLength()*(1-2*startFactor-dist/JumpLength());
 }

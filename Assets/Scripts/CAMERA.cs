@@ -1,9 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CAMERA : MonoBehaviour
 {
 	[SerializeField] GameObject target;
+
+	[SerializeField] Vector3 offset;
 
 	[SerializeField] float lkahdMult = 0;
 
@@ -21,13 +24,11 @@ public class CAMERA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		var p = transform.position;
 
-		var lookahead = targRb.linearVelocity.y * lkahdMult;
-
-		p.y = GLOBAL.Lerpd(transform.position.y, target.transform.position.y + lookahead, k, t, Time.deltaTime);
-		transform.position = p;
+		var lookahead = targRb.linearVelocity.y * lkahdMult; 
+		transform.position = GLOBAL.Lerpd(transform.position, new Vector3(0, target.transform.position.y, 0) + Vector3.up * lookahead + offset, k, t, Time.deltaTime);
 		return;
+		var p = transform.position;
 		Debug.DrawLine(new(p.x - 100, p.y, 0), new(p.x + 100, p.y, 0), Color.red);
 		Debug.DrawLine(new(p.x-100, target.transform.position.y, 0), new(p.x + 100, target.transform.position.y, 0), Color.blue);
 		Debug.DrawLine(new(p.x-100, target.transform.position.y + lookahead, 0), new(p.x + 100, target.transform.position.y + lookahead, 0), Color.green);

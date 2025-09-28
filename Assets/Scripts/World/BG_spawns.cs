@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BG_spawn : MonoBehaviour
 {
-    public float deleteThreshhold;
     public float start;
     public int maxObjs;
     public GameObject objType;
@@ -13,14 +12,10 @@ public class BG_spawn : MonoBehaviour
     public float nextSpawnDist;
     Camera cam;
 
-    public List<GameObject> objs = new();
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         nextSpawnDist = Random.Range(nxtSpwnDstBounds.x, nxtSpwnDstBounds.y);
-
-        
     }
 
     void Spawn()
@@ -31,7 +26,6 @@ public class BG_spawn : MonoBehaviour
 
         obj.GetComponent<GAME_obj>().Spawn(new());
         
-        objs.Add(obj);
         nextSpawnDist = Random.Range(nxtSpwnDstBounds.x, nxtSpwnDstBounds.y);
     }
 
@@ -43,16 +37,5 @@ public class BG_spawn : MonoBehaviour
         {
             Spawn();
         }
-
-        var objNxt = objs;
-        foreach (var obj in objs)
-        {
-            if (obj.transform.position.x < deleteThreshhold)
-            {
-                Destroy(obj);
-                objNxt.Remove(obj);
-            }
-        }
-        objs = objNxt;
     }
 }

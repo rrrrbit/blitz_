@@ -36,27 +36,15 @@ public class OBJ_relay : Interactable
         var randomOffset = mvt.JumpLength() * Random.Range(.5f, 1.5f);
         Vector3 offsV = new(randomOffset, mvt.Trajectory(0, randomOffset));
 
-        if (GAME.spawns.spawnQueue.Count > 1)
-        { 
-            GAME.spawns.QueueSpawn(new(transform, offsV, new()
-            {
-                {GAME.spawns.window, 4 },
-                {GAME.spawns.relay, 2 },
-                {GAME.spawns.burst, 1 },
-                {GAME.spawns.empty, 2 }
-            }));
-        }
-        else
-        {
-            GAME.spawns.QueueSpawn(new(transform, offsV, new()
-            {
-                {GAME.spawns.window, 4 },
-                {GAME.spawns.relay, 2 },
-                {GAME.spawns.burst, 1 }
-            }));
-        }
+		GAME.spawns.QueueSpawn(new(transform, offsV, new()
+		{
+			{GAME.spawns.window, 7 },
+			{GAME.spawns.relay, 2 },
+			{GAME.spawns.burst, 1 }
+		},
+		Random.Range(5f, 30f)));
 
 
-        GAME.spawns.objs.Add(gameObject);
+		GAME.spawns.objs.Add(gameObject);
 	}
 }

@@ -50,6 +50,7 @@ public class GAME_spawns : MonoBehaviour
 		}
 		var objInst = Instantiate(obj);
 		objInst.transform.position = spawn.origin.position + spawn.offset;
+		objInst.GetComponent<GAME_obj>().length = spawn.platLength;
 		objInst.GetComponent<GAME_obj>().Spawn(spawn);
     }
 
@@ -60,11 +61,12 @@ public class GAME_spawns : MonoBehaviour
 
 	public struct QueuedSpawn
 	{
-		public QueuedSpawn(Transform Origin, Vector3 Offset, Dictionary<GameObject, int> PossibleObjs)
+		public QueuedSpawn(Transform Origin, Vector3 Offset, Dictionary<GameObject, int> PossibleObjs, float PlatLength)
 		{
 			origin = Origin;
 			offset = Offset;
 			possibleObjs = PossibleObjs;
+			platLength = PlatLength;
 		}
 		
 		public Vector3 AbsPos() => origin.transform.position + offset;
@@ -72,21 +74,12 @@ public class GAME_spawns : MonoBehaviour
 		public Transform origin;
 		public Vector3 offset;
 		public Dictionary<GameObject, int> possibleObjs;
+		public float platLength;
 	}
 
     private void Start()
     {
 		mvt = player.GetComponent<PLAYER_baseMvt>();
-
-		Invoke("StartDelayed", 0.01f);
-    }
-
-	void StartDelayed()
-	{
-        foreach (var obj in objs)
-        {
-            obj.GetComponent<GAME_obj>().SpawnStart();
-        }	
     }
 	
     private void Update()
@@ -107,7 +100,8 @@ public class GAME_spawns : MonoBehaviour
             GLOBAL.DrawCross(queued.origin.position + queued.offset);
             GLOBAL.DrawCross(queued.origin.position + queued.origin.gameObject.GetComponent<GAME_obj>().length * Vector3.right, 10, Color.blue);
 			Debug.DrawLine(queued.origin.position + queued.offset, queued.origin.position + queued.origin.gameObject.GetComponent<GAME_obj>().length * Vector3.right, Color.purple);
-        }
+			Debug.DrawLine(queued.origin.position + queued.offset, queued.origin.position + queued.offset + Vector3.right * queued.platLength, Color.green);
+		}
 
         Debug.DrawLine(new Vector3(deleteThreshhold, 100, 0), new Vector3(deleteThreshhold, -100, 0), Color.red);
 		Debug.DrawLine(new Vector3(start, 100, 0), new Vector3(start, -100, 0), Color.green);

@@ -18,7 +18,15 @@ public static class GLOBAL
                 1 - k,
                 d / t));
     }
-    public static float Lerpd(float a, float b, float f, float d)
+	public static Vector3 Lerpd(Vector3 a, Vector3 b, float k, float t, float d)
+	{
+		return Vector3.Lerp(
+			a, b,
+			1 - Mathf.Pow(
+				1 - k,
+				d / t));
+	}
+	public static float Lerpd(float a, float b, float f, float d)
     {
         return Mathf.Lerp(
             a, b,
@@ -30,6 +38,12 @@ public static class GLOBAL
             a, b,
             1 - Mathf.Pow(f, d));
     }
+	public static Vector3 Lerpd(Vector3 a, Vector3 b, float f, float d)
+	{
+		return Vector3.Lerp(
+			a, b,
+			1 - Mathf.Pow(f, d));
+	}
 	public static float LerpdF(float k, float t)
 	{
 		return Mathf.Pow(1 - k, 1 / t);

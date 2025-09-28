@@ -105,7 +105,7 @@ public class PLAYER_anim : MonoBehaviour
             );
 
         if (state == States.ground && last == States.air) { face.transform.localPosition += Vector3.down * .075f; }
-        else { face.transform.localPosition = GLOBAL.Lerpd(face.transform.localPosition, targetPos, lfC, d); }
+        else { face.transform.localPosition = GLOBAL.Lerpd((Vector2)face.transform.localPosition, targetPos, lfC, d); }
         
     }
 

@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 public class BG_window : GAME_obj
 {
     public Vector2 size;
-    public GameObject child;
+    public GameObject body;
     public GameObject contents;
 
     SpriteRenderer sprite;
@@ -19,7 +19,7 @@ public class BG_window : GAME_obj
     private void UpdateSize()
     {
         sprite.size = size;
-        child.transform.localPosition = size / 2 * new Vector2(1, -1);
+        body.transform.localPosition = size / 2 * new Vector2(1, -1);
         length = size.x;
 
     }
@@ -38,7 +38,7 @@ public class BG_window : GAME_obj
 
     private void Start()
     {
-        sprite = child.GetComponent<SpriteRenderer>();
+        sprite = body.GetComponent<SpriteRenderer>();
         
     }
 
