@@ -7,7 +7,46 @@ using System.Collections;
 
 public class GAME_spawns : MonoBehaviour
 {
-    public float deleteThreshhold;
+	/*
+    REWRITE PLAN OVERVIEW
+
+	-replace class Interactable with interface IInteractable and Destructible with IDestructible (extends IInteractable).
+
+	-TrajectoryAffectable
+		a class for objects that affect the platforming of the player.
+		-bool solid
+		-IEnumerable<Trajectory> Trajectories()
+			returns all possible trajectories (jump/no jump, interact/no interact, etc.) from an object.
+		-Start()
+			add this objs trajectories to the list in GAME_spawns.
+
+	-class Trajectory
+		a class describing a trajectory (+x half of a parabola) on which an object can spawn.
+		-Transform origin
+		-Vector2 startPos
+		-float maxDistX
+			maximum distance an obj can spawn on this trajectory. it can still be evaluated outside this.
+		-Vector3 Evaluate(float x)
+		-float InverseEvaluate(float y)
+			returns the x coordinate on this trajectory for a given y or null. 
+			not ambiguous because this is only 1 half of the parabola.
+		-bool CanLandOn(TrajectoryAffectable)
+			checks whether the player can land on a given solid TrajectoryAffectable from this trajectory.
+			does this by checking if the InverseEvaluate() of the top of the object is between the x-bounds of the object.
+	
+	-GAME_spawns:
+		-List<Trajectory> allTrajectories
+		-void Spawn()
+			-select a random object
+			-select only trajectories that start off camera. pick a random one from these.
+			-if a platform, randomise the size of the object
+			-evaluate along the Trajectory, reroll until it doesnt collide with any object+headroom.
+			-place object.
+			-remove every Trajectory that CanLandOn the new object from the list.
+     */
+
+
+	public float deleteThreshhold;
     public float start;
 	public float grace;
 
