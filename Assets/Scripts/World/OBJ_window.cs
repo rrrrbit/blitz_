@@ -25,41 +25,9 @@ public class OBJ_window : TrajectoryAffectable
 
     public override void Start()
     {
-        sprite = body.GetComponent<SpriteRenderer>();
-
-		jumpOnNext = Random.value < 0.5f;
-
-		if (!presentAtStart)
-		{
-			size = new Vector2(length, Random.Range(5f,30f)) + Vector2.right * GAME.spawns.grace;
-			transform.position += Vector3.left * GAME.spawns.grace;
-			GAME.spawns.objs.Add(gameObject);
-		}
-
-		var mvt = GAME.spawns.mvt;
-
-		if (jumpOnNext)
-		{
-			float randomOffset = mvt.JumpLength() * Random.Range(.5f, 1.5f);
-			Vector3 offsV = new(randomOffset, mvt.Trajectory(0, randomOffset));
-			GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
-				{GAME.spawns.window, 4 },
-				{GAME.spawns.relay, 2 },
-				{GAME.spawns.burst, 2 }
-			},
-			Random.Range(5f, 30f)));
-		}
-		else
-		{
-			float randomOffset = mvt.JumpLength() * Random.Range(0.25f, 0.75f);
-			Vector3 offsV = new(randomOffset, mvt.Trajectory(.5f, randomOffset));
-			GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
-				{GAME.spawns.window, 4 },
-				{GAME.spawns.relay, 2 },
-				{GAME.spawns.burst, 2 }
-			},
-			Random.Range(5f, 30f)));
-		}
+        bounds = body.GetComponent<Collider2D>().bounds;
+		
+		sprite = body.GetComponent<SpriteRenderer>();
 
 		float aspectRatio = size.y / size.x;
 		hasIcon = aspectRatio > 0.9f && aspectRatio < 1.2f;

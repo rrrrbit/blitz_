@@ -35,7 +35,7 @@ public class Trajectory
 
     public Vector3 Evaluate(float x)
     {
-        return AbsPos() + new Vector3(x, -GAME.plyrMvt.jumpHeight * Mathf.Pow(2 * x / GAME.plyrMvt.JumpLength(), 2), 0);
+        return AbsPos() + new Vector3(x * maxDistX, -GAME.plyrMvt.jumpHeight * Mathf.Pow(2 * x * maxDistX / GAME.plyrMvt.JumpLength(), 2), 0);
     }
     public float InverseEvaluate(float y)
     {

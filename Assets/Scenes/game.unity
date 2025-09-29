@@ -460,12 +460,12 @@ MonoBehaviour:
   maxObjs: 50
   objTypes:
   - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
-  - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
-  - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
-  - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
-  - {fileID: 3657978883164431491, guid: eca2e84f7a8a7544bb26530bb85e1c32, type: 3}
-  - {fileID: 3657978883164431491, guid: eca2e84f7a8a7544bb26530bb85e1c32, type: 3}
   - {fileID: 3657978883164431491, guid: 37bbfdd1924619f4cafa7f787e5aec0d, type: 3}
+  - {fileID: 3657978883164431491, guid: eca2e84f7a8a7544bb26530bb85e1c32, type: 3}
+  objTypeProbs:
+  - 7
+  - 1
+  - 2
   window: {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
   relay: {fileID: 3657978883164431491, guid: eca2e84f7a8a7544bb26530bb85e1c32, type: 3}
   burst: {fileID: 3657978883164431491, guid: 37bbfdd1924619f4cafa7f787e5aec0d, type: 3}

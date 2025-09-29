@@ -36,6 +36,7 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
     public override void Start()
     {
         base.Start();
+        bounds = GetComponent<Collider2D>().bounds;
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         GAME.mgr.interactables.Add(gameObject);
     }
@@ -53,8 +54,5 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
 			{GAME.spawns.burst, 1 }
 		},
 		Random.Range(5f, 30f)));
-
-
-		GAME.spawns.objs.Add(gameObject);
 	}
 }

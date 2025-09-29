@@ -4,6 +4,7 @@ using UnityEngine;
 public class GAME_obj : MonoBehaviour
 {
 	public float length;
+	public Bounds bounds;
 	
 	protected virtual void FixedUpdate()
     {

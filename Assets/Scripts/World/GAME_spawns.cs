@@ -10,9 +10,9 @@ public class GAME_spawns : MonoBehaviour
 	/*
     REWRITE PLAN OVERVIEW
 
-	-replace class Interactable with interface IInteractable and Destructible with IDestructible (extends IInteractable).
+	DONE -replace class Interactable with interface IInteractable and Destructible with IDestructible (extends IInteractable).
 
-	-TrajectoryAffectable
+	DONE -TrajectoryAffectable
 		a class for objects that affect the platforming of the player.
 		-bool solid
 		-IEnumerable<Trajectory> Trajectories()
@@ -20,7 +20,7 @@ public class GAME_spawns : MonoBehaviour
 		-Start()
 			add this objs trajectories to the list in GAME_spawns.
 
-	-class Trajectory
+	DONE -class Trajectory
 		a class describing a trajectory (+x half of a parabola) on which an object can spawn.
 		-Transform origin
 		-Vector2 startPos
@@ -35,10 +35,10 @@ public class GAME_spawns : MonoBehaviour
 			does this by checking if the InverseEvaluate() of the top of the object is between the x-bounds of the object.
 	
 	-GAME_spawns:
-		-List<Trajectory> allTrajectories
+		DONE -List<Trajectory> allTrajectories
 		-void Spawn()
-			-select a random object
-			-select only trajectories that start off camera. pick a random one from these.
+			DONE -select a random object
+			DONE -select only trajectories that start off camera. pick a random one from these.
 			-if a platform, randomise the size of the object
 			-evaluate along the Trajectory, reroll until it doesnt collide with any object+headroom.
 			-place object.
@@ -52,7 +52,8 @@ public class GAME_spawns : MonoBehaviour
 
     public int maxObjs;
 
-    public GameObject[] objTypes;
+    public List<GameObject> objTypes;
+	public List<float> objTypeProbs;
 
 	[Header("object type refs")]
 	public GameObject window;
@@ -76,23 +77,60 @@ public class GAME_spawns : MonoBehaviour
 
 	public QueuedSpawn nearest;
 
-	void Spawn(QueuedSpawn spawn)
+	void Spawn()
 	{
 		GameObject obj = null;
-		int p = Random.Range(0, spawn.possibleObjs.Values.Sum());
-		foreach (var item in spawn.possibleObjs)
+		float p = Random.Range(0, objTypeProbs.Sum());
+		for (int i = 0; i < objTypeProbs.Count; i++)
 		{
-			if (p <= item.Value)
+			if (p <= objTypeProbs[i])
 			{
-				obj = item.Key;
+				obj = objTypes[i];
 				break;
 			}
-			p -= item.Value;
+			p -= objTypeProbs[i];
 		}
-		var objInst = Instantiate(obj);
-		objInst.transform.position = spawn.origin.position + spawn.offset;
-		objInst.GetComponent<GAME_obj>().length = spawn.platLength;
-		objInst.GetComponent<GAME_obj>().Spawn(spawn);
+
+		var offCamTrajs = allTrajectories.Where(x => x.AbsPos().x <= start).ToList();
+		Trajectory traj = null;
+        if (offCamTrajs.Count > 0)
+		{
+            traj = offCamTrajs[Random.Range(0, offCamTrajs.Count)];
+        }
+		else
+		{
+            traj = allTrajectories[Random.Range(0, allTrajectories.Count)];
+
+        }
+
+		obj = Instantiate(obj);
+		var plat = obj.GetComponent<OBJ_window>();
+
+        if (plat != null)
+		{
+			plat.size = new(Random.Range(5f, 30f), Random.Range(5f, 30f));
+		}
+
+		var good = false;
+		while (!good)
+		{
+            obj.transform.position = traj.Evaluate(Random.value);
+			good = true;
+			foreach (var i in objs)
+            {
+				var boundsWithHeadroom = obj.GetComponent<GAME_obj>().bounds;
+				boundsWithHeadroom.SetMinMax(boundsWithHeadroom.min, boundsWithHeadroom.max + Vector3.up * (GAME.plyrMvt.jumpHeight + 2));
+				var otherBoundsWithHeadroom = i.GetComponent<GAME_obj>().bounds;
+                otherBoundsWithHeadroom.SetMinMax(otherBoundsWithHeadroom.min, otherBoundsWithHeadroom.max + Vector3.up * (GAME.plyrMvt.jumpHeight + 2));
+
+                if (boundsWithHeadroom.Intersects(otherBoundsWithHeadroom))
+                {
+					good = false;
+                }
+            }
+        }
+
+		objs.Add(obj);
     }
 
 	public void QueueSpawn(QueuedSpawn spawn)
@@ -125,14 +163,12 @@ public class GAME_spawns : MonoBehaviour
 	
     private void Update()
     {
-		nearest = spawnQueue.OrderBy(x => x.origin.position.x + x.offset.x).First();
+		//nearest = spawnQueue.OrderBy(x => x.origin.position.x + x.offset.x).First();
 
 
-        if (objs.Count < maxObjs && nearest.AbsPos().x < start)
+        if (objs.Count < maxObjs)
         {
-            Spawn(nearest);
-			spawnQueue.Remove(nearest);
-            nearest = spawnQueue.OrderBy(x => x.origin.position.x + x.offset.x).First();
+            Spawn();
         }
 		//return;
         foreach (var traj in allTrajectories.ToList())
