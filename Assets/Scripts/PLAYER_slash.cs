@@ -67,7 +67,7 @@ public class PLAYER_slash : MonoBehaviour
             slashBox.Overlap(overlap);
             foreach (Collider2D obj in overlap)
             {
-                Interactable interactable = obj.GetComponent<Interactable>();
+                IInteractable interactable = obj.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
                     interactable.Slash(gameObject);

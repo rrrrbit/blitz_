@@ -1,15 +1,18 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class OBJ_burst : Interactable
+public class OBJ_burst : TrajectoryAffectable, IInteractable
 {
     [SerializeField] bool repeatable;
     [SerializeField] Transform inner;
     [SerializeField] Vector2 rotateSpeed;
     [SerializeField] float boostTime;
-    public override void Slash(GameObject context)
+
+    public bool beenSlashed { get; set; }
+    public void Slash(GameObject context)
     {
         PLAYER_baseMvt mvt = context.GetComponent<PLAYER_baseMvt>();
 
@@ -19,6 +22,13 @@ public class OBJ_burst : Interactable
         }
 
         beenSlashed = true;
+    }
+
+    public override IEnumerable<Trajectory> Trajectories()
+    {
+        return new List<Trajectory>(){
+            new Trajectory(transform, new Vector2(GAME.mgr.speed * boostTime , 0), GAME.plyrMvt.JumpLength() * 1.5f)
+        };
     }
 
     IEnumerator Burst(PLAYER_baseMvt mvt)
@@ -42,11 +52,12 @@ public class OBJ_burst : Interactable
 
     }
 
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         inner.eulerAngles.Set(0, 0, Random.Range(0, 60));
+        GAME.mgr.interactables.Add(gameObject);
     }
 
     public override void Spawn(GAME_spawns.QueuedSpawn ctx)

@@ -134,14 +134,17 @@ public class GAME_spawns : MonoBehaviour
 			spawnQueue.Remove(nearest);
             nearest = spawnQueue.OrderBy(x => x.origin.position.x + x.offset.x).First();
         }
-        //return;
-
-        foreach (var queued in spawnQueue)
+		//return;
+        foreach (var traj in allTrajectories.ToList())
 		{
-            GLOBAL.DrawCross(queued.origin.position + queued.offset);
-            GLOBAL.DrawCross(queued.origin.position + queued.origin.gameObject.GetComponent<GAME_obj>().length * Vector3.right, 10, Color.blue);
-			Debug.DrawLine(queued.origin.position + queued.offset, queued.origin.position + queued.origin.gameObject.GetComponent<GAME_obj>().length * Vector3.right, Color.purple);
-			Debug.DrawLine(queued.origin.position + queued.offset, queued.origin.position + queued.offset + Vector3.right * queued.platLength, Color.green);
+			if (traj.origin == null)
+			{
+				allTrajectories.Remove(traj);
+				continue;
+			} 
+			//GLOBAL.DrawCross(traj.origin.position + traj.startPos, 10, Color.purple);
+			Debug.DrawLine(traj.origin.position, traj.AbsPos(), Color.green);
+			traj.Draw();
 		}
 
         Debug.DrawLine(new Vector3(deleteThreshhold, 100, 0), new Vector3(deleteThreshhold, -100, 0), Color.red);

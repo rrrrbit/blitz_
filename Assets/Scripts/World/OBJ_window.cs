@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class OBJ_window : GAME_obj
+public class OBJ_window : TrajectoryAffectable
 {
     public Vector2 size;
     public GameObject body;
@@ -13,10 +14,18 @@ public class OBJ_window : GAME_obj
 
 	bool jumpOnNext = false;
 	public bool presentAtStart = false;
-    
-    private void Start()
+
+    public override IEnumerable<Trajectory> Trajectories()
     {
-		sprite = body.GetComponent<SpriteRenderer>();
+		return new List<Trajectory>(){
+			new Trajectory(transform, new Vector2(size.x, 0), GAME.plyrMvt.JumpLength() * 1.5f),
+            new Trajectory(transform, new Vector2(size.x + GAME.plyrMvt.JumpLength()/2, GAME.plyrMvt.jumpHeight), GAME.plyrMvt.JumpLength() * 1.5f)
+        };
+    }
+
+    public override void Start()
+    {
+        sprite = body.GetComponent<SpriteRenderer>();
 
 		jumpOnNext = Random.value < 0.5f;
 
@@ -36,7 +45,7 @@ public class OBJ_window : GAME_obj
 			GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
 				{GAME.spawns.window, 4 },
 				{GAME.spawns.relay, 2 },
-				{GAME.spawns.burst, 1 }
+				{GAME.spawns.burst, 2 }
 			},
 			Random.Range(5f, 30f)));
 		}
@@ -47,7 +56,7 @@ public class OBJ_window : GAME_obj
 			GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
 				{GAME.spawns.window, 4 },
 				{GAME.spawns.relay, 2 },
-				{GAME.spawns.burst, 1 }
+				{GAME.spawns.burst, 2 }
 			},
 			Random.Range(5f, 30f)));
 		}
@@ -67,5 +76,6 @@ public class OBJ_window : GAME_obj
 		sprite.size = size;
 		body.GetComponent<BoxCollider2D>().size = size;
 		body.transform.localPosition = size / 2 * new Vector2(1, -1);
+        base.Start();
 	}
 }

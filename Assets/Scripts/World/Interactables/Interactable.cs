@@ -1,17 +1,7 @@
 using UnityEngine;
 
-public class Interactable : GAME_obj
+public interface IInteractable
 {
-    protected bool beenSlashed = false;
-    public virtual void Slash(GameObject context)
-    {
-
-    }
-
-    protected virtual void Start()
-    {
-        GAME.mgr.interactables.Add(gameObject);
-    }
-
-	
+    public bool beenSlashed { get; set; }
+    public void Slash(GameObject context);
 }
