@@ -72,6 +72,8 @@ public class GAME_spawns : MonoBehaviour
     public GameObject player;
 	public PLAYER_baseMvt mvt;
 
+	public List<Trajectory> allTrajectories = new();
+
 	public QueuedSpawn nearest;
 
 	void Spawn(QueuedSpawn spawn)
