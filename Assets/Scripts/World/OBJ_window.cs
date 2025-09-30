@@ -58,7 +58,7 @@ public class OBJ_window : GAME_obj
 		{
 			contents.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
 		}
-		contents.transform.localPosition = size / 2 * new Vector2(1, -1);
+		contents.transform.localPosition = size / 2 * new Vector2(1, -1) + Vector2.down * 16/27f;
 		contents.transform.localScale = Vector2.one * Mathf.Min(size.x, size.y) * .6f;
 		var layer = Random.Range(-20000, 20000);
 		sprite.sortingOrder = 2 * layer;
