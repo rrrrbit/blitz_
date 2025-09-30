@@ -32,27 +32,16 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
 
 
     }
+    public override void SetBounds()
+    {
+        bounds = GetComponent<Collider2D>().bounds;
+    }
 
     public override void Start()
     {
         base.Start();
-        bounds = GetComponent<Collider2D>().bounds;
+        length = bounds.size.x;
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         GAME.mgr.interactables.Add(gameObject);
     }
-
-    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
-	{
-		var mvt = GAME.spawns.mvt;
-        var randomOffset = mvt.JumpLength() * Random.Range(.5f, 1.5f);
-        Vector3 offsV = new(randomOffset, mvt.Trajectory(0, randomOffset));
-
-		GAME.spawns.QueueSpawn(new(transform, offsV, new()
-		{
-			{GAME.spawns.window, 7 },
-			{GAME.spawns.relay, 2 },
-			{GAME.spawns.burst, 1 }
-		},
-		Random.Range(5f, 30f)));
-	}
 }

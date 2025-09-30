@@ -31,7 +31,17 @@ public class Trajectory
         maxDistX = MaxDistX;
     }
 
-    public Vector3 AbsPos() => origin.position + startPos;
+    public Vector3 AbsPos()
+    {
+        if (origin == null)
+        {
+            return startPos;
+        }
+        else
+        {
+            return origin.position + startPos;
+        }
+    } 
 
     public Vector3 Evaluate(float x)
     {
@@ -39,7 +49,7 @@ public class Trajectory
     }
     public float InverseEvaluate(float y)
     {
-        return Mathf.Sqrt(-y / GAME.plyrMvt.jumpHeight) * GAME.plyrMvt.JumpLength() / 2;
+        return AbsPos().x + Mathf.Sqrt(-y / GAME.plyrMvt.jumpHeight) * GAME.plyrMvt.JumpLength() / 2;
     }
 
     public bool CanLandOn(TrajectoryAffectable trajectoryAffectable)
@@ -48,15 +58,15 @@ public class Trajectory
         {
             return false;
         }
-        return trajectoryAffectable.transform.position.x <= InverseEvaluate(trajectoryAffectable.transform.position.y) &&
-               InverseEvaluate(trajectoryAffectable.transform.position.y) <= trajectoryAffectable.transform.position.x + trajectoryAffectable.length;
+        return trajectoryAffectable.bounds.min.x <= InverseEvaluate(trajectoryAffectable.bounds.max.y) &&
+               InverseEvaluate(trajectoryAffectable.bounds.max.y) <= trajectoryAffectable.bounds.max.x;
     }
 
     public void Draw(int resolution = 5)
     {
         for (int i = 0; i < resolution; i++)
         {
-            Debug.DrawLine(Evaluate(i * maxDistX / resolution), Evaluate((i+1) * maxDistX / resolution), Color.red);
+            Debug.DrawLine(Evaluate((float)i / resolution), Evaluate((i+1f) / resolution), Color.red);
         }
     }
 }

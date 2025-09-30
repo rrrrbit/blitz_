@@ -52,27 +52,17 @@ public class OBJ_burst : TrajectoryAffectable, IInteractable
 
     }
 
+    public override void SetBounds()
+    {
+        bounds = GetComponent<Collider2D>().bounds;
+    }
+
     public override void Start()
     {
         base.Start();
-        bounds = GetComponent<Collider2D>().bounds;
+        length = bounds.size.x;
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         inner.eulerAngles.Set(0, 0, Random.Range(0, 60));
         GAME.mgr.interactables.Add(gameObject);
-    }
-
-    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
-    {
-        var mvt = GAME.spawns.mvt;
-        var randomOffset = mvt.JumpLength() * Random.Range(.25f, .5f);
-        Vector2 offsV = new(randomOffset, mvt.Trajectory(.5f, randomOffset));
-
-        GAME.spawns.QueueSpawn(new(transform, offsV + Vector2.right * GAME.mgr.speed * boostTime, new()
-        {
-            {GAME.spawns.window, 8 },
-            {GAME.spawns.relay, 1 },
-            {GAME.spawns.burst, 1 }
-        },
-		Random.Range(5f, 30f)));
     }
 }

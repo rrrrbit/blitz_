@@ -39,12 +39,14 @@ public class BG_window : GAME_obj
     private void Start()
     {
         sprite = body.GetComponent<SpriteRenderer>();
-        
+        size = new Vector2(Random.Range(10f, 50f), Random.Range(10f, 50f));
+        SetContents();
+        UpdateSize();
     }
 
     private void Update()
     {
-        UpdateSize();
+        
         if (hasIcon)
         {
             contents.transform.localPosition = size / 2 * new Vector2(1, -1);
@@ -53,11 +55,5 @@ public class BG_window : GAME_obj
 
             contents.transform.localScale = Vector2.one * Mathf.Min(size.x, size.y) * .6f;
         }
-    }
-
-    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
-    {
-        size = new Vector2(Random.Range(10f, 50f), Random.Range(10f, 50f));
-        SetContents();
     }
 }

@@ -11,6 +11,8 @@ public class GAME_obj : MonoBehaviour
 
 		GetComponent<Rigidbody2D>().linearVelocityX = -GAME.mgr.speed;
 
+		//Gizmos.DrawWireCube(bounds.center, bounds.size);
+
         if (transform.position.x < GAME.spawns.deleteThreshhold)
         {
             GAME.spawns.objs.Remove(gameObject);
@@ -22,12 +24,7 @@ public class GAME_obj : MonoBehaviour
         }
     }
 
-	public virtual void Spawn(GAME_spawns.QueuedSpawn ctx)
-	{
-		
-	}
-
-	public virtual void SpawnStart()
+	public virtual void SetBounds()
 	{
 
 	}

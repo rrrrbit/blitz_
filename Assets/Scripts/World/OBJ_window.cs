@@ -23,10 +23,16 @@ public class OBJ_window : TrajectoryAffectable
         };
     }
 
+	public override void SetBounds()
+	{
+        bounds = body.GetComponent<Collider2D>().bounds;
+	}
+
     public override void Start()
     {
-        bounds = body.GetComponent<Collider2D>().bounds;
-		
+
+		length = bounds.size.x;
+
 		sprite = body.GetComponent<SpriteRenderer>();
 
 		float aspectRatio = size.y / size.x;

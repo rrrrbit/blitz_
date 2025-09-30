@@ -68,14 +68,11 @@ public class GAME_spawns : MonoBehaviour
 
     public List<GameObject> objs = new();
 
-	public List<QueuedSpawn> spawnQueue = new();
-
     public GameObject player;
 	public PLAYER_baseMvt mvt;
 
 	public List<Trajectory> allTrajectories = new();
 
-	public QueuedSpawn nearest;
 
 	void Spawn()
 	{
@@ -110,51 +107,28 @@ public class GAME_spawns : MonoBehaviour
 		{
 			plat.size = new(Random.Range(5f, 30f), Random.Range(5f, 30f));
 		}
+        obj.transform.position = traj.Evaluate(Random.value);
+		obj.GetComponent<GAME_obj>().SetBounds();
+		objs.Add(obj);
+		UpdateTrajectories();
 
-		var good = false;
-		while (!good)
+    }
+
+	void UpdateTrajectories()
+	{
+        foreach(var obj in objs.Where(x => x.GetComponent<TrajectoryAffectable>() != null).ToList())
 		{
-            obj.transform.position = traj.Evaluate(Random.value);
-			good = true;
-			foreach (var i in objs)
+            var t = obj.GetComponent<TrajectoryAffectable>();
+			foreach (var i in allTrajectories.ToList())
             {
-				var boundsWithHeadroom = obj.GetComponent<GAME_obj>().bounds;
-				boundsWithHeadroom.SetMinMax(boundsWithHeadroom.min, boundsWithHeadroom.max + Vector3.up * (GAME.plyrMvt.jumpHeight + 2));
-				var otherBoundsWithHeadroom = i.GetComponent<GAME_obj>().bounds;
-                otherBoundsWithHeadroom.SetMinMax(otherBoundsWithHeadroom.min, otherBoundsWithHeadroom.max + Vector3.up * (GAME.plyrMvt.jumpHeight + 2));
-
-                if (boundsWithHeadroom.Intersects(otherBoundsWithHeadroom))
+				Debug.DrawLine(t.bounds.center, new(i.InverseEvaluate(t.bounds.max.y), t.bounds.max.y));
+				if (i.CanLandOn(t))
                 {
-					good = false;
+					allTrajectories.Remove(i);
                 }
             }
         }
-
-		objs.Add(obj);
     }
-
-	public void QueueSpawn(QueuedSpawn spawn)
-	{
-		spawnQueue.Add(spawn);
-	}
-
-	public struct QueuedSpawn
-	{
-		public QueuedSpawn(Transform Origin, Vector3 Offset, Dictionary<GameObject, int> PossibleObjs, float PlatLength)
-		{
-			origin = Origin;
-			offset = Offset;
-			possibleObjs = PossibleObjs;
-			platLength = PlatLength;
-		}
-		
-		public Vector3 AbsPos() => origin.transform.position + offset;
-
-		public Transform origin;
-		public Vector3 offset;
-		public Dictionary<GameObject, int> possibleObjs;
-		public float platLength;
-	}
 
     private void Start()
     {
@@ -163,7 +137,6 @@ public class GAME_spawns : MonoBehaviour
 	
     private void Update()
     {
-		//nearest = spawnQueue.OrderBy(x => x.origin.position.x + x.offset.x).First();
 
 
         if (objs.Count < maxObjs)
@@ -185,8 +158,6 @@ public class GAME_spawns : MonoBehaviour
 
         Debug.DrawLine(new Vector3(deleteThreshhold, 100, 0), new Vector3(deleteThreshhold, -100, 0), Color.red);
 		Debug.DrawLine(new Vector3(start, 100, 0), new Vector3(start, -100, 0), Color.green);
-		Debug.DrawLine(new Vector3(nearest.AbsPos().x, 100, 0), new Vector3(nearest.AbsPos().x, -100, 0), Color.blue);
-
     }
 
 }
