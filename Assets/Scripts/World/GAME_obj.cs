@@ -4,7 +4,7 @@ using UnityEngine;
 public class GAME_obj : MonoBehaviour
 {
 	public float length;
-	public Bounds bounds;
+	public Collider2D bounds;
 	
 	protected virtual void FixedUpdate()
     {
@@ -24,7 +24,7 @@ public class GAME_obj : MonoBehaviour
         }
     }
 
-	public virtual void SetBounds()
+    public virtual void SetBounds()
 	{
 
 	}

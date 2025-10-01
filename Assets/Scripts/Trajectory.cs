@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.FullSerializer;
 public class TrajectoryAffectable : GAME_obj
 {
     public bool solid;
@@ -47,26 +48,56 @@ public class Trajectory
     {
         return AbsPos() + new Vector3(x * maxDistX, -GAME.plyrMvt.jumpHeight * Mathf.Pow(2 * x * maxDistX / GAME.plyrMvt.JumpLength(), 2), 0);
     }
-    public float InverseEvaluate(float y)
+
+    public Vector3? EvaluateAbs(float x)
     {
-        return AbsPos().x + Mathf.Sqrt(-y / GAME.plyrMvt.jumpHeight) * GAME.plyrMvt.JumpLength() / 2;
+        if (x < AbsPos().x)
+        {
+            return null;
+        }
+        return new Vector3(x, AbsPos() .y -GAME.plyrMvt.jumpHeight * Mathf.Pow(2 * (x- AbsPos().x) / GAME.plyrMvt.JumpLength(), 2), 0);
+    }
+    public float? InverseEvaluate(float y)
+    {
+        if (y > AbsPos().y)
+        {
+            return null;
+        }
+        return AbsPos().x + Mathf.Sqrt((AbsPos().y-y) / GAME.plyrMvt.jumpHeight) * GAME.plyrMvt.JumpLength() / 2;
     }
 
     public bool CanLandOn(TrajectoryAffectable trajectoryAffectable)
     {
-        if (!trajectoryAffectable.solid)
+        var iey = InverseEvaluate(trajectoryAffectable.bounds.bounds.max.y);
+        if (!trajectoryAffectable.solid || iey == null || trajectoryAffectable.transform == origin)
         {
             return false;
         }
-        return trajectoryAffectable.bounds.min.x <= InverseEvaluate(trajectoryAffectable.bounds.max.y) &&
-               InverseEvaluate(trajectoryAffectable.bounds.max.y) <= trajectoryAffectable.bounds.max.x;
+        return trajectoryAffectable.bounds.bounds.min.x <= (float)iey &&
+               (float)iey <= trajectoryAffectable.bounds.bounds.max.x;
     }
 
-    public void Draw(int resolution = 5)
+    public bool WouldHit(TrajectoryAffectable trajectoryAffectable)
+    {
+        var ex = EvaluateAbs(trajectoryAffectable.bounds.bounds.min.x);
+        if (!trajectoryAffectable.solid || ex == null || trajectoryAffectable.transform == origin)
+        {
+            return false;
+        }
+        if(trajectoryAffectable.bounds.bounds.min.y <= ((Vector3)ex).y &&
+               ((Vector3)ex).y <= trajectoryAffectable.bounds.bounds.max.y)
+        {
+            Debug.Log("!");
+        }
+        return trajectoryAffectable.bounds.bounds.min.y <= ((Vector3)ex).y &&
+               ((Vector3)ex).y <= trajectoryAffectable.bounds.bounds.max.y;
+    }
+
+    public void Draw(Color color, int resolution = 5)
     {
         for (int i = 0; i < resolution; i++)
         {
-            Debug.DrawLine(Evaluate((float)i / resolution), Evaluate((i+1f) / resolution), Color.red);
+            Debug.DrawLine(Evaluate((float)i / resolution), Evaluate((i+1f) / resolution), color);
         }
     }
 }

@@ -100,6 +100,7 @@ public class GAME_spawns : MonoBehaviour
 
         }
 
+		obj.GetComponent<GAME_obj>().SetBounds();
 		obj = Instantiate(obj);
 		var plat = obj.GetComponent<OBJ_window>();
 
@@ -108,24 +109,18 @@ public class GAME_spawns : MonoBehaviour
 			plat.size = new(Random.Range(5f, 30f), Random.Range(5f, 30f));
 		}
         obj.transform.position = traj.Evaluate(Random.value);
-		obj.GetComponent<GAME_obj>().SetBounds();
 		objs.Add(obj);
-		UpdateTrajectories();
+		
 
     }
 
 	void UpdateTrajectories()
 	{
-        foreach(var obj in objs.Where(x => x.GetComponent<TrajectoryAffectable>() != null).ToList())
+        foreach(var obj in objs.Where(x => x.GetComponent<TrajectoryAffectable>() != null).Select(x => x.GetComponent<TrajectoryAffectable>()))
 		{
-            var t = obj.GetComponent<TrajectoryAffectable>();
-			foreach (var i in allTrajectories.ToList())
+			foreach (var i in allTrajectories.Where(x => x.CanLandOn(obj)).ToList())
             {
-				Debug.DrawLine(t.bounds.center, new(i.InverseEvaluate(t.bounds.max.y), t.bounds.max.y));
-				if (i.CanLandOn(t))
-                {
-					allTrajectories.Remove(i);
-                }
+				allTrajectories.Remove(i);
             }
         }
     }
@@ -143,6 +138,7 @@ public class GAME_spawns : MonoBehaviour
         {
             Spawn();
         }
+        UpdateTrajectories();
 		//return;
         foreach (var traj in allTrajectories.ToList())
 		{
@@ -150,14 +146,44 @@ public class GAME_spawns : MonoBehaviour
 			{
 				allTrajectories.Remove(traj);
 				continue;
-			} 
-			//GLOBAL.DrawCross(traj.origin.position + traj.startPos, 10, Color.purple);
-			Debug.DrawLine(traj.origin.position, traj.AbsPos(), Color.green);
-			traj.Draw();
-		}
+			}
 
-        Debug.DrawLine(new Vector3(deleteThreshhold, 100, 0), new Vector3(deleteThreshhold, -100, 0), Color.red);
-		Debug.DrawLine(new Vector3(start, 100, 0), new Vector3(start, -100, 0), Color.green);
+            
+            foreach (TrajectoryAffectable obj in objs.Where(x => x.GetComponent<TrajectoryAffectable>() != null).Select(x => x.GetComponent<TrajectoryAffectable>()))
+            {
+                if(traj.InverseEvaluate(obj.bounds.bounds.max.y) == null) { continue; }
+
+                if (traj.AbsPos().x < start)
+                {
+                    traj.Draw(Color.red);
+                }
+				else if (traj.WouldHit(obj))
+				{
+                    traj.Draw(Color.yellow);
+
+                }
+                else
+                {
+                    traj.Draw(Color.green);
+                } 
+
+                //Debug.DrawLine(new(obj.bounds.bounds.min.x, obj.bounds.bounds.max.y), new(obj.bounds.bounds.max.x, obj.bounds.bounds.max.y), Color.purple);
+                Debug.DrawLine(new(obj.bounds.bounds.min.x, obj.bounds.bounds.min.y), new(obj.bounds.bounds.min.x, obj.bounds.bounds.max.y), Color.purple);
+
+				if(traj.WouldHit(obj))
+				{
+
+					GLOBAL.DrawCross((Vector3)traj.EvaluateAbs(obj.bounds.bounds.min.x));
+				}
+
+                Debug.DrawLine(traj.origin.GetComponent<GAME_obj>().bounds.bounds.center, traj.AbsPos(), Color.green);
+            }
+        }
+
+        Debug.DrawLine(new Vector3(deleteThreshhold, 1000, 0), new Vector3(deleteThreshhold, -1000, 0), Color.red);
+		Debug.DrawLine(new Vector3(start, 1000, 0), new Vector3(start, -1000, 0), Color.green);
+
+		
     }
 
 }

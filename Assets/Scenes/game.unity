@@ -457,7 +457,7 @@ MonoBehaviour:
   deleteThreshhold: -100
   start: 100
   grace: 5
-  maxObjs: 10
+  maxObjs: 40
   objTypes:
   - {fileID: 8164759381850711129, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
   - {fileID: 3657978883164431491, guid: 37bbfdd1924619f4cafa7f787e5aec0d, type: 3}
@@ -16581,6 +16581,10 @@ PrefabInstance:
     - target: {fileID: 2514058948175288592, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6022639007220960579, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
+      propertyPath: solid
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6022639007220960579, guid: 657c7ea1f962e3f4dabfe061fc71f6f6, type: 3}
       propertyPath: size.x

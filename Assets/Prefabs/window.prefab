@@ -269,6 +269,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 0
+  bounds: {fileID: 0}
+  solid: 1
   size: {x: 0, y: 0}
   body: {fileID: 3776264596628374788}
   contents: {fileID: 3643219870374601754}

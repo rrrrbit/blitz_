@@ -34,13 +34,13 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
     }
     public override void SetBounds()
     {
-        bounds = GetComponent<Collider2D>().bounds;
+        bounds = GetComponent<Collider2D>();
     }
 
     public override void Start()
     {
         base.Start();
-        length = bounds.size.x;
+        length = bounds.bounds.size.x;
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         GAME.mgr.interactables.Add(gameObject);
     }

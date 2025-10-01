@@ -25,13 +25,17 @@ public class OBJ_window : TrajectoryAffectable
 
 	public override void SetBounds()
 	{
-        bounds = body.GetComponent<Collider2D>().bounds;
+        bounds = body.GetComponent<Collider2D>();
 	}
 
     public override void Start()
     {
+		if (presentAtStart)
+		{
+			SetBounds();
+		}
 
-		length = bounds.size.x;
+		length = bounds.bounds.size.x;
 
 		sprite = body.GetComponent<SpriteRenderer>();
 
