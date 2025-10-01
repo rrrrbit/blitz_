@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Unity.VisualScripting;
 using System.Collections;
+using UnityEditor.Rendering;
 
 public class GAME_spawns : MonoBehaviour
 {
@@ -106,11 +107,20 @@ public class GAME_spawns : MonoBehaviour
 
         if (plat != null)
 		{
-			plat.size = new(Random.Range(5f, 30f), Random.Range(5f, 30f));
+			plat.size = new(Random.Range(5f, 30f) + grace, Random.Range(5f, 30f));
 		}
-        obj.transform.position = traj.Evaluate(Random.value);
+        
+
+		var good = false;
+		while (!good)
+		{
+            obj.transform.position = traj.Evaluate(Random.value);
+            good = !(objs.Where(x => x.GetComponent<GAME_obj>() != null && x.GetComponent<GAME_obj>().bounds.bounds.Intersects(obj.GetComponent<GAME_obj>().bounds.bounds)).Count() > 0);
+        }
+
+
 		objs.Add(obj);
-		
+        UpdateTrajectories();
 
     }
 
@@ -138,7 +148,7 @@ public class GAME_spawns : MonoBehaviour
         {
             Spawn();
         }
-        UpdateTrajectories();
+        
 		//return;
         foreach (var traj in allTrajectories.ToList())
 		{

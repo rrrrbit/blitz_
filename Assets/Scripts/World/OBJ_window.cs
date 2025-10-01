@@ -35,6 +35,7 @@ public class OBJ_window : TrajectoryAffectable
 			SetBounds();
 		}
 
+		transform.position -= Vector3.right*GAME.spawns.grace;
 		length = bounds.bounds.size.x;
 
 		sprite = body.GetComponent<SpriteRenderer>();
