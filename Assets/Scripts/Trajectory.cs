@@ -15,6 +15,7 @@ public class TrajectoryAffectable : GAME_obj
         foreach (var i in Trajectories())
         {
             GAME.spawns.allTrajectories.Add(i);
+            GAME.spawns.newTrajectories.Add(i);
         }
     }
 }
@@ -86,6 +87,17 @@ public class Trajectory
         }
         return trajectoryAffectable.bounds.bounds.min.y <= ((Vector3)ex).y &&
                ((Vector3)ex).y <= trajectoryAffectable.bounds.bounds.max.y;
+    }
+
+    public bool IsSafe(List<TrajectoryAffectable> world)
+    {
+        bool hasLanding = false;
+        foreach (var obj in world)
+        {
+            if (WouldHit(obj)) { return false; }
+            if (!hasLanding && CanLandOn(obj)) { hasLanding = true; }
+        }
+        return hasLanding;
     }
 
     public void Draw(Color color, int resolution = 5)
