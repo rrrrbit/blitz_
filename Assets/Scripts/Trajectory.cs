@@ -10,7 +10,7 @@ public class TrajectoryAffectable : GAME_obj
     {
         return Trajectories(); 
     }
-    public virtual void Start()
+    public override void Ready()
     {
         foreach (var i in Trajectories())
         {

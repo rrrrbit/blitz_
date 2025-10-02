@@ -6,48 +6,12 @@ using Unity.VisualScripting;
 
 public class GAME_spawns : MonoBehaviour
 {
-	/*
-    REWRITE PLAN OVERVIEW
-
-	DONE -replace class Interactable with interface IInteractable and Destructible with IDestructible (extends IInteractable).
-
-	DONE -TrajectoryAffectable
-		a class for objects that affect the platforming of the player.
-		-bool solid
-		-IEnumerable<Trajectory> Trajectories()
-			returns all possible trajectories (jump/no jump, interact/no interact, etc.) from an object.
-		-Start()
-			add this objs trajectories to the list in GAME_spawns.
-
-	DONE -class Trajectory
-		a class describing a trajectory (+x half of a parabola) on which an object can spawn.
-		-Transform origin
-		-Vector2 startPos
-		-float maxDistX
-			maximum distance an obj can spawn on this trajectory. it can still be evaluated outside this.
-		-Vector3 Evaluate(float x)
-		-float InverseEvaluate(float y)
-			returns the x coordinate on this trajectory for a given y or null. 
-			not ambiguous because this is only 1 half of the parabola.
-		-bool CanLandOn(TrajectoryAffectable)
-			checks whether the player can land on a given solid TrajectoryAffectable from this trajectory.
-			does this by checking if the InverseEvaluate() of the top of the object is between the x-bounds of the object.
-	
-	-GAME_spawns:
-		DONE -List<Trajectory> allTrajectories
-		-void Spawn()
-			DONE -select a random object
-			DONE -select only trajectories that start off camera. pick a random one from these.
-			-if a platform, randomise the size of the object
-			-evaluate along the Trajectory, reroll until it doesnt collide with any object+headroom.
-			-place object.
-			-remove every Trajectory that CanLandOn the new object from the list.
-     */
-
-
-	public float deleteThreshhold;
+    [SerializeField] bool debugDraw;
+    
+    public float deleteThreshhold;
     public float start;
 	public float grace;
+	public float padding;
 
     public int maxObjs;
 
@@ -66,24 +30,9 @@ public class GAME_spawns : MonoBehaviour
 	[Space]
 
     public List<GameObject> objs = new();
-	public List<UnresolvedObj> unresolvedObjs = new();
-
-    public GameObject player;
-	public PLAYER_baseMvt mvt;
+	public List<GameObject> unresolvedObjs = new();
 
 	public List<Trajectory> allTrajectories = new();
-
-	public class UnresolvedObj
-	{
-		public GameObject obj;
-		public Trajectory traj;
-
-		public UnresolvedObj(GameObject Obj, Trajectory Traj)
-		{
-			obj = Obj;
-			traj = Traj;
-		}
-	}
 
 	void Spawn()
 	{
@@ -99,30 +48,18 @@ public class GAME_spawns : MonoBehaviour
 			p -= objTypeProbs[i];
 		}
 
-		var offCamTrajs = allTrajectories.Where(x => x.AbsPos().x <= start).ToList();
-		Trajectory traj = null;
-        if (offCamTrajs.Count > 0)
-		{
-            traj = offCamTrajs[Random.Range(0, offCamTrajs.Count)];
-        }
-		else
-		{
-            traj = allTrajectories[Random.Range(0, allTrajectories.Count)];
+        
 
-        }
 
-		obj.GetComponent<GAME_obj>().SetBounds();
+        obj.GetComponent<GAME_obj>().SetBounds();
 		obj = Instantiate(obj);
 		var plat = obj.GetComponent<OBJ_window>();
 
-        if (plat != null)
-		{
-			plat.size = new(Random.Range(5f, 30f) + grace, Random.Range(5f, 30f));
-		}
+        if (plat != null) { plat.size = new(Random.Range(5f, 30f) + grace, Random.Range(5f, 30f)); }
 
-        obj.transform.position = traj.Evaluate(Random.value);
 
-		unresolvedObjs.Add(new UnresolvedObj(obj, traj));
+        obj.transform.position = SelectTrajectory().Evaluate(Random.value);
+		unresolvedObjs.Add(obj);
 
 
 
@@ -138,79 +75,92 @@ public class GAME_spawns : MonoBehaviour
             }
         }
     }
-
-    private void Start()
-    {
-		mvt = player.GetComponent<PLAYER_baseMvt>();
-    }
 	
+	Trajectory SelectTrajectory()
+	{
+        var offCamTrajs = allTrajectories.Where(x => x.AbsPos().x >= start).ToList();
+        Trajectory traj = allTrajectories[Random.Range(0, allTrajectories.Count)];
+        if (offCamTrajs.Count > 0) { traj = offCamTrajs[Random.Range(0, offCamTrajs.Count)]; }
+		return traj;
+    }
+	bool OverlapCheck(Bounds a, Bounds b)
+	{
+        a.Encapsulate(a.max + Vector3.up * (GAME.plyrMvt.jumpHeight));
+        a.Expand(padding);
+        b.Encapsulate(b.max + Vector3.up * (GAME.plyrMvt.jumpHeight) );
+		b.Expand(padding);
+		return a.Intersects(b);
+	}
+
     private void Update()
     {
 
-        foreach (var i in unresolvedObjs.ToList())
+        foreach (var obj in unresolvedObjs.ToList())
         {
-			var good = objs.Where(x => i.obj.GetComponent<GAME_obj>().bounds.bounds.Intersects(x.GetComponent<GAME_obj>().bounds.bounds)).Count() == 0;
-			if (good)
+
+			if (objs.Where(x => OverlapCheck(obj.GetComponent<GAME_obj>().bounds.bounds, x.GetComponent<GAME_obj>().bounds.bounds)).Count() == 0) // if no platforms intersect this
 			{
-				unresolvedObjs.Remove(i);
-                objs.Add(i.obj);
+				unresolvedObjs.Remove(obj);
+                objs.Add(obj);
                 UpdateTrajectories();
+				obj.GetComponent<GAME_obj>().Ready();
 				print("resolved");
                 continue;
 			}
-            i.obj.transform.position = i.traj.Evaluate(Random.value);
+            obj.transform.position = SelectTrajectory().Evaluate(Random.value);
         }
 
         if (objs.Count < maxObjs)
         {
             Spawn();
         }
-        
-		//return;
+
+        if (debugDraw) { DebugDraw(); }
+    }
+
+	void DebugDraw()
+	{
         foreach (var traj in allTrajectories.ToList())
-		{
-			if (traj.origin == null)
-			{
-				allTrajectories.Remove(traj);
-				continue;
-			}
+        {
+            if (traj.origin == null)
+            {
+                allTrajectories.Remove(traj);
+                continue;
+            }
 
 
             foreach (TrajectoryAffectable obj in objs.Where(x => x.GetComponent<TrajectoryAffectable>() != null).Select(x => x.GetComponent<TrajectoryAffectable>()))
             {
-                if(traj.InverseEvaluate(obj.bounds.bounds.max.y) == null) { continue; }
+                if (traj.InverseEvaluate(obj.bounds.bounds.max.y) == null) { continue; }
 
                 if (traj.AbsPos().x < start)
                 {
                     traj.Draw(Color.red);
                 }
-				else if (traj.WouldHit(obj))
-				{
+                else if (traj.WouldHit(obj))
+                {
                     traj.Draw(Color.yellow);
 
                 }
                 else
                 {
                     traj.Draw(Color.green);
-                } 
+                }
 
                 //Debug.DrawLine(new(obj.bounds.bounds.min.x, obj.bounds.bounds.max.y), new(obj.bounds.bounds.max.x, obj.bounds.bounds.max.y), Color.purple);
                 Debug.DrawLine(new(obj.bounds.bounds.min.x, obj.bounds.bounds.min.y), new(obj.bounds.bounds.min.x, obj.bounds.bounds.max.y), Color.purple);
 
-				if(traj.WouldHit(obj))
-				{
+                if (traj.WouldHit(obj))
+                {
 
-					GLOBAL.DrawCross((Vector3)traj.EvaluateAbs(obj.bounds.bounds.min.x));
-				}
+                    GLOBAL.DrawCross((Vector3)traj.EvaluateAbs(obj.bounds.bounds.min.x));
+                }
 
                 Debug.DrawLine(traj.origin.GetComponent<GAME_obj>().bounds.bounds.center, traj.AbsPos(), Color.green);
             }
         }
 
         Debug.DrawLine(new Vector3(deleteThreshhold, 1000, 0), new Vector3(deleteThreshhold, -1000, 0), Color.red);
-		Debug.DrawLine(new Vector3(start, 1000, 0), new Vector3(start, -1000, 0), Color.green);
-
-		
+        Debug.DrawLine(new Vector3(start, 1000, 0), new Vector3(start, -1000, 0), Color.green);
     }
-
 }

@@ -33,9 +33,8 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
 
     }
 
-    public override void Start()
+    public void Start()
     {
-        base.Start();
         length = bounds.bounds.size.x;
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         GAME.mgr.interactables.Add(gameObject);

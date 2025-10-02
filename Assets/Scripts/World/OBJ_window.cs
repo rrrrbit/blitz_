@@ -28,14 +28,15 @@ public class OBJ_window : TrajectoryAffectable
         bounds = body.GetComponent<Collider2D>();
 	}
 
-    public override void Start()
+    public void Start()
     {
 		if (presentAtStart)
 		{
 			SetBounds();
+			Ready();
 		}
 
-		transform.position -= Vector3.right*GAME.spawns.grace;
+		transform.position += new Vector3(-GAME.spawns.grace, -1);
 		length = bounds.bounds.size.x;
 
 		sprite = body.GetComponent<SpriteRenderer>();
@@ -55,7 +56,6 @@ public class OBJ_window : TrajectoryAffectable
 		sprite.size = size;
 		body.GetComponent<BoxCollider2D>().size = size;
 		body.transform.localPosition = size / 2 * new Vector2(1, -1);
-        base.Start();
 	}
 
     private void OnDrawGizmosSelected()

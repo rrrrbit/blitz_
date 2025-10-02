@@ -25,6 +25,11 @@ public class GAME_obj : MonoBehaviour
         }
     }
 
+	public virtual void Ready()
+	{
+
+	}
+
     public virtual void SetBounds()
 	{
 		bounds = GetComponent<Collider2D>();
