@@ -21,10 +21,8 @@ public class BG_spawn : MonoBehaviour
     void Spawn()
     {
         var obj = Instantiate(objType);
-        cam = GAME.spawns.mvt.cam;
+        cam = GAME.plyrMvt.cam;
         obj.transform.position = new(start, cam.transform.position.y + Random.Range(-50f, 50), obj.transform.position.z);
-
-        obj.GetComponent<GAME_obj>().Spawn(new());
         
         nextSpawnDist = Random.Range(nxtSpwnDstBounds.x, nxtSpwnDstBounds.y);
     }

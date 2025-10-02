@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 0
+  bounds: {fileID: 707867367458757557}
+  solid: 0
   repeatable: 0
   rotateSpeed: 60
 --- !u!58 &707867367458757557

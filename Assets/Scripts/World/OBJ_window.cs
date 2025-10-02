@@ -1,7 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class OBJ_window : GAME_obj
+public class OBJ_window : TrajectoryAffectable
 {
     public Vector2 size;
     public GameObject body;
@@ -13,44 +14,32 @@ public class OBJ_window : GAME_obj
 
 	bool jumpOnNext = false;
 	public bool presentAtStart = false;
-    
-    private void Start()
+
+    public override IEnumerable<Trajectory> Trajectories()
     {
+		return new List<Trajectory>(){
+			new Trajectory(transform, new Vector2(size.x, 0), GAME.plyrMvt.JumpLength() * 1.5f),
+            new Trajectory(transform, new Vector2(size.x + GAME.plyrMvt.JumpLength()/2, GAME.plyrMvt.jumpHeight), GAME.plyrMvt.JumpLength() * 1.5f)
+        };
+    }
+
+	public override void SetBounds()
+	{
+        bounds = body.GetComponent<Collider2D>();
+	}
+
+    public void Start()
+    {
+		if (presentAtStart)
+		{
+			SetBounds();
+			Ready();
+		}
+
+		transform.position += new Vector3(-GAME.spawns.grace, -1);
+		length = bounds.bounds.size.x;
+
 		sprite = body.GetComponent<SpriteRenderer>();
-
-		jumpOnNext = Random.value < 0.5f;
-
-		if (!presentAtStart)
-		{
-			size = new Vector2(length, Random.Range(5f,30f)) + Vector2.right * GAME.spawns.grace;
-			transform.position += Vector3.left * GAME.spawns.grace;
-			GAME.spawns.objs.Add(gameObject);
-		}
-
-		var mvt = GAME.spawns.mvt;
-
-		if (jumpOnNext)
-		{
-			float randomOffset = mvt.JumpLength() * Random.Range(.5f, 1.5f);
-			Vector3 offsV = new(randomOffset, mvt.Trajectory(0, randomOffset));
-			GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
-				{GAME.spawns.window, 4 },
-				{GAME.spawns.relay, 2 },
-				{GAME.spawns.burst, 1 }
-			},
-			Random.Range(5f, 30f)));
-		}
-		else
-		{
-			float randomOffset = mvt.JumpLength() * Random.Range(0.25f, 0.75f);
-			Vector3 offsV = new(randomOffset, mvt.Trajectory(.5f, randomOffset));
-			GAME.spawns.QueueSpawn(new(transform, offsV + Vector3.right * size.x, new() {
-				{GAME.spawns.window, 4 },
-				{GAME.spawns.relay, 2 },
-				{GAME.spawns.burst, 1 }
-			},
-			Random.Range(5f, 30f)));
-		}
 
 		float aspectRatio = size.y / size.x;
 		hasIcon = aspectRatio > 0.9f && aspectRatio < 1.2f;
@@ -68,4 +57,27 @@ public class OBJ_window : GAME_obj
 		body.GetComponent<BoxCollider2D>().size = size;
 		body.transform.localPosition = size / 2 * new Vector2(1, -1);
 	}
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new(1,1,0,0.5f);
+
+        Gizmos.DrawCube(bounds.bounds.center, bounds.bounds.size);
+		Gizmos.color = Color.blue;
+
+        foreach (var j in GAME.spawns.objs.Where(x => bounds.bounds.Intersects(x.GetComponent<GAME_obj>().bounds.bounds)))
+        {
+            Gizmos.DrawWireCube(j.GetComponent<GAME_obj>().bounds.bounds.center, j.GetComponent<GAME_obj>().bounds.bounds.size);
+        }
+
+   //     foreach (var i in GAME.spawns.objs.Select(x => x.GetComponent<GAME_obj>()).ToList())
+   //     {
+            
+			
+			//if (i.bounds != null && GetComponent<GAME_obj>().bounds.bounds.Intersects(i.bounds.bounds))
+   //         {
+   //             Gizmos.DrawWireCube(i.bounds.bounds.center, i.bounds.bounds.size);
+   //         }
+   //     }
+    }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public static class GLOBAL
 {
+    public static float SQRT2OVER2 = Mathf.Sqrt(2) / 2;
+    
     public static float Lerpd(float a, float b, float k, float t, float d)
     {
         return Mathf.Lerp(

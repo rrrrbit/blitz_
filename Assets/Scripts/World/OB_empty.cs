@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class OB_empty : GAME_obj
 {
-    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
+    private void Start()
     {
-        GAME.spawns.objs.Add(gameObject);
+        GAME.spawns.objs.Add(gameObject); 
     }
 }
