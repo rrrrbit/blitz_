@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 0
+  bounds: {fileID: 707867367458757557}
   scoreVal: 2
 --- !u!58 &707867367458757557
 CircleCollider2D:

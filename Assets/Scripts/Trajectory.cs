@@ -84,11 +84,6 @@ public class Trajectory
         {
             return false;
         }
-        if(trajectoryAffectable.bounds.bounds.min.y <= ((Vector3)ex).y &&
-               ((Vector3)ex).y <= trajectoryAffectable.bounds.bounds.max.y)
-        {
-            Debug.Log("!");
-        }
         return trajectoryAffectable.bounds.bounds.min.y <= ((Vector3)ex).y &&
                ((Vector3)ex).y <= trajectoryAffectable.bounds.bounds.max.y;
     }

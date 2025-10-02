@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class OBJ_window : TrajectoryAffectable
 {
@@ -57,4 +57,27 @@ public class OBJ_window : TrajectoryAffectable
 		body.transform.localPosition = size / 2 * new Vector2(1, -1);
         base.Start();
 	}
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new(1,1,0,0.5f);
+
+        Gizmos.DrawCube(bounds.bounds.center, bounds.bounds.size);
+		Gizmos.color = Color.blue;
+
+        foreach (var j in GAME.spawns.objs.Where(x => bounds.bounds.Intersects(x.GetComponent<GAME_obj>().bounds.bounds)))
+        {
+            Gizmos.DrawWireCube(j.GetComponent<GAME_obj>().bounds.bounds.center, j.GetComponent<GAME_obj>().bounds.bounds.size);
+        }
+
+   //     foreach (var i in GAME.spawns.objs.Select(x => x.GetComponent<GAME_obj>()).ToList())
+   //     {
+            
+			
+			//if (i.bounds != null && GetComponent<GAME_obj>().bounds.bounds.Intersects(i.bounds.bounds))
+   //         {
+   //             Gizmos.DrawWireCube(i.bounds.bounds.center, i.bounds.bounds.size);
+   //         }
+   //     }
+    }
 }

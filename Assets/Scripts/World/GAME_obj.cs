@@ -1,4 +1,5 @@
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GAME_obj : MonoBehaviour
@@ -26,6 +27,17 @@ public class GAME_obj : MonoBehaviour
 
     public virtual void SetBounds()
 	{
-
+		bounds = GetComponent<Collider2D>();
 	}
+
+	//public virtual void OnDrawGizmos()
+	//{
+	//	Gizmos.color = Color.green;
+	//	if (bounds)
+	//	{
+
+	//		Gizmos.DrawWireCube(bounds.bounds.center, bounds.bounds.size);
+	//	}
+
+	//}
 }

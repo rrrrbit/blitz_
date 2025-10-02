@@ -32,10 +32,6 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
 
 
     }
-    public override void SetBounds()
-    {
-        bounds = GetComponent<Collider2D>();
-    }
 
     public override void Start()
     {

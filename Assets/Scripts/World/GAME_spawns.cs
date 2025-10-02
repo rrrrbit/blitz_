@@ -1,10 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using Unity.VisualScripting;
 using System.Collections;
-using UnityEditor.Rendering;
+using Unity.VisualScripting;
 
 public class GAME_spawns : MonoBehaviour
 {
@@ -68,12 +66,24 @@ public class GAME_spawns : MonoBehaviour
 	[Space]
 
     public List<GameObject> objs = new();
+	public List<UnresolvedObj> unresolvedObjs = new();
 
     public GameObject player;
 	public PLAYER_baseMvt mvt;
 
 	public List<Trajectory> allTrajectories = new();
 
+	public class UnresolvedObj
+	{
+		public GameObject obj;
+		public Trajectory traj;
+
+		public UnresolvedObj(GameObject Obj, Trajectory Traj)
+		{
+			obj = Obj;
+			traj = Traj;
+		}
+	}
 
 	void Spawn()
 	{
@@ -109,20 +119,14 @@ public class GAME_spawns : MonoBehaviour
 		{
 			plat.size = new(Random.Range(5f, 30f) + grace, Random.Range(5f, 30f));
 		}
-        
 
-		var good = false;
-		while (!good)
-		{
-            obj.transform.position = traj.Evaluate(Random.value);
-            good = !(objs.Where(x => x.GetComponent<GAME_obj>() != null && x.GetComponent<GAME_obj>().bounds.bounds.Intersects(obj.GetComponent<GAME_obj>().bounds.bounds)).Count() > 0);
-        }
+        obj.transform.position = traj.Evaluate(Random.value);
+
+		unresolvedObjs.Add(new UnresolvedObj(obj, traj));
 
 
-		objs.Add(obj);
-        UpdateTrajectories();
 
-    }
+	}
 
 	void UpdateTrajectories()
 	{
@@ -143,6 +147,19 @@ public class GAME_spawns : MonoBehaviour
     private void Update()
     {
 
+        foreach (var i in unresolvedObjs.ToList())
+        {
+			var good = objs.Where(x => i.obj.GetComponent<GAME_obj>().bounds.bounds.Intersects(x.GetComponent<GAME_obj>().bounds.bounds)).Count() == 0;
+			if (good)
+			{
+				unresolvedObjs.Remove(i);
+                objs.Add(i.obj);
+                UpdateTrajectories();
+				print("resolved");
+                continue;
+			}
+            i.obj.transform.position = i.traj.Evaluate(Random.value);
+        }
 
         if (objs.Count < maxObjs)
         {
@@ -158,7 +175,7 @@ public class GAME_spawns : MonoBehaviour
 				continue;
 			}
 
-            
+
             foreach (TrajectoryAffectable obj in objs.Where(x => x.GetComponent<TrajectoryAffectable>() != null).Select(x => x.GetComponent<TrajectoryAffectable>()))
             {
                 if(traj.InverseEvaluate(obj.bounds.bounds.max.y) == null) { continue; }
