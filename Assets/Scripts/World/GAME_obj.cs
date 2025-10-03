@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GAME_obj : MonoBehaviour
 {
-	public float length;
+	public GAME_objType typeEntry;
 	public Collider2D bounds;
 	
 	protected virtual void FixedUpdate()
@@ -15,11 +15,10 @@ public class GAME_obj : MonoBehaviour
         if (transform.position.x < GAME.spawns.deleteThreshhold)
         {
             GAME.spawns.objs.Remove(gameObject);
-			if (GAME.mgr.interactables.Contains(gameObject))
-			{
-				GAME.mgr.interactables.Remove(gameObject);
-			}
-			Destroy(gameObject, 0.1f);
+			GAME.mgr.interactables.Remove(gameObject);
+			GAME.spawns.unresolvedObjs.Remove(gameObject);
+			GAME.spawns.npObjs.Remove(gameObject);
+            Destroy(gameObject, 0.1f);
         }
     }
 

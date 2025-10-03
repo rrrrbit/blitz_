@@ -27,7 +27,7 @@ public class OBJ_burst : TrajectoryAffectable, IInteractable
     public override IEnumerable<Trajectory> Trajectories()
     {
         return new List<Trajectory>(){
-            new Trajectory(transform, new Vector2(GAME.mgr.speed * boostTime , 0), GAME.plyrMvt.JumpLength() * 1.5f)
+            new Trajectory(transform, new Vector2(GAME.mgr.speed * boostTime , 0), GAME.plyrMvt.JumpLength())
         };
     }
 
@@ -55,7 +55,6 @@ public class OBJ_burst : TrajectoryAffectable, IInteractable
 
     public void Start()
     {
-        length = bounds.bounds.size.x;
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         inner.eulerAngles.Set(0, 0, Random.Range(0, 60));
         GAME.mgr.interactables.Add(gameObject);

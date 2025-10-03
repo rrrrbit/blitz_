@@ -171,11 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e227d600f10ac9e4f900669c3274cc83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 0
+  typeEntry: {fileID: 11400000, guid: 8444208a4f1d05d4f97feb026ea6fccf, type: 2}
+  bounds: {fileID: 5549245188062454209}
   repeatable: 0
   inner: {fileID: 7730271006618833906}
   rotateSpeed: {x: 60, y: -25}
-  boostTime: 0
 --- !u!212 &4166057665357391029
 SpriteRenderer:
   m_ObjectHideFlags: 0

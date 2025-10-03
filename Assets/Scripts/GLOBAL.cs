@@ -57,4 +57,14 @@ public static class GLOBAL
 		Debug.DrawLine(pos + Vector3.left * size / 2, pos + Vector3.right * size / 2, c);
 		Debug.DrawLine(pos + Vector3.up * size / 2, pos + Vector3.down * size / 2, c);
 	}
+
+    public static void DrawBounds(Bounds bounds, Color? color = null)
+    {
+        if (!color.HasValue) { color = Color.white; }
+
+        Debug.DrawLine(new(bounds.min.x, bounds.min.y), new(bounds.min.x, bounds.max.y), (Color)color);
+        Debug.DrawLine(new(bounds.max.x, bounds.min.y), new(bounds.max.x, bounds.max.y), (Color)color);
+        Debug.DrawLine(new(bounds.min.x, bounds.min.y), new(bounds.max.x, bounds.min.y), (Color)color);
+        Debug.DrawLine(new(bounds.min.x, bounds.max.y), new(bounds.max.x, bounds.max.y), (Color)color);
+    }
 }

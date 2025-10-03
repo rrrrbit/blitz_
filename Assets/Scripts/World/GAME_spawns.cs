@@ -21,9 +21,9 @@ public class GAME_spawns : MonoBehaviour
 	public float padding;
 
     public int maxObjs;
+    public int maxNpObjs;
 
-    public List<GameObject> objTypes;
-	public List<float> objTypeProbs;
+    public List<GAME_objType> objTypes;
 
 	[Header("object type refs")]
 	public GameObject window;
@@ -38,6 +38,7 @@ public class GAME_spawns : MonoBehaviour
 
     public List<GameObject> objs = new();
 	public List<GameObject> unresolvedObjs = new();
+    public List<GameObject> npObjs = new();
 
 	public List<Trajectory> allTrajectories = new();
     public List<Trajectory> newTrajectories = new();
@@ -45,40 +46,62 @@ public class GAME_spawns : MonoBehaviour
 
 	void Spawn()
 	{
-		GameObject obj = null;
-		float p = Random.Range(0, objTypeProbs.Sum());
-		for (int i = 0; i < objTypeProbs.Count; i++)
+        var pObjTypes = objTypes.Where(x => x.category == GAME_objType.Category.p).ToList();
+        GAME_objType objType = null;
+        float p = Random.Range(0, pObjTypes.Select(x => x.frequency).Sum());
+		for (int i = 0; i < pObjTypes.Count; i++)
 		{
-			if (p <= objTypeProbs[i])
+			if (p <= pObjTypes[i].frequency)
 			{
-				obj = objTypes[i];
+                objType = pObjTypes[i];
 				break;
 			}
-			p -= objTypeProbs[i];
+			p -= pObjTypes[i].frequency;
 		}
-
+        
+        GameObject obj = Instantiate(objType.obj);
         obj.GetComponent<GAME_obj>().SetBounds();
-		obj = Instantiate(obj);
-		var plat = obj.GetComponent<OBJ_window>();
 
-        if (plat != null) { plat.size = new(Random.Range(5f, 30f) + grace, Random.Range(5f, 30f)); }
-
-
+        var plat = obj.GetComponent<OBJ_window>();
+        if (plat) { plat.size = new(Random.Range(5f, 30f) + grace, Random.Range(5f, 30f)); }
         obj.transform.position = SelectTrajectory().Evaluate(Random.value);
-		unresolvedObjs.Add(obj);
-	}
+        unresolvedObjs.Add(obj);
 
-	void UpdateTrajectories()
-	{
-        foreach(var obj in objs.Where(x => x.GetComponent<TrajectoryAffectable>() != null).Select(x => x.GetComponent<TrajectoryAffectable>()))
-		{
-			foreach (var i in newTrajectories.Where(x => x.CanLandOn(obj)).ToList())
-            {
-                newTrajectories.Remove(i);
-            }
-        }
     }
-	
+
+    void SpawnNonPlatformable()
+    {
+        var npObjTypes = objTypes.Where(x => x.category == GAME_objType.Category.np).ToList();
+        
+        GAME_objType objType = null;
+        float p = Random.Range(0, npObjTypes.Select(x => x.frequency).Sum());
+        for (int i = 0; i < npObjTypes.Count; i++)
+        {
+            if (p <= npObjTypes[i].frequency)
+            {
+                objType = npObjTypes[i];
+                break;
+            }
+            p -= npObjTypes[i].frequency;
+        }
+
+
+        GameObject obj = Instantiate(objType.obj);
+        obj.GetComponent<GAME_obj>().SetBounds();
+
+        obj.transform.position = SelectSafeTrajectory().EvaluateWithLanding(Random.value, objs.Select(y => y.GetComponent<TrajectoryAffectable>()).Where(y => y).ToList());
+        unresolvedObjs.Add(obj);
+    }
+
+    Trajectory SelectSafeTrajectory()
+    {
+        var safeTrajs = allTrajectories.Where(x => x.IsSafe(objs.Select(y => y.GetComponent<TrajectoryAffectable>()).Where(y => y).ToList())).ToList();
+        var offCamTrajs = safeTrajs.Where(x => x.AbsPos().x >= start).ToList();
+
+        Trajectory traj = safeTrajs[Random.Range(0, safeTrajs.Count)];
+        if (offCamTrajs.Count > 0) { traj = offCamTrajs[Random.Range(0, offCamTrajs.Count)]; }
+        return traj;
+    }
 	Trajectory SelectTrajectory()
 	{
         var offCamTrajs = newTrajectories.Where(x => x.AbsPos().x >= start).ToList();
@@ -86,12 +109,25 @@ public class GAME_spawns : MonoBehaviour
         if (offCamTrajs.Count > 0) { traj = offCamTrajs[Random.Range(0, offCamTrajs.Count)]; }
 		return traj;
     }
-	bool OverlapCheck(Bounds a, Bounds b)
+
+	void UpdateTrajectories()
 	{
-        a.Encapsulate(a.max + Vector3.up * (GAME.plyrMvt.jumpHeight));
+        foreach(var obj in objs.Select(x => x.GetComponent<TrajectoryAffectable>()).Where(x => x != null))
+		{
+            newTrajectories.RemoveAll(x => x.CanLandOnWithRange(obj));
+        }
+    }
+	
+	bool OverlapCheck(Bounds a, Bounds b, bool headroom, float padding)
+	{
+        a.Encapsulate(a.max + Vector3.up * (headroom?GAME.plyrMvt.jumpHeight:0));
         a.Expand(padding);
-        b.Encapsulate(b.max + Vector3.up * (GAME.plyrMvt.jumpHeight) );
+        b.Encapsulate(b.max + Vector3.up * (headroom ? GAME.plyrMvt.jumpHeight : 0));
 		b.Expand(padding);
+
+        GLOBAL.DrawBounds(a);
+        GLOBAL.DrawBounds(b);
+
 		return a.Intersects(b);
 	}
 
@@ -100,30 +136,38 @@ public class GAME_spawns : MonoBehaviour
 
         foreach (var obj in unresolvedObjs.ToList())
         {
-
-			if (objs.Where(x => OverlapCheck(obj.GetComponent<GAME_obj>().bounds.bounds, x.GetComponent<GAME_obj>().bounds.bounds)).Count() == 0) // if no platforms intersect this
+            bool isPlatformable = obj.GetComponent<GAME_obj>().typeEntry.category == GAME_objType.Category.p;
+            if ((isPlatformable ? objs : objs.Concat(npObjs)).Where(x => x != null).Where(x => 
+                OverlapCheck(obj.GetComponent<GAME_obj>().bounds.bounds, x.GetComponent<GAME_obj>().bounds.bounds, isPlatformable, isPlatformable?padding:padding/2)
+                ).Count() == 0) // if no objects intersect this
 			{
 				unresolvedObjs.Remove(obj);
-                objs.Add(obj);
+                (isPlatformable?objs:npObjs).Add(obj);
                 UpdateTrajectories();
 				obj.GetComponent<GAME_obj>().Ready();
 				//print("resolved");
                 continue;
 			}
-            obj.transform.position = SelectTrajectory().Evaluate(Random.value);
+            if(isPlatformable)
+            {
+                obj.transform.position = SelectTrajectory().Evaluate(Random.value);
+            } 
+            else
+            {
+                obj.transform.position = SelectSafeTrajectory().Evaluate(Random.value);
+            }
+            
         }
 
         if (objs.Count < maxObjs)
         {
             Spawn();
         }
-        foreach (var traj in allTrajectories.ToList())
+        if(npObjs.Count < maxNpObjs)
         {
-            if (traj.origin == null)
-            {
-                allTrajectories.Remove(traj);
-            }
+            SpawnNonPlatformable();
         }
+        allTrajectories.RemoveAll(x => x.origin == null);
 
         if (debugDraw) { DebugDraw(); }
     }
@@ -132,17 +176,9 @@ public class GAME_spawns : MonoBehaviour
 	{
         foreach (var traj in allTrajectories.ToList())
         {
-            if (newTrajectories.Where(x => x.AbsPos().x >= start).Contains(traj))
-            {
-                traj.Draw(Color.yellow);
-            }
-            else if(traj.IsSafe(objs.Select(x => x.GetComponent<TrajectoryAffectable>()).Where(x => x).ToList()))
+            if(traj.IsSafe(objs.Select(x => x.GetComponent<TrajectoryAffectable>()).Where(x => x).ToList()))
             {
                 traj.Draw(Color.white);
-            }
-            else
-            {
-                traj.Draw(Color.red);
             }
         }
 

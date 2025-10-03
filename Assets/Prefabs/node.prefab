@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb389804e1af9a54788db70bd50c4a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 0
+  typeEntry: {fileID: 11400000, guid: 982e26e3ce0a7e5418190144990a7ca9, type: 2}
   bounds: {fileID: 707867367458757557}
   scoreVal: 2
 --- !u!58 &707867367458757557
