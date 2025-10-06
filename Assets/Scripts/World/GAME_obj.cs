@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,12 +13,12 @@ public class GAME_obj : MonoBehaviour
 
 		GetComponent<Rigidbody2D>().linearVelocityX = -GAME.mgr.speed;
 
-        if (transform.position.x < GAME.spawns.deleteThreshhold)
+        if (transform.position.x < GAME.objMgr.deleteThreshhold)
         {
-            GAME.spawns.objs.Remove(gameObject);
+            GAME.objMgr.objs.Remove(gameObject);
 			GAME.mgr.interactables.Remove(gameObject);
-			GAME.spawns.unresolvedObjs.Remove(gameObject);
-			GAME.spawns.npObjs.Remove(gameObject);
+			GAME.objMgr.unresolvedObjs.Remove(gameObject);
+			GAME.objMgr.npObjs.Remove(gameObject);
             Destroy(gameObject, 0.1f);
         }
     }
@@ -39,4 +40,11 @@ public class GAME_obj : MonoBehaviour
 	//	}
 
 	//}
+}
+
+public interface INode
+{
+	List<Transform> connections { get; set; }
+
+	public float GetSmallestAngle();
 }

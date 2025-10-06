@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections;
 using Unity.VisualScripting;
 
-public class GAME_spawns : MonoBehaviour
+public class GAME_objManager : MonoBehaviour
 {
     /*
      NON PLATFORMING OBJECT SPAWNING
@@ -43,6 +43,9 @@ public class GAME_spawns : MonoBehaviour
 	public List<Trajectory> allTrajectories = new();
     public List<Trajectory> newTrajectories = new();
     public List<Trajectory> trajsWithLandings = new();
+
+    public GameObject bottom;
+    public float bottomOffset;
 
 	void Spawn()
 	{
@@ -170,6 +173,9 @@ public class GAME_spawns : MonoBehaviour
         allTrajectories.RemoveAll(x => x.origin == null);
 
         if (debugDraw) { DebugDraw(); }
+
+
+        bottom.transform.position = new(0, objs.Select(x => x.GetComponent<GAME_obj>().bounds.bounds.min.y + bottomOffset).Min());
     }
 
 	void DebugDraw()

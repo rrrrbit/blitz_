@@ -24,4 +24,10 @@ public class GAME_manager : MonoBehaviour
     {
         score += amt;
     }
+
+    public void End()
+    {
+        print("end");
+        Time.timeScale = 0;
+    }
 }

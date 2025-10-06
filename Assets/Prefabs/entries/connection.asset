@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdd186a30e0d639438fffd498b79b694, type: 3}
-  m_Name: node
+  m_Name: connection
   m_EditorClassIdentifier: 
-  obj: {fileID: 3657978883164431491, guid: 3ead752729c5dfc498169fd2f05c2efd, type: 3}
-  frequency: 49
-  category: 1
+  obj: {fileID: 0}
+  frequency: 0
+  category: 2

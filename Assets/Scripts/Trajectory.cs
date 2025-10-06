@@ -14,8 +14,8 @@ public class TrajectoryAffectable : GAME_obj
     {
         foreach (var i in Trajectories())
         {
-            GAME.spawns.allTrajectories.Add(i);
-            GAME.spawns.newTrajectories.Add(i);
+            GAME.objMgr.allTrajectories.Add(i);
+            GAME.objMgr.newTrajectories.Add(i);
         }
     }
 }

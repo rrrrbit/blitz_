@@ -30,8 +30,8 @@ public class OBJ_window : TrajectoryAffectable
     public override void Ready()
     {
         base.Ready();
-        transform.position += new Vector3(-GAME.spawns.grace, -1);
-		size += Vector2.right * GAME.spawns.grace;
+        transform.position += new Vector3(-GAME.objMgr.grace, -1);
+		size += Vector2.right * GAME.objMgr.grace;
         UpdateSize();
     }
 
@@ -80,7 +80,7 @@ public class OBJ_window : TrajectoryAffectable
         Gizmos.DrawCube(bounds.bounds.center, bounds.bounds.size);
 		Gizmos.color = Color.blue;
 
-        foreach (var j in GAME.spawns.objs.Where(x => bounds.bounds.Intersects(x.GetComponent<GAME_obj>().bounds.bounds)))
+        foreach (var j in GAME.objMgr.objs.Where(x => bounds.bounds.Intersects(x.GetComponent<GAME_obj>().bounds.bounds)))
         {
             Gizmos.DrawWireCube(j.GetComponent<GAME_obj>().bounds.bounds.center, j.GetComponent<GAME_obj>().bounds.bounds.size);
         }
