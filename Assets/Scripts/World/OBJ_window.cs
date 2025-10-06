@@ -68,10 +68,6 @@ public class OBJ_window : TrajectoryAffectable
         }
     }
 
-	public void Update()
-    {
-        
-    }
 
     private void OnDrawGizmosSelected()
     {

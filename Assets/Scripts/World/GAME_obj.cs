@@ -13,15 +13,25 @@ public class GAME_obj : MonoBehaviour
 
 		GetComponent<Rigidbody2D>().linearVelocityX = -GAME.mgr.speed;
 
-        if (transform.position.x < GAME.objMgr.deleteThreshhold)
-        {
-            GAME.objMgr.objs.Remove(gameObject);
-			GAME.mgr.interactables.Remove(gameObject);
-			GAME.objMgr.unresolvedObjs.Remove(gameObject);
-			GAME.objMgr.npObjs.Remove(gameObject);
-            Destroy(gameObject, 0.1f);
-        }
+        
     }
+
+	protected virtual void Update()
+	{
+		if (transform.position.x < GAME.objMgr.deleteThreshhold)
+		{
+			DestroyCleanup();
+		}
+	}
+
+	public void DestroyCleanup()
+	{
+		GAME.objMgr.objs.Remove(gameObject);
+		GAME.mgr.interactables.Remove(gameObject);
+		GAME.objMgr.unresolvedObjs.Remove(gameObject);
+		GAME.objMgr.npObjs.Remove(gameObject);
+		Destroy(gameObject);
+	}
 
 	public virtual void Ready() { }
 

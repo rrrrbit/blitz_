@@ -43,9 +43,9 @@ public class BG_window : GAME_obj
         UpdateSize();
     }
 
-    private void Update()
+    protected override void Update()
     {
-        
+        base.Update();
         if (hasIcon)
         {
             contents.transform.localPosition = size / 2 * new Vector2(1, -1);

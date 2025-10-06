@@ -7,8 +7,7 @@ public class Destructible : GAME_obj, IInteractable
     public void Slash(GameObject context)
     {
         GAME.mgr.AddScore(scoreVal);
-        GAME.mgr.interactables.Remove(gameObject);
-        Destroy(gameObject);
+        DestroyCleanup();
     }
 
     protected virtual void Start()

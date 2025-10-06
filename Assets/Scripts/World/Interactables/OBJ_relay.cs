@@ -26,16 +26,22 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
         };
     }
 
-    void Update()
-    {
-        transform.eulerAngles += Vector3.forward * rotateSpeed * Time.deltaTime;
+	protected override void Update()
+	{
+		base.Update();
+		transform.eulerAngles += Vector3.forward * rotateSpeed * Time.deltaTime;
 
 
     }
 
+	public override void Ready()
+	{
+		GAME.mgr.interactables.Add(gameObject);
+	}
+
     public void Start()
     {
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
-        GAME.mgr.interactables.Add(gameObject);
+        
     }
 }
