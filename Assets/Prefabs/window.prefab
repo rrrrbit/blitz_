@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bd4845aadfa074fa58e69b8a762002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 0
+  typeEntry: {fileID: 11400000, guid: d9e5b74634c086a469acb08639ea0dff, type: 2}
   bounds: {fileID: 3318141266778853032}
   solid: 1
   size: {x: 0, y: 0}

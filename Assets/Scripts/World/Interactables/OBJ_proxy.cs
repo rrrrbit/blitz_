@@ -9,7 +9,7 @@ public class OBJ_proxy : GAME_obj, IInteractable
     [SerializeField] Transform inner;
     [SerializeField] Vector2 rotateSpeed;
 
-    public bool beenSlashed {  get; set; }
+    public bool beenSlashed { get; set; }
     public void Slash(GameObject context)
     {
         PLAYER_baseMvt mvt = context.GetComponent<PLAYER_baseMvt>();
@@ -32,6 +32,5 @@ public class OBJ_proxy : GAME_obj, IInteractable
     {
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         inner.eulerAngles.Set(0, 0, Random.Range(0, 90));
-        GAME.spawns.objs.Add(gameObject);
     }
 }

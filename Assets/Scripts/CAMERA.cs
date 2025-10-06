@@ -27,11 +27,15 @@ public class CAMERA : MonoBehaviour
 
 		var lookahead = targRb.linearVelocity.y * lkahdMult; 
 		transform.position = GLOBAL.Lerpd(transform.position, new Vector3(0, target.transform.position.y, 0) + Vector3.up * lookahead + offset, k, t, Time.deltaTime);
-		return;
+		
+	}
+
+	void DebugDraw(float lookahead)
+	{
 		var p = transform.position;
 		Debug.DrawLine(new(p.x - 100, p.y, 0), new(p.x + 100, p.y, 0), Color.red);
 		Debug.DrawLine(new(p.x-100, target.transform.position.y, 0), new(p.x + 100, target.transform.position.y, 0), Color.blue);
 		Debug.DrawLine(new(p.x-100, target.transform.position.y + lookahead, 0), new(p.x + 100, target.transform.position.y + lookahead, 0), Color.green);
-		
+
 	}
 }

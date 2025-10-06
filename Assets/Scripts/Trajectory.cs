@@ -14,7 +14,8 @@ public class TrajectoryAffectable : GAME_obj
     {
         foreach (var i in Trajectories())
         {
-            GAME.spawns.allTrajectories.Add(i);
+            GAME.objMgr.allTrajectories.Add(i);
+            GAME.objMgr.newTrajectories.Add(i);
         }
     }
 }
@@ -77,6 +78,32 @@ public class Trajectory
                (float)iey <= trajectoryAffectable.bounds.bounds.max.x;
     }
 
+    public bool CanLandOnWithRange(TrajectoryAffectable trajectoryAffectable)
+    {
+        var iey = InverseEvaluate(trajectoryAffectable.bounds.bounds.max.y);
+        if (!trajectoryAffectable.solid || iey == null || trajectoryAffectable.transform == origin)
+        {
+            return false;
+        }
+        return trajectoryAffectable.bounds.bounds.min.x <= (float)iey &&
+               (float)iey <= trajectoryAffectable.bounds.bounds.max.x && 
+               (iey < AbsPos().x + maxDistX);
+    }
+
+    public TrajectoryAffectable Landing(List<TrajectoryAffectable> world)
+    {
+        return world.Where(x => CanLandOnWithRange(x)).First();
+    }
+
+    public Vector3 EvaluateWithLanding(float x, List<TrajectoryAffectable>  world)
+    {
+        var landingXDist = InverseEvaluate(Landing(world).bounds.bounds.max.y) - AbsPos().x;
+
+        if (landingXDist == null) { return Evaluate(x); }
+
+        return AbsPos() + new Vector3(x * (float)landingXDist, -GAME.plyrMvt.jumpHeight * Mathf.Pow(2 * x * (float)landingXDist / GAME.plyrMvt.JumpLength(), 2), 0);
+    }
+
     public bool WouldHit(TrajectoryAffectable trajectoryAffectable)
     {
         var ex = EvaluateAbs(trajectoryAffectable.bounds.bounds.min.x);
@@ -86,6 +113,17 @@ public class Trajectory
         }
         return trajectoryAffectable.bounds.bounds.min.y <= ((Vector3)ex).y &&
                ((Vector3)ex).y <= trajectoryAffectable.bounds.bounds.max.y;
+    }
+
+    public bool IsSafe(List<TrajectoryAffectable> world)
+    {
+        bool hasLanding = false;
+        foreach (var obj in world)
+        {
+            if (WouldHit(obj)) { return false; }
+            if (!hasLanding && CanLandOnWithRange(obj)) { hasLanding = true; }
+        }
+        return hasLanding;
     }
 
     public void Draw(Color color, int resolution = 5)

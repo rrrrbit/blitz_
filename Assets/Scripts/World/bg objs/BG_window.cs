@@ -20,7 +20,6 @@ public class BG_window : GAME_obj
     {
         sprite.size = size;
         body.transform.localPosition = size / 2 * new Vector2(1, -1);
-        length = size.x;
 
     }
 

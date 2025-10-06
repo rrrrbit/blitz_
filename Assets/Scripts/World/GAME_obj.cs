@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class GAME_obj : MonoBehaviour
 {
-	public float length;
+	public GAME_objType typeEntry;
 	public Collider2D bounds;
 	
 	protected virtual void FixedUpdate()
@@ -12,23 +13,17 @@ public class GAME_obj : MonoBehaviour
 
 		GetComponent<Rigidbody2D>().linearVelocityX = -GAME.mgr.speed;
 
-		//Gizmos.DrawWireCube(bounds.center, bounds.size);
-
-        if (transform.position.x < GAME.spawns.deleteThreshhold)
+        if (transform.position.x < GAME.objMgr.deleteThreshhold)
         {
-            GAME.spawns.objs.Remove(gameObject);
-			if (GAME.mgr.interactables.Contains(gameObject))
-			{
-				GAME.mgr.interactables.Remove(gameObject);
-			}
-			Destroy(gameObject, 0.1f);
+            GAME.objMgr.objs.Remove(gameObject);
+			GAME.mgr.interactables.Remove(gameObject);
+			GAME.objMgr.unresolvedObjs.Remove(gameObject);
+			GAME.objMgr.npObjs.Remove(gameObject);
+            Destroy(gameObject, 0.1f);
         }
     }
 
-	public virtual void Ready()
-	{
-
-	}
+	public virtual void Ready() { }
 
     public virtual void SetBounds()
 	{
@@ -45,4 +40,11 @@ public class GAME_obj : MonoBehaviour
 	//	}
 
 	//}
+}
+
+public interface INode
+{
+	List<Transform> connections { get; set; }
+
+	public float GetSmallestAngle();
 }

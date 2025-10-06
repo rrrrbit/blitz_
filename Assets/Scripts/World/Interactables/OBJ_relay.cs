@@ -22,7 +22,7 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
     public override IEnumerable<Trajectory> Trajectories()
     {
         return new List<Trajectory>(){
-            new Trajectory(transform, new Vector2(GAME.plyrMvt.JumpLength()/2, GAME.plyrMvt.jumpHeight), GAME.plyrMvt.JumpLength() * 1.5f)
+            new Trajectory(transform, new Vector2(GAME.plyrMvt.JumpLength()/2, GAME.plyrMvt.jumpHeight), GAME.plyrMvt.JumpLength()/2)
         };
     }
 
@@ -35,7 +35,6 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
 
     public void Start()
     {
-        length = bounds.bounds.size.x;
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         GAME.mgr.interactables.Add(gameObject);
     }

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d648c4fcbe1c7ad4eb67163a02cc0d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 0
+  typeEntry: {fileID: 11400000, guid: 984c502b5bddd184998cd55536989975, type: 2}
   bounds: {fileID: 707867367458757557}
   solid: 0
   repeatable: 0

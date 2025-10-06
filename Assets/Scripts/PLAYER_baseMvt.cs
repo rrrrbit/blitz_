@@ -93,6 +93,14 @@ public class PLAYER_baseMvt : MonoBehaviour
         anim.state = grounded ? PLAYER_anim.States.ground : PLAYER_anim.States.air;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject == GAME.objMgr.bottom)
+        {
+            GAME.mgr.End();
+        }
+    }
+
     public void Jump()
     {
         rb.linearVelocityY = jumpForce;
