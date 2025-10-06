@@ -7,6 +7,7 @@ public class PLAYER_slash : MonoBehaviour
 {
     [SerializeField] Transform slashBoxPivot;
     [SerializeField] Collider2D slashBox;
+    [SerializeField] Animator slashBoxAnim;
 
     [SerializeField] float checkTime;
     [SerializeField] float comboTime;
@@ -37,6 +38,7 @@ public class PLAYER_slash : MonoBehaviour
         slashBoxPivot.right = closest.position - transform.position;
 
         checkTimer = checkTime;
+        slashBoxAnim.Play("slash", -1, 0f);
     }
 
     void Setup()
@@ -61,7 +63,6 @@ public class PLAYER_slash : MonoBehaviour
 
         if (checkTimer > 0)
         {
-            slashBox.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, .5f);
 
             List<Collider2D> overlap = new List<Collider2D>();
             slashBox.Overlap(overlap);

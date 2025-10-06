@@ -3,12 +3,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class OBJ_proxy : Interactable
+public class OBJ_proxy : GAME_obj, IInteractable
 {
     [SerializeField] bool repeatable;
     [SerializeField] Transform inner;
     [SerializeField] Vector2 rotateSpeed;
-    public override void Slash(GameObject context)
+
+    public bool beenSlashed {  get; set; }
+    public void Slash(GameObject context)
     {
         PLAYER_baseMvt mvt = context.GetComponent<PLAYER_baseMvt>();
 
@@ -24,19 +26,12 @@ public class OBJ_proxy : Interactable
     {
         transform.eulerAngles += Vector3.forward * rotateSpeed.x * Time.deltaTime;
         inner.eulerAngles += Vector3.forward * rotateSpeed.y * Time.deltaTime;
-
-
     }
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         transform.eulerAngles.Set(0, 0, Random.Range(0, 90));
         inner.eulerAngles.Set(0, 0, Random.Range(0, 90));
-    }
-
-    public override void Spawn(GAME_spawns.QueuedSpawn ctx)
-    {
         GAME.spawns.objs.Add(gameObject);
     }
 }

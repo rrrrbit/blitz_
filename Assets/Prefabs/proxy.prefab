@@ -172,10 +172,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 0
+  bounds: {fileID: 5549245188062454209}
   repeatable: 0
   inner: {fileID: 7730271006618833906}
   rotateSpeed: {x: 60, y: -25}
-  boostTime: 0
 --- !u!212 &4166057665357391029
 SpriteRenderer:
   m_ObjectHideFlags: 0
