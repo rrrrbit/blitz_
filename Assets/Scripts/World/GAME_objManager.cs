@@ -66,7 +66,7 @@ public class GAME_objManager : MonoBehaviour
         obj.GetComponent<GAME_obj>().SetBounds();
 
         var plat = obj.GetComponent<OBJ_window>();
-        if (plat) { plat.size = new(Random.Range(5f, 30f) + grace, Random.Range(5f, 30f)); }
+        if (plat != null) { plat.size = new(Random.Range(5f, 30f) + grace, Random.Range(5f, 30f)); }
         obj.transform.position = SelectTrajectory().Evaluate(Random.value);
         unresolvedObjs.Add(obj);
 
@@ -140,8 +140,8 @@ public class GAME_objManager : MonoBehaviour
         foreach (var obj in unresolvedObjs.ToList())
         {
             bool isPlatformable = obj.GetComponent<GAME_obj>().typeEntry.category == GAME_objType.Category.p;
-            if ((isPlatformable ? objs : objs.Concat(npObjs)).Where(x => x != null).Where(x => 
-                OverlapCheck(obj.GetComponent<GAME_obj>().bounds.bounds, x.GetComponent<GAME_obj>().bounds.bounds, isPlatformable, isPlatformable?padding:padding/2)
+            if ((isPlatformable ? objs : objs.Concat(npObjs)).Where(x =>
+                x != null && OverlapCheck(obj.GetComponent<GAME_obj>().bounds.bounds, x.GetComponent<GAME_obj>().bounds.bounds, isPlatformable, isPlatformable?padding:padding/2)
                 ).Count() == 0) // if no objects intersect this
 			{
 				unresolvedObjs.Remove(obj);
@@ -149,8 +149,8 @@ public class GAME_objManager : MonoBehaviour
                 UpdateTrajectories();
 				obj.GetComponent<GAME_obj>().Ready();
 				//print("resolved");
-                continue;
 			}
+            
             if(isPlatformable)
             {
                 obj.transform.position = SelectTrajectory().Evaluate(Random.value);
@@ -159,7 +159,6 @@ public class GAME_objManager : MonoBehaviour
             {
                 obj.transform.position = SelectSafeTrajectory().Evaluate(Random.value);
             }
-            
         }
 
         if (objs.Count < maxObjs)
@@ -186,6 +185,15 @@ public class GAME_objManager : MonoBehaviour
             {
                 traj.Draw(Color.white);
             }
+        }
+
+        foreach (var obj in objs)
+        {
+            GLOBAL.DrawBounds(obj.GetComponent<GAME_obj>().bounds.bounds, Color.green);
+        }
+        foreach (var obj in npObjs)
+        {
+            GLOBAL.DrawBounds(obj.GetComponent<GAME_obj>().bounds.bounds, Color.blue);
         }
 
         Debug.DrawLine(new Vector3(deleteThreshhold, 1000, 0), new Vector3(deleteThreshhold, -1000, 0), Color.red);
