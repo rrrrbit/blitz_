@@ -158,7 +158,7 @@ public class GAME_objManager : MonoBehaviour
             } 
             else
             {
-                obj.transform.position = SelectSafeTrajectory().Evaluate(Random.value);
+                obj.transform.position = SelectTrajectory().Evaluate(Random.value);
             }
         }
 

@@ -39,8 +39,8 @@ public class BG_window : GAME_obj
     {
         sprite = body.GetComponent<SpriteRenderer>();
         size = new Vector2(Random.Range(10f, 50f), Random.Range(10f, 50f));
-        SetContents();
         UpdateSize();
+        SetContents();
     }
 
     protected override void Update()

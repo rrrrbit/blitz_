@@ -18,7 +18,7 @@ public class GAME_obj : MonoBehaviour
 
 	protected virtual void Update()
 	{
-		if (transform.position.x < GAME.objMgr.deleteThreshhold)
+		if ((bounds == null ? transform.position.x : bounds.bounds.max.x) < GAME.objMgr.deleteThreshhold)
 		{
 			DestroyCleanup();
 		}

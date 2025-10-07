@@ -22,7 +22,7 @@ public class OBJ_window : TrajectoryAffectable
         };
     }
 
-	public override void SetBounds()
+  	public override void SetBounds()
 	{
         bounds = body.GetComponent<Collider2D>();
 	}
@@ -31,7 +31,7 @@ public class OBJ_window : TrajectoryAffectable
     {
         base.Ready();
         transform.position += new Vector3(-GAME.objMgr.grace, -1);
-		size += Vector2.right * GAME.objMgr.grace;
+		
         UpdateSize();
     }
 
@@ -43,10 +43,10 @@ public class OBJ_window : TrajectoryAffectable
 			SetBounds();
 			Ready();
 		}
+        size += Vector2.right * GAME.objMgr.grace;
 
 
-		
-		var layer = Random.Range(-20000, 20000);
+        var layer = Random.Range(-20000, 20000);
 		sprite.sortingOrder = 2 * layer;
 		contents.GetComponent<SpriteRenderer>().sortingOrder = 2 * layer + 1;
 

@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,6 +38,7 @@ public class PLAYER_slash : MonoBehaviour
 
         checkTimer = checkTime;
         slashBoxAnim.Play("slash", -1, 0f);
+        slashBox.GetComponent<SpriteRenderer>().flipY = Random.value < 0.5f;
     }
 
     void Setup()
