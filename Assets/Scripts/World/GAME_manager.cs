@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,21 @@ public class GAME_manager : MonoBehaviour
     public float speedMult = 0;
     public float speed = 1;
 
+    public Canvas deathCanvas;
+
     public List<GameObject> interactables = new();
+
+    void Start()
+    {
+        StartCoroutine(Init());
+    }
+
+    IEnumerator Init()
+    {
+        speedMult = 0;
+        yield return new WaitForSeconds(0.3f);
+        speedMult = 1;
+    }
 
     void Update()
     {
@@ -29,5 +44,6 @@ public class GAME_manager : MonoBehaviour
     {
         print("end");
         Time.timeScale = 0;
+        deathCanvas.enabled = true;
     }
 }

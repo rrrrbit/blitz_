@@ -106,6 +106,6 @@ public class PLAYER_baseMvt : MonoBehaviour
         rb.linearVelocityY = jumpForce;
     }
 
-    public float JumpLength() => jumpTime * GAME.mgr.speed;
+    public float JumpLength() => jumpTime * GAME.mgr.baseSpeed;
 	public float Trajectory(float startFactor, float dist) => 4*jumpHeight*dist/JumpLength()*(1-2*startFactor-dist/JumpLength());
 }

@@ -27,7 +27,7 @@ public class OBJ_burst : TrajectoryAffectable, IInteractable
     public override IEnumerable<Trajectory> Trajectories()
     {
         return new List<Trajectory>(){
-            new Trajectory(transform, new Vector2(GAME.mgr.speed * boostTime , 0), GAME.plyrMvt.JumpLength())
+            new Trajectory(transform, new Vector2(GAME.mgr.baseSpeed * boostTime , 0), GAME.plyrMvt.JumpLength())
         };
     }
 

@@ -262,8 +262,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6226eb986c481ca46b02319fb38bfa65, type: 2}
+  m_sharedMaterial: {fileID: 670620998812937455, guid: 6226eb986c481ca46b02319fb38bfa65, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -425,6 +425,7 @@ MonoBehaviour:
   baseSpeed: 50
   speedMult: 1
   speed: 50
+  deathCanvas: {fileID: 1089460294}
   interactables: []
 --- !u!4 &467681792
 Transform:
@@ -455,12 +456,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugDraw: 1
-  deleteThreshhold: -40
+  deleteThreshhold: -100
   start: 40
   grace: 0
   padding: 4
-  maxObjs: 20
+  maxObjs: 50
   maxNpObjs: 5
+  maxUnresolved: 3
   objTypes:
   - {fileID: 11400000, guid: d9e5b74634c086a469acb08639ea0dff, type: 2}
   - {fileID: 11400000, guid: d42d8a72a758b384ca26ab29a8c3064d, type: 2}
@@ -494,6 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlyrMvt: {fileID: 634814818}
+  Cam: {fileID: 1235208198}
 --- !u!1 &546301117
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,10 +554,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: menu
+  m_text: exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 494703b377c46114c9edefdda0d708f7, type: 2}
+  m_sharedMaterial: {fileID: -627649935740649970, guid: 494703b377c46114c9edefdda0d708f7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -578,7 +581,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.7
+  m_fontSize: 2.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -678,7 +681,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!61 &634814815
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5842,7 +5845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 103.17, y: 73.9}
+  m_AnchoredPosition: {x: 105, y: 70}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741132426
@@ -5867,8 +5870,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6226eb986c481ca46b02319fb38bfa65, type: 2}
+  m_sharedMaterial: {fileID: 670620998812937455, guid: 6226eb986c481ca46b02319fb38bfa65, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10931,7 +10934,7 @@ GameObject:
   - component: {fileID: 936612938}
   - component: {fileID: 936612937}
   m_Layer: 5
-  m_Name: menu
+  m_Name: exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10954,7 +10957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.6742, y: -5.1981}
+  m_AnchoredPosition: {x: 4.1, y: -4}
   m_SizeDelta: {x: 8.7131, y: 3.0363}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &936612937
@@ -11000,7 +11003,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 936612938}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 467681794}
+        m_TargetAssemblyTypeName: GAME, Assembly-CSharp
+        m_MethodName: SaveAndExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &936612938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16000,7 +16015,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089460291}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 1235208196}
@@ -16013,7 +16028,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1866283555
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1089460295
@@ -16033,8 +16048,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -14, y: 1.9}
-  m_SizeDelta: {x: 20, y: 15}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 18, y: 13.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1089460296
 MonoBehaviour:
@@ -16048,6 +16063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2eb8196ba8ce4f449359d0a8e3273ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 634814817}
+  padding: 3
 --- !u!1 &1104550933
 GameObject:
   m_ObjectHideFlags: 0
@@ -21390,10 +21407,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: retry
+  m_text: reload
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 494703b377c46114c9edefdda0d708f7, type: 2}
+  m_sharedMaterial: {fileID: -627649935740649970, guid: 494703b377c46114c9edefdda0d708f7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21417,7 +21434,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.7
+  m_fontSize: 2.2
   m_fontSizeBase: 21.6
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21678,14 +21695,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 3922244624772197832, guid: 6c59e2dd3e2a8c64d87bc451a604bd63, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21694,7 +21711,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 5
+  m_PixelsPerUnitMultiplier: 96
 --- !u!222 &1601743882
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21716,7 +21733,7 @@ GameObject:
   - component: {fileID: 1656891310}
   - component: {fileID: 1656891309}
   m_Layer: 5
-  m_Name: retry
+  m_Name: reload
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21739,7 +21756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.4389, y: -5.1981}
+  m_AnchoredPosition: {x: -4.3, y: -4}
   m_SizeDelta: {x: 8.0345, y: 3.0363}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1656891309
@@ -21785,7 +21802,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656891310}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 467681794}
+        m_TargetAssemblyTypeName: GAME, Assembly-CSharp
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1656891310
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class OBJ_window : TrajectoryAffectable
     {
 		return new List<Trajectory>(){
 			new Trajectory(transform, new Vector2(size.x, 0), GAME.plyrMvt.JumpLength()),
-            new Trajectory(transform, new Vector2(size.x + GAME.plyrMvt.JumpLength()/2, GAME.plyrMvt.jumpHeight), GAME.plyrMvt.JumpLength()/2)
+            new Trajectory(transform, new Vector2(size.x + GAME.plyrMvt.JumpLength()/2, GAME.plyrMvt.jumpHeight), GAME.plyrMvt.JumpLength())
         };
     }
 

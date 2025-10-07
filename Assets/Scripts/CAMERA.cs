@@ -40,14 +40,17 @@ public class CAMERA : MonoBehaviour
 		Debug.DrawLine(new(p.x-100, target.transform.position.y, 0), new(p.x + 100, target.transform.position.y, 0), Color.blue);
 		Debug.DrawLine(new(p.x-100, target.transform.position.y + lookahead, 0), new(p.x + 100, target.transform.position.y + lookahead, 0), Color.green);
 
-		var cam  = GetComponent<Camera>();
-		Bounds bounds = new();
-		bounds.SetMinMax(cam.ScreenToWorldPoint(new(0,0, target.transform.position.z - transform.position.z)), cam.ScreenToWorldPoint(new(Screen.width, Screen.height, target.transform.position.z - transform.position.z)));
+		
 
-		GLOBAL.DrawBounds(bounds, Color.purple);
+		GLOBAL.DrawBounds(GetBounds(), Color.purple);
 	}
 
-	public void GetBounds()
+	public Bounds GetBounds()
 	{
+        var cam = GetComponent<Camera>();
+        Bounds bounds = new();
+		var z = target.transform.position.z - transform.position.z;
+        bounds.SetMinMax(cam.ScreenToWorldPoint(new(0, 0, z)), cam.ScreenToWorldPoint(new(Screen.width, Screen.height, z)));
+		return bounds;
 	}
 }

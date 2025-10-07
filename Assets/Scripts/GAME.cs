@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GAME : MonoBehaviour
 {
 	public static GAME_manager mgr { get; private set; }
@@ -8,11 +8,27 @@ public class GAME : MonoBehaviour
 	public static PLAYER_baseMvt plyrMvt { get; private set; }
 
 	[SerializeField] PLAYER_baseMvt PlyrMvt;
+    public static CAMERA cam { get; private set; }
 
-	private void Awake()
+    [SerializeField] CAMERA Cam;
+
+    private void Awake()
 	{
 		mgr = GetComponent<GAME_manager>();
 		objMgr = GetComponent<GAME_objManager>();
 		plyrMvt = PlyrMvt;
+		cam = Cam;
+		Time.timeScale = 1;
 	}
+
+	public void SaveAndExit()
+	{
+		SceneManager.LoadScene("menu_main");
+	}
+
+	public void Reload()
+	{
+        SceneManager.LoadScene("game");
+
+    }
 }

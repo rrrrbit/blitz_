@@ -53,5 +53,8 @@ TagManager:
   - name: blitz
     uniqueID: 1337011621
     locked: 0
+  - name: menu
+    uniqueID: 1866283555
+    locked: 0
   m_RenderingLayers:
   - Default

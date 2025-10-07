@@ -22,6 +22,7 @@ public class GAME_objManager : MonoBehaviour
 
     public int maxObjs;
     public int maxNpObjs;
+    public int maxUnresolved;
 
     public List<GAME_objType> objTypes;
 
@@ -162,11 +163,11 @@ public class GAME_objManager : MonoBehaviour
             }
         }
 
-        if (objs.Count < maxObjs)
+        if (objs.Count < maxObjs && unresolvedObjs.Count < maxUnresolved)
         {
             Spawn();
         }
-        if(npObjs.Count < maxNpObjs)
+        if(npObjs.Count < maxNpObjs && unresolvedObjs.Count < maxUnresolved)
         {
             SpawnNonPlatformable();
         }
