@@ -53,6 +53,7 @@ MonoBehaviour:
   solid: 0
   repeatable: 0
   rotateSpeed: 60
+  particle: {fileID: 4023558836378336164, guid: 04a692b4c6709b74fa80e728a651cf03, type: 3}
 --- !u!58 &707867367458757557
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,7 +134,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7025651857757288288, guid: 3a26c800102aebf4aa1026e77ea25eb9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dfb741430df94bb4d921979b1f665466, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -247,7 +248,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7025651857757288288, guid: a9fbdf8952d7a38499c42edc968d61ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc665a30c19aad14a9c3f40e15843515, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

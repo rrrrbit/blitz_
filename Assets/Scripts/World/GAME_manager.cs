@@ -51,7 +51,7 @@ public class GAME_manager : MonoBehaviour
 
     IEnumerator EndSequence()
     {
-        yield return new WaitForSecondsRealtime(0.25f);
+        yield return new WaitForSecondsRealtime(1f);
         deathCanvas.enabled = true;
     }
 }

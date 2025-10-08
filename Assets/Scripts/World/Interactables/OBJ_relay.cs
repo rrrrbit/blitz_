@@ -6,6 +6,7 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
 {
     [SerializeField] bool repeatable;
     [SerializeField] float rotateSpeed;
+    [SerializeField] GameObject particle;
     public bool beenSlashed { get; set; }
     public void Slash(GameObject context)
     {
@@ -14,6 +15,9 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
         if (mvt != null && (!beenSlashed || repeatable))
         {
             mvt.Jump();
+            var p = Instantiate(particle, context.transform);
+            p.transform.localPosition = Vector3.zero;
+
         }
 
         beenSlashed = true;
