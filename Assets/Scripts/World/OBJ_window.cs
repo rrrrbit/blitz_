@@ -9,8 +9,9 @@ public class OBJ_window : TrajectoryAffectable
 	public GameObject contents;
 
     SpriteRenderer sprite;
-	[SerializeField] Sprite[] sprites;
-	bool hasIcon = false;
+	[SerializeField] Sprite[] contentSprites;
+	[SerializeField] Sprite[] bodySprites;
+    bool hasIcon = false;
 
 	public bool presentAtStart = false;
 
@@ -37,7 +38,8 @@ public class OBJ_window : TrajectoryAffectable
 
     public void Start()
     {
-		sprite = body.GetComponent<SpriteRenderer>();
+        sprite = body.GetComponent<SpriteRenderer>();
+        sprite.sprite = bodySprites[Random.Range(0, bodySprites.Length)];
 		if (presentAtStart)
 		{
 			SetBounds();
@@ -64,7 +66,7 @@ public class OBJ_window : TrajectoryAffectable
         hasIcon = aspectRatio > 0.9f && aspectRatio < 1.2f;
         if (hasIcon)
         {
-            contents.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
+            contents.GetComponent<SpriteRenderer>().sprite = contentSprites[Random.Range(0, contentSprites.Length)];
         }
     }
 

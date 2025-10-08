@@ -67,7 +67,7 @@ public class GAME_objManager : MonoBehaviour
         obj.GetComponent<GAME_obj>().SetBounds();
 
         var plat = obj.GetComponent<OBJ_window>();
-        if (plat != null) { plat.size = new(Random.Range(10f, 30f) + grace, Random.Range(10f, 30f)); }
+        if (plat != null) { plat.size = new(Random.Range(10f, 40f) + grace, Random.Range(10f, 30f)); }
         obj.transform.position = SelectTrajectory().Evaluate(Random.value);
         unresolvedObjs.Add(obj);
 

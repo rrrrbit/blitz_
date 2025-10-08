@@ -12,6 +12,7 @@ public class GAME_manager : MonoBehaviour
     public float speedMult = 0;
     public float speed = 1;
 
+    public Canvas hudCanvas;
     public Canvas deathCanvas;
 
     public List<GameObject> interactables = new();
@@ -44,6 +45,13 @@ public class GAME_manager : MonoBehaviour
     {
         print("end");
         Time.timeScale = 0;
+        hudCanvas.enabled = false;
+        StartCoroutine(EndSequence());
+    }
+
+    IEnumerator EndSequence()
+    {
+        yield return new WaitForSecondsRealtime(0.25f);
         deathCanvas.enabled = true;
     }
 }
