@@ -15,7 +15,6 @@ public class GAME_manager : MonoBehaviour
     public Canvas hudCanvas;
     public Canvas deathCanvas;
 
-
     void Start()
     {
         StartCoroutine(Init());

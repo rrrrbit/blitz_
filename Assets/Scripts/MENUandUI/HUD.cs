@@ -20,6 +20,6 @@ public class HUD : MonoBehaviour
         visualSpeed = GLOBAL.Lerpd(visualSpeed, GAME.mgr.speed, 0.5f, 0.1f, Time.deltaTime);
         
         speedText.text = ">> " + Mathf.RoundToInt(visualSpeed * 3.6f) + " K/H";
-        scoreText.text = "## "+ GAME.mgr.score.ToString();
+        scoreText.text = "** "+ GAME.mgr.score.ToString();
     }
 }
