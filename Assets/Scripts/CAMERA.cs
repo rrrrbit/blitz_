@@ -16,11 +16,17 @@ public class CAMERA : MonoBehaviour
 	Rigidbody2D targRb;
 	public bool debugDraw;
 
+	[SerializeField] Vector3 quickTransitionPos;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         targRb = target.GetComponent<Rigidbody2D>();
+
+		if (GAME_globalData.instance.quickGameTransition)
+		{
+			transform.position = quickTransitionPos;
+		}
     }
 
     // Update is called once per frame

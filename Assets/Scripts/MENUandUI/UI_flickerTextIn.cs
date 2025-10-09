@@ -1,31 +1,14 @@
 using TMPro;
 using UnityEngine;
 
-public class UI_flickerTextIn : MonoBehaviour, IFlicker
+public class UI_flickerTextIn : Flicker
 {
-    [SerializeField] float startDelay;
-    [SerializeField] float time;
-    [SerializeField] float speed;
-    float timer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Update()
     {
-        In();
-    }
+        base.Update();
 
-    public void In()
-    {
-        timer = time + startDelay;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        timer = Mathf.Max(0, timer-Time.unscaledDeltaTime);
-        
         var c = GetComponent<TextMeshProUGUI>().color;
-        c.a = timer > time ? 0 : timer > 0 ? Mathf.Floor(timer * speed % 2) : 1;
-
-        GetComponent<TextMeshProUGUI> ().color = c;
+        c.a = alpha;
+        GetComponent<TextMeshProUGUI>().color = c;
     }
 }

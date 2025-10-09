@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: glitch
+  m_Name: glitch2
   m_Shader: {fileID: -6465566751694194690, guid: 830659f8a589c964398df58abdf0d421, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -56,7 +56,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _NOISE: 0
     - _ZWrite: 0
-    - _seed: 80.409325
+    - _seed: 78.58486
     - _time_mult: 100
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

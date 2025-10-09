@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GAME : MonoBehaviour
 {
 	public static GAME_manager mgr { get; private set; }
@@ -11,6 +13,8 @@ public class GAME : MonoBehaviour
     public static CAMERA cam { get; private set; }
 
     [SerializeField] CAMERA Cam;
+
+	[SerializeField] Image blackScreen;
 
     private void Awake()
 	{
@@ -25,12 +29,29 @@ public class GAME : MonoBehaviour
 
 	public void SaveAndExit()
 	{
-		SceneManager.LoadScene("menu_main");
-	}
+        StartCoroutine(ExitSequence());
+    }
 
-	public void Reload()
+    IEnumerator ExitSequence()
+    {
+        vfx.fxGlitchGlobal.SetVector("_strength", new(30, 0));
+        yield return new WaitForSecondsRealtime(0.1f);
+        blackScreen.enabled = true;
+        SceneManager.LoadScene("menu_main");
+    }
+
+    public void Reload()
 	{
-        SceneManager.LoadScene("game");
+        StartCoroutine(ReloadSequence());
 
+    }
+
+	IEnumerator ReloadSequence()
+	{
+		vfx.fxGlitchGlobal.SetVector("_strength", new(30, 0));
+        yield return new WaitForSecondsRealtime(0.1f);
+		blackScreen.enabled = true;
+        GAME_globalData.instance.quickGameTransition = true;
+        SceneManager.LoadScene("game");
     }
 }

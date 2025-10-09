@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GAME_manager : MonoBehaviour
 {
@@ -14,10 +15,10 @@ public class GAME_manager : MonoBehaviour
 
     public Canvas hudCanvas;
     public Canvas deathCanvas;
-
+    public Image dim;
     void Start()
     {
-        StartCoroutine(Init());
+        if (!GAME_globalData.instance.quickGameTransition) { StartCoroutine(Init()); }
     }
 
     IEnumerator Init()
@@ -50,11 +51,12 @@ public class GAME_manager : MonoBehaviour
     IEnumerator EndSequence()
     {
         Time.timeScale = 0;
+        dim.enabled = true;
         //hudCanvas.enabled = false;
-        GAME.vfx.fxGlitch.SetVector("_strength", new(15, 0));
-        yield return new WaitForSecondsRealtime(1f);
+        GAME.vfx.fxGlitch.SetVector("_strength", new(3, 0));
+        yield return new WaitForSecondsRealtime(0.75f);
+        deathCanvas.transform.GetChild(0).GetComponent<Flicker>().In();
         deathCanvas.enabled = true;
-        deathCanvas.transform.GetChild(0).GetComponent<IFlicker>().In();
         
     }
 }
