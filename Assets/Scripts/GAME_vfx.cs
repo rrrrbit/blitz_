@@ -9,21 +9,18 @@ public class GAME_vfx : MonoBehaviour
     void Start()
     {
         GAME.vfx.fxGlitchGlobal.SetVector("_strength", new(0, 0));
+        fxGlitch.SetVector("_strength", new(0, 0));
         if (GAME_globalData.instance.quickGameTransition)
         {
             StartCoroutine(StartGlitch());
-        }
-        else
-        {
-            fxGlitch.SetVector("_strength", new(0, 0));
         }
     }
 
     IEnumerator StartGlitch()
     {
-        fxGlitch.SetVector("_strength", new(30, 0));
-        yield return new WaitForSecondsRealtime(0.1f);
-        fxGlitch.SetVector("_strength", new(0, 0));
+		fxGlitchGlobal.SetVector("_strength", new(30, 0));
+        yield return new WaitForSecondsRealtime(0.15f);
+		fxGlitchGlobal.SetVector("_strength", new(0, 0));
     }
 
     // Update is called once per frame

@@ -1,13 +1,15 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class MENU_main : MonoBehaviour
 {
-    public Material fxGlitch, fxGlitchGlobal;
+    public Material fxGlitch;
+	public Image blackScreen;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        fxGlitchGlobal.SetVector("_strength", new(0, 0));
         fxGlitch.SetVector("_strength", new(0, 0));
     }
 
@@ -20,6 +22,27 @@ public class MENU_main : MonoBehaviour
     public void StartGame()
     {
         GAME_globalData.instance.quickGameTransition = false;
-        SceneManager.LoadScene("game");
+		StartCoroutine(PlaySequence());
     }
+
+	public void Exit()
+	{
+		StartCoroutine(ExitSequence());
+	}
+
+	IEnumerator ExitSequence()
+	{
+		fxGlitch.SetVector("_strength", new(30, 0));
+		yield return new WaitForSecondsRealtime(0.05f);
+		blackScreen.enabled = true;
+		Application.Quit();
+	}
+
+	IEnumerator PlaySequence()
+	{
+		fxGlitch.SetVector("_strength", new(30, 0));
+		yield return new WaitForSecondsRealtime(0.05f);
+		blackScreen.enabled = true;
+		SceneManager.LoadScene("game");
+	}
 }

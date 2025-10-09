@@ -17,7 +17,6 @@ public class UI_textBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData data)
     {
         GetComponentInChildren<TextMeshProUGUI>().text = hoverText;
-        print("hovered");
     }
 
     public void OnPointerExit(PointerEventData data)

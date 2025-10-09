@@ -35,7 +35,7 @@ public class GAME : MonoBehaviour
     IEnumerator ExitSequence()
     {
         vfx.fxGlitchGlobal.SetVector("_strength", new(30, 0));
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(0.05f);
         blackScreen.enabled = true;
         SceneManager.LoadScene("menu_main");
     }
@@ -49,7 +49,7 @@ public class GAME : MonoBehaviour
 	IEnumerator ReloadSequence()
 	{
 		vfx.fxGlitchGlobal.SetVector("_strength", new(30, 0));
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(0.05f);
 		blackScreen.enabled = true;
         GAME_globalData.instance.quickGameTransition = true;
         SceneManager.LoadScene("game");
