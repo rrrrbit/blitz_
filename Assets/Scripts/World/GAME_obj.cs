@@ -27,7 +27,7 @@ public class GAME_obj : MonoBehaviour
 	public void DestroyCleanup()
 	{
 		GAME.objMgr.objs.Remove(gameObject);
-		GAME.mgr.interactables.Remove(gameObject);
+		GAME.objMgr.interactables.Remove(gameObject);
 		GAME.objMgr.unresolvedObjs.Remove(gameObject);
 		GAME.objMgr.npObjs.Remove(gameObject);
 		Destroy(gameObject);

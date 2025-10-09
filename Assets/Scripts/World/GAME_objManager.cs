@@ -40,8 +40,9 @@ public class GAME_objManager : MonoBehaviour
     public List<GameObject> objs = new();
 	public List<GameObject> unresolvedObjs = new();
     public List<GameObject> npObjs = new();
+    public List<GameObject> interactables = new();
 
-	public List<Trajectory> allTrajectories = new();
+    public List<Trajectory> allTrajectories = new();
     public List<Trajectory> newTrajectories = new();
     public List<Trajectory> trajsWithLandings = new();
 
@@ -176,7 +177,10 @@ public class GAME_objManager : MonoBehaviour
         if (debugDraw) { DebugDraw(); }
 
 
-        bottom.transform.position = new(GAME.plyrMvt.transform.position.x, objs.Select(x => x.GetComponent<GAME_obj>().bounds.bounds.min.y + bottomOffset).Min());
+        bottom.transform.position = new(GAME.plyrMvt.transform.position.x, objs
+            .Where(x=>x.GetComponent<GAME_obj>().bounds.bounds.min.x < GAME.cam.GetBounds().max.x)
+            .Select(x => x.GetComponent<GAME_obj>().bounds.bounds.min.y)
+            .Min() + bottomOffset);
     }
 
 	void DebugDraw()

@@ -13,10 +13,10 @@ TagManager:
   - UI
   - interactables
   - gameVolumes
+  - hudVolumes
   - menuVolumes
-  - 
-  - 
-  - 
+  - HUD
+  - menu
   - 
   - 
   - 

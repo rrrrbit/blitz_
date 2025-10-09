@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd186a30e0d639438fffd498b79b694, type: 3}
   m_Name: empty
   m_EditorClassIdentifier: 
-  obj: {fileID: 0}
+  obj: {fileID: 4701189408267180690, guid: eae60b12ef5c6494fbbdd1b737506210, type: 3}
   frequency: 10
   category: 0

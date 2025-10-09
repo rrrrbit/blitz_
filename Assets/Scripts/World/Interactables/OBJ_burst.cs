@@ -58,7 +58,7 @@ public class OBJ_burst : TrajectoryAffectable, IInteractable
 
 	public override void Ready()
 	{
-		GAME.mgr.interactables.Add(gameObject);
+		GAME.objMgr.interactables.Add(gameObject);
 	}
 
     public void Start()

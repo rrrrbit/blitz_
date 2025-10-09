@@ -1,19 +1,18 @@
-using UnityEditor;
 using UnityEngine;
 
-public class DEBUG_slashVis : MonoBehaviour
+public class GAME_vfx : MonoBehaviour
 {
+    public Material fxGlitch;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        fxGlitch.SetVector("_strength", new(0, 0));
     }
 
     // Update is called once per frame
     void Update()
     {
-        Color c = GetComponent<SpriteRenderer>().color;
-        c.a -= Time.deltaTime * 2;
-        GetComponent<SpriteRenderer>().color = c;
+        fxGlitch.SetFloat("_seed", Time.unscaledTime);
+
     }
 }

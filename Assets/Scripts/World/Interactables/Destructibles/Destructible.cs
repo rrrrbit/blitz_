@@ -12,6 +12,6 @@ public class Destructible : GAME_obj, IInteractable
 
     protected virtual void Start()
     {
-        GAME.mgr.interactables.Add(gameObject);
+        GAME.objMgr.interactables.Add(gameObject);
     }
 }

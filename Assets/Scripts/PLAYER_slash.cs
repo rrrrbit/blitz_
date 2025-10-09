@@ -24,7 +24,7 @@ public class PLAYER_slash : MonoBehaviour
         Transform closest = null;
         float closestDistSqr = Mathf.Infinity;
 
-        foreach(GameObject obj in GAME.mgr.interactables)
+        foreach(GameObject obj in GAME.objMgr.interactables)
         {
             float distSqr = (obj.transform.position - transform.position).sqrMagnitude;
             if (distSqr < closestDistSqr)

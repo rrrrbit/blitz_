@@ -31,7 +31,7 @@ public class OBJ_proxy : GAME_obj, IInteractable
 
 	public override void Ready()
 	{
-		GAME.mgr.interactables.Add(gameObject);
+		GAME.objMgr.interactables.Add(gameObject);
 	}
     protected void Start()
     {

@@ -40,7 +40,7 @@ public class OBJ_relay : TrajectoryAffectable, IInteractable
 
 	public override void Ready()
 	{
-		GAME.mgr.interactables.Add(gameObject);
+		GAME.objMgr.interactables.Add(gameObject);
 	}
 
     public void Start()

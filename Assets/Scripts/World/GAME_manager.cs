@@ -15,7 +15,6 @@ public class GAME_manager : MonoBehaviour
     public Canvas hudCanvas;
     public Canvas deathCanvas;
 
-    public List<GameObject> interactables = new();
 
     void Start()
     {
@@ -44,13 +43,16 @@ public class GAME_manager : MonoBehaviour
     public void End()
     {
         print("end");
-        Time.timeScale = 0;
-        hudCanvas.enabled = false;
+        
+        
         StartCoroutine(EndSequence());
     }
 
     IEnumerator EndSequence()
     {
+        Time.timeScale = 0;
+        //hudCanvas.enabled = false;
+        GAME.vfx.fxGlitch.SetVector("_strength", new(15, 0));
         yield return new WaitForSecondsRealtime(1f);
         deathCanvas.enabled = true;
     }
