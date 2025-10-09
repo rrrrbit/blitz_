@@ -142,6 +142,7 @@ MonoBehaviour:
   inner: {fileID: 3441426079424117010}
   rotateSpeed: {x: 60, y: -25}
   boostTime: 0.35
+  particle: {fileID: 7367028772698578202, guid: 16721061242e70a4d9337f0fed11b041, type: 3}
 --- !u!58 &707867367458757557
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class OBJ_burst : TrajectoryAffectable, IInteractable
     [SerializeField] Transform inner;
     [SerializeField] Vector2 rotateSpeed;
     [SerializeField] float boostTime;
+	[SerializeField] ParticleSystem particle;
 
     public bool beenSlashed { get; set; }
     public void Slash(GameObject context)
@@ -18,7 +19,9 @@ public class OBJ_burst : TrajectoryAffectable, IInteractable
 
         if (mvt != null && (!beenSlashed || repeatable))
         {
-            StartCoroutine(Burst(mvt));
+			var p = Instantiate(particle);
+			p.transform.position = transform.position;
+			StartCoroutine(Burst(mvt));
         }
 
         beenSlashed = true;

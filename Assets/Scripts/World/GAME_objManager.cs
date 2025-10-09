@@ -176,7 +176,7 @@ public class GAME_objManager : MonoBehaviour
         if (debugDraw) { DebugDraw(); }
 
 
-        bottom.transform.position = new(0, objs.Select(x => x.GetComponent<GAME_obj>().bounds.bounds.min.y + bottomOffset).Min());
+        bottom.transform.position = new(GAME.plyrMvt.transform.position.x, objs.Select(x => x.GetComponent<GAME_obj>().bounds.bounds.min.y + bottomOffset).Min());
     }
 
 	void DebugDraw()
