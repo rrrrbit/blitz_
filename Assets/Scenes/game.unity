@@ -371,9 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea5b4497b32ead44abf7b1b07226342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 0.25
+  startDelay: 0.6
   time: 0.35
-  seed: 0
   speed: 30
 --- !u!1 &210723650
 GameObject:
@@ -814,9 +813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea5b4497b32ead44abf7b1b07226342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 0.75
-  time: 0.35
-  seed: 0
+  startDelay: 1
+  time: 0.01
   speed: 30
 --- !u!1 &634814813
 GameObject:
@@ -6145,9 +6143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea5b4497b32ead44abf7b1b07226342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 0.1
+  startDelay: 0.25
   time: 0.35
-  seed: 0
   speed: 30
 --- !u!1 &741378782
 GameObject:
@@ -22022,7 +22019,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -22103,9 +22100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea5b4497b32ead44abf7b1b07226342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 0.5
-  time: 0.35
-  seed: 0
+  startDelay: 0.75
+  time: 0.01
   speed: 30
 --- !u!1 &1558162183
 GameObject:
@@ -22287,10 +22283,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1601743880}
+  - component: {fileID: 1601743883}
   - component: {fileID: 1601743882}
   - component: {fileID: 1601743881}
   m_Layer: 11
-  m_Name: Panel
+  m_Name: window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22356,6 +22353,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601743879}
   m_CullTransparentMesh: 1
+--- !u!114 &1601743883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601743879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e00743d44604b64e98f8b467446ae22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDelay: 0
+  time: 0.1
+  speed: 30
+  children:
+  - {fileID: 1700621319}
+  - {fileID: 1557254578}
+  - {fileID: 546301117}
 --- !u!1 &1623682443
 GameObject:
   m_ObjectHideFlags: 0
@@ -22656,9 +22672,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea5b4497b32ead44abf7b1b07226342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 0
-  time: 0.35
-  seed: 0
+  startDelay: 0.15
+  time: 0.15
   speed: 30
 --- !u!1 &1797290676
 GameObject:
@@ -22736,7 +22751,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1006733119
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: -32768
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}

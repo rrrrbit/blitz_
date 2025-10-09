@@ -54,5 +54,7 @@ public class GAME_manager : MonoBehaviour
         GAME.vfx.fxGlitch.SetVector("_strength", new(15, 0));
         yield return new WaitForSecondsRealtime(1f);
         deathCanvas.enabled = true;
+        deathCanvas.transform.GetChild(0).GetComponent<IFlicker>().In();
+        
     }
 }
