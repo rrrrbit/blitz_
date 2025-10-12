@@ -7,6 +7,7 @@ public class MENU_info : MonoBehaviour
 	public float time;
 	public float opacity;
 	public GameObject menu;
+	public Scrollbar scrollbar;
 
 	public float timer;
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,6 +18,7 @@ public class MENU_info : MonoBehaviour
 
 	public void Enable()
 	{
+		scrollbar.value = 1;
 		showInfo = true;
 	}
 	public void Disable()

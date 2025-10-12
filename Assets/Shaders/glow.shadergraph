@@ -8,6 +8,24 @@
         },
         {
             "m_Id": "7587decbfa394ad8bc538fd7d572758f"
+        },
+        {
+            "m_Id": "a305ea3605784907ab73923b87e5c8fc"
+        },
+        {
+            "m_Id": "b71a8256af834926bb391e6b2f710f82"
+        },
+        {
+            "m_Id": "e864271deac14a57856ece288734d78e"
+        },
+        {
+            "m_Id": "5876c6bc4f094af99155938968bf6580"
+        },
+        {
+            "m_Id": "7563e6342190433abe6c08c15d64c576"
+        },
+        {
+            "m_Id": "290d045c74ed47d6a674bc7ee538bed2"
         }
     ],
     "m_Keywords": [],
@@ -237,10 +255,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -334.0,
-            "y": 246.00001525878907,
-            "width": 207.99996948242188,
-            "height": 433.0
+            "x": -778.3999633789063,
+            "y": 360.0000305175781,
+            "width": 208.0,
+            "height": 430.3999938964844
         }
     },
     "m_Slots": [
@@ -297,10 +315,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -591.0,
-            "y": 289.0,
-            "width": 127.99996948242188,
-            "height": 34.0
+            "x": -1035.2000732421875,
+            "y": 402.4000549316406,
+            "width": 128.79998779296876,
+            "height": 33.599945068359378
         }
     },
     "m_Slots": [
@@ -322,6 +340,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "290d045c74ed47d6a674bc7ee538bed2",
+    "m_Guid": {
+        "m_GuidSerialized": "1db3dbba-d7aa-4268-9e7c-933e26aef7ef"
+    },
+    "m_Name": "ColorMask",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "ColorMask",
+    "m_DefaultReferenceName": "_ColorMask",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "4a53dd8a161848aeaf2cb6325d363219",
@@ -332,8 +378,54 @@
         },
         {
             "m_Id": "7587decbfa394ad8bc538fd7d572758f"
+        },
+        {
+            "m_Id": "a305ea3605784907ab73923b87e5c8fc"
+        },
+        {
+            "m_Id": "b71a8256af834926bb391e6b2f710f82"
+        },
+        {
+            "m_Id": "e864271deac14a57856ece288734d78e"
+        },
+        {
+            "m_Id": "5876c6bc4f094af99155938968bf6580"
+        },
+        {
+            "m_Id": "7563e6342190433abe6c08c15d64c576"
+        },
+        {
+            "m_Id": "290d045c74ed47d6a674bc7ee538bed2"
         }
     ]
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "5876c6bc4f094af99155938968bf6580",
+    "m_Guid": {
+        "m_GuidSerialized": "7d15ad66-1e59-42db-a2b9-993b688f5fe0"
+    },
+    "m_Name": "StencilReadMask",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "StencilReadMask",
+    "m_DefaultReferenceName": "_StencilReadMask",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
 }
 
 {
@@ -379,10 +471,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 14.0,
-            "y": 555.0,
-            "width": 208.0,
-            "height": 302.0
+            "x": -104.0,
+            "y": 402.4000244140625,
+            "width": 207.99996948242188,
+            "height": 301.5999755859375
         }
     },
     "m_Slots": [
@@ -455,6 +547,34 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "7563e6342190433abe6c08c15d64c576",
+    "m_Guid": {
+        "m_GuidSerialized": "56953079-c0ea-48ea-89fd-81b01d26e500"
+    },
+    "m_Name": "StencilWriteMask",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "StencilWriteMask",
+    "m_DefaultReferenceName": "_StencilWriteMask",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
     }
 }
 
@@ -580,10 +700,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -142.0,
-            "y": 757.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": -306.3999938964844,
+            "y": 670.4000244140625,
+            "width": 101.5999755859375,
+            "height": 33.5999755859375
         }
     },
     "m_Slots": [
@@ -684,7 +804,7 @@
     },
     "m_AllowMaterialOverride": false,
     "m_SurfaceType": 0,
-    "m_ZTestMode": 4,
+    "m_ZTestMode": 5,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
@@ -734,6 +854,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "a305ea3605784907ab73923b87e5c8fc",
+    "m_Guid": {
+        "m_GuidSerialized": "fa859b35-d33c-4c93-bc0b-359f960a8978"
+    },
+    "m_Name": "Stencil",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Stencil",
+    "m_DefaultReferenceName": "_Stencil",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "ab85d1c2d31f4c75931f60e9d7bf3593",
@@ -778,6 +926,34 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "b71a8256af834926bb391e6b2f710f82",
+    "m_Guid": {
+        "m_GuidSerialized": "5f964867-c00b-442c-a5bf-2ccc0aef622a"
+    },
+    "m_Name": "StencilOp",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "StencilOp",
+    "m_DefaultReferenceName": "_StencilOp",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
     }
 }
 
@@ -998,6 +1174,34 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "e864271deac14a57856ece288734d78e",
+    "m_Guid": {
+        "m_GuidSerialized": "0c20e210-9393-48d2-89dc-941c2e33a2a7"
+    },
+    "m_Name": "StencilComp",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "StencilComp",
+    "m_DefaultReferenceName": "_StencilComp",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
 }
 
 {
