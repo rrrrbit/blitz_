@@ -16567,7 +16567,7 @@ MonoBehaviour:
   m_Cameras:
   - {fileID: 1387068593}
   - {fileID: 1529112007}
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -16641,7 +16641,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 95
+    m_Bits: 1119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -17544,7 +17544,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 6826f526c80f4604784b89ba622103e5, type: 3}
+  - {fileID: -876546973899608171, guid: eb2ddd7bec5c654438ce1c71c10c2e91, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

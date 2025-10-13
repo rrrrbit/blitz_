@@ -1392,7 +1392,7 @@
     },
     "m_Name": "Sample Texture 2D",
     "m_DrawState": {
-        "m_Expanded": false,
+        "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
             "x": -87.0,
@@ -1431,7 +1431,7 @@
         "tex2d"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -2752,8 +2752,8 @@
     "m_ObjectId": "8b9798bf7808487195b3fba694068d53",
     "m_Title": "squash",
     "m_Position": {
-        "x": -1083.9998779296875,
-        "y": -521.5999755859375
+        "x": -1084.0,
+        "y": -521.6000366210938
     }
 }
 
@@ -3272,8 +3272,8 @@
     "m_ObjectId": "b77eedf392b7408a875ce3d20706f4fe",
     "m_Title": "shear",
     "m_Position": {
-        "x": -643.199951171875,
-        "y": -477.5999755859375
+        "x": -643.2000732421875,
+        "y": -477.60003662109377
     }
 }
 

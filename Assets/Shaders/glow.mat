@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: glitch
-  m_Shader: {fileID: -6465566751694194690, guid: 830659f8a589c964398df58abdf0d421, type: 3}
+  m_Name: glow
+  m_Shader: {fileID: -6465566751694194690, guid: eb2ddd7bec5c654438ce1c71c10c2e91, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -54,15 +54,23 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _NOISE: 0
     - _ZWrite: 0
-    - _seed: 14.551739
-    - _time_mult: 100
+    - _glow: 2
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _resolution: {r: 1, g: 20, b: 0, a: 0}
-    - _scale: {r: 1, g: 90.77, b: 0, a: 0}
-    - _strength: {r: 3, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!114 &5054974543992731884
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
