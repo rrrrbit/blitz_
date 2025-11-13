@@ -7,24 +7,29 @@ public class MENU_info : MonoBehaviour
 	public float time;
 	public float opacity;
 	public GameObject menu;
-	public Scrollbar scrollbar;
 
 	public float timer;
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    InputSystem_Actions.MenuActions actions;
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        actions = new InputSystem_Actions().menu;
+        actions.Enable();
     }
 
 	public void Enable()
 	{
-		scrollbar.value = 1;
 		showInfo = true;
 	}
 	public void Disable()
 	{
 		showInfo = false;
 	}
+
+	
 
     // Update is called once per frame
     void Update()
@@ -34,5 +39,10 @@ public class MENU_info : MonoBehaviour
 		timer = Mathf.Clamp01(timer + Time.unscaledDeltaTime * (showInfo ? 1 : -1) / time);
 
 		menu.GetComponent <CanvasGroup>().alpha = timer * opacity;
+
+		if (actions.info.WasPressedThisFrame())
+		{
+			showInfo = !showInfo;
+		}
 	}
 }

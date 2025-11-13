@@ -13,8 +13,6 @@ public class PLAYER_baseMvt : MonoBehaviour
     [SerializeField] public float jumpHeight = 10f;
     [SerializeField] public float jumpTime = 0.75f;
     [SerializeField] float coyoteTime;
-    [Header("Other Mvt")]
-    public float boostForce;
     [Header("(Internal)")]
     [SerializeField] float jumpForce;
     [SerializeField] float grav;
@@ -82,10 +80,6 @@ public class PLAYER_baseMvt : MonoBehaviour
         {
             Jump();
         }
-		
-        if (actions.brake.WasPressedThisFrame()) { rb.linearVelocityX -= boostForce; }
-        if (actions.boost.WasPressedThisFrame()) { rb.linearVelocityX += boostForce; }
-        if (actions.down.WasPressedThisFrame()) { rb.linearVelocityY = -jumpForce; }
 
         rb.gravityScale = grav * gravityMult / Physics2D.gravity.y;
 

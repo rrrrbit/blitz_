@@ -7,16 +7,24 @@ public class MENU_main : MonoBehaviour
     public Material fxGlitch;
 	public Image blackScreen;
 
+    InputSystem_Actions.MenuActions actions;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         fxGlitch.SetVector("_strength", new(0, 0));
+        actions = new InputSystem_Actions().menu;
+        actions.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
         fxGlitch.SetFloat("_seed", Time.unscaledTime);
+        if (actions.play.WasPressedThisFrame())
+        {
+            StartGame();
+        }
     }
 
     public void StartGame()

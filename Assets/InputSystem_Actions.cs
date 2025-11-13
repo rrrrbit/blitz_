@@ -110,33 +110,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""boost"",
-                    ""type"": ""Button"",
-                    ""id"": ""61ebe4ee-e78d-4c82-809e-426eef647d04"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""brake"",
-                    ""type"": ""Button"",
-                    ""id"": ""8fcab9ce-cc0c-4c0e-95cf-73c9e1d9e678"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""down"",
-                    ""type"": ""Button"",
-                    ""id"": ""547d3329-bc37-4931-880d-ad680bd1d5da"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""slash"",
                     ""type"": ""Button"",
                     ""id"": ""fa7cb371-9260-4794-8fbb-1b7c5f23b80d"",
@@ -150,7 +123,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""05a85ddf-542b-4e66-a943-26fb51a2ee91"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a9afc01-a50b-4e40-a349-df1d15f05439"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -172,7 +156,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""c68d0ef3-8b4d-49eb-83cc-1d6254ca1c16"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -183,6 +167,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""0955f524-dcbf-492b-b989-9ccc01debd0e"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""lr"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""61e56a78-c85c-420b-92ac-e6bfd4194851"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""lr"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b3347280-c629-4c7c-b98f-918b1350892d"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -192,42 +198,20 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""6b61311e-b858-4604-81ee-7e72af7aee7f"",
-                    ""path"": ""<Keyboard>/l"",
+                    ""name"": ""positive"",
+                    ""id"": ""12c89270-23ad-4e6a-9edb-3ad8af131be0"",
+                    ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""boost"",
+                    ""action"": ""lr"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d3253f79-8cc8-4e81-8996-1c0d80affcb8"",
-                    ""path"": ""<Keyboard>/j"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""brake"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6eb02ddf-0802-4dfc-bd6a-727558b261c3"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
                     ""id"": ""2e1df29c-f2c9-4130-ba17-0bee908406cf"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -238,7 +222,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""559dcb45-a7a3-4f30-b4d0-353fd7f43a30"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -269,22 +253,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""exit"",
-                    ""type"": ""Button"",
-                    ""id"": ""fdcff0cf-5266-402e-9a94-d249d799e379"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""d8228703-8414-45c2-a00d-65df2bf58d22"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -294,8 +269,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d7666738-adc3-4f2e-8cd5-0efb7012d538"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""play"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6d88fca6-bded-4a36-a0e2-fa9bd98b4035"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -305,12 +291,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5a47423a-22ee-47f8-a159-bdccbb136294"",
-                    ""path"": """",
+                    ""id"": ""d24c8ab4-e1b4-4fc7-ae59-2986b5ef962a"",
+                    ""path"": ""<Keyboard>/6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""exit"",
+                    ""action"": ""info"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -384,15 +370,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_player = asset.FindActionMap("player", throwIfNotFound: true);
         m_player_lr = m_player.FindAction("lr", throwIfNotFound: true);
         m_player_jump = m_player.FindAction("jump", throwIfNotFound: true);
-        m_player_boost = m_player.FindAction("boost", throwIfNotFound: true);
-        m_player_brake = m_player.FindAction("brake", throwIfNotFound: true);
-        m_player_down = m_player.FindAction("down", throwIfNotFound: true);
         m_player_slash = m_player.FindAction("slash", throwIfNotFound: true);
         // menu
         m_menu = asset.FindActionMap("menu", throwIfNotFound: true);
         m_menu_play = m_menu.FindAction("play", throwIfNotFound: true);
         m_menu_info = m_menu.FindAction("info", throwIfNotFound: true);
-        m_menu_exit = m_menu.FindAction("exit", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -476,9 +458,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_player_lr;
     private readonly InputAction m_player_jump;
-    private readonly InputAction m_player_boost;
-    private readonly InputAction m_player_brake;
-    private readonly InputAction m_player_down;
     private readonly InputAction m_player_slash;
     /// <summary>
     /// Provides access to input actions defined in input action map "player".
@@ -499,18 +478,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "player/jump".
         /// </summary>
         public InputAction @jump => m_Wrapper.m_player_jump;
-        /// <summary>
-        /// Provides access to the underlying input action "player/boost".
-        /// </summary>
-        public InputAction @boost => m_Wrapper.m_player_boost;
-        /// <summary>
-        /// Provides access to the underlying input action "player/brake".
-        /// </summary>
-        public InputAction @brake => m_Wrapper.m_player_brake;
-        /// <summary>
-        /// Provides access to the underlying input action "player/down".
-        /// </summary>
-        public InputAction @down => m_Wrapper.m_player_down;
         /// <summary>
         /// Provides access to the underlying input action "player/slash".
         /// </summary>
@@ -547,15 +514,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @jump.started += instance.OnJump;
             @jump.performed += instance.OnJump;
             @jump.canceled += instance.OnJump;
-            @boost.started += instance.OnBoost;
-            @boost.performed += instance.OnBoost;
-            @boost.canceled += instance.OnBoost;
-            @brake.started += instance.OnBrake;
-            @brake.performed += instance.OnBrake;
-            @brake.canceled += instance.OnBrake;
-            @down.started += instance.OnDown;
-            @down.performed += instance.OnDown;
-            @down.canceled += instance.OnDown;
             @slash.started += instance.OnSlash;
             @slash.performed += instance.OnSlash;
             @slash.canceled += instance.OnSlash;
@@ -576,15 +534,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @jump.started -= instance.OnJump;
             @jump.performed -= instance.OnJump;
             @jump.canceled -= instance.OnJump;
-            @boost.started -= instance.OnBoost;
-            @boost.performed -= instance.OnBoost;
-            @boost.canceled -= instance.OnBoost;
-            @brake.started -= instance.OnBrake;
-            @brake.performed -= instance.OnBrake;
-            @brake.canceled -= instance.OnBrake;
-            @down.started -= instance.OnDown;
-            @down.performed -= instance.OnDown;
-            @down.canceled -= instance.OnDown;
             @slash.started -= instance.OnSlash;
             @slash.performed -= instance.OnSlash;
             @slash.canceled -= instance.OnSlash;
@@ -627,7 +576,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_menu_play;
     private readonly InputAction m_menu_info;
-    private readonly InputAction m_menu_exit;
     /// <summary>
     /// Provides access to input actions defined in input action map "menu".
     /// </summary>
@@ -647,10 +595,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "menu/info".
         /// </summary>
         public InputAction @info => m_Wrapper.m_menu_info;
-        /// <summary>
-        /// Provides access to the underlying input action "menu/exit".
-        /// </summary>
-        public InputAction @exit => m_Wrapper.m_menu_exit;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -683,9 +627,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @info.started += instance.OnInfo;
             @info.performed += instance.OnInfo;
             @info.canceled += instance.OnInfo;
-            @exit.started += instance.OnExit;
-            @exit.performed += instance.OnExit;
-            @exit.canceled += instance.OnExit;
         }
 
         /// <summary>
@@ -703,9 +644,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @info.started -= instance.OnInfo;
             @info.performed -= instance.OnInfo;
             @info.canceled -= instance.OnInfo;
-            @exit.started -= instance.OnExit;
-            @exit.performed -= instance.OnExit;
-            @exit.canceled -= instance.OnExit;
         }
 
         /// <summary>
@@ -826,27 +764,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "boost" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnBoost(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "brake" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnBrake(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "down" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDown(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "slash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -875,12 +792,5 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInfo(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "exit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnExit(InputAction.CallbackContext context);
     }
 }
