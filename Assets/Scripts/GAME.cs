@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GAME : MonoBehaviour
 {
-	public static GAME_manager mgr { get; private set; }
+	public static GAME instance;
+    public static GAME_manager mgr { get; private set; }
 	public static GAME_objManager objMgr { get; private set; }
 	public static GAME_vfx vfx {  get; private set; }
 	public static PLAYER_baseMvt plyrMvt { get; private set; }
@@ -18,7 +19,8 @@ public class GAME : MonoBehaviour
 
     private void Awake()
 	{
-		mgr = GetComponent<GAME_manager>();
+		instance = this;
+        mgr = GetComponent<GAME_manager>();
 		objMgr = GetComponent<GAME_objManager>();
         vfx = GetComponent<GAME_vfx>();
 

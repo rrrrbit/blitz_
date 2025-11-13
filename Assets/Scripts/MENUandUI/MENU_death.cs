@@ -6,17 +6,31 @@ public class MENU_death : MonoBehaviour
     [SerializeField] float padding;
 
     Vector3 corner;
-
+    InputSystem_Actions.MenuActions actions;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        actions = new InputSystem_Actions().menu;
+        actions.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdatePos();
+
+        if (GetComponent<Canvas>().enabled)
+        {
+            if (actions.play.WasPressedThisFrame())
+            {
+                GAME.instance.Reload();
+            }
+
+            if (actions.info.WasPressedThisFrame())
+            {
+                GAME.instance.SaveAndExit   ();
+            }
+        }
     }
 
     void UpdatePos()
