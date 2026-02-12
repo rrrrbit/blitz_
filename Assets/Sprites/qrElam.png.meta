@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 34e8b4d0122b2aa4cb43f189ebc85e06
+guid: c0a22aae4ab792c488ca534f8cb83c0c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4394683457047790218
-    second: rbitWordmark_0
-  - first:
-      213: -1825371867225885740
-    second: rbitWordmark_1
-  - first:
-      213: -5851346645837896327
-    second: rbitWordmark_2
+      213: -2977290460919727711
+    second: Untitled834_20251113144045_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,13 +46,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 383}
+  spritePixelsToUnits: 1160
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -103,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -116,7 +110,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -145,23 +139,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rbitWordmark_0
+      name: Untitled834_20251113144045_0
       rect:
         serializedVersion: 2
-        x: 126
-        y: 255
-        width: 1794
-        height: 898
+        x: 0
+        y: 0
+        width: 1160
+        height: 1160
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 67d716a0ea2f203c0800000000000000
-      internalID: -4394683457047790218
+      spriteID: 1a978b3a91a8ea6d0800000000000000
+      internalID: -2977290460919727711
       vertices: []
       indices: 
       edges: []
@@ -171,7 +165,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -180,9 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      rbitWordmark_0: -4394683457047790218
-      rbitWordmark_1: -1825371867225885740
-      rbitWordmark_2: -5851346645837896327
+      Untitled834_20251113144045_0: -2977290460919727711
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
