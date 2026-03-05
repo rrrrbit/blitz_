@@ -1112,12 +1112,12 @@ MonoBehaviour:
   jumpHeight: 7.5
   jumpTime: 0.75
   coyoteTime: 0
-  boostForce: 30
   jumpForce: 0
   grav: 0
   gravityMult: 1
   cam: {fileID: 1235208196}
   grounded: 0
+  tokenControlScheme: {fileID: 11400000, guid: 72f64e8d18aa9ff4aa684b31021b7768, type: 2}
 --- !u!114 &634814819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1256,6 +1256,7 @@ MonoBehaviour:
   slashBoxAnim: {fileID: 1558162188}
   checkTime: 0.1
   comboTime: 0.25
+  tokenControlScheme: {fileID: 11400000, guid: 72f64e8d18aa9ff4aa684b31021b7768, type: 2}
 --- !u!1 &714505904
 GameObject:
   m_ObjectHideFlags: 0
@@ -11598,6 +11599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 634814817}
   padding: 3
+  tokenControlScheme: {fileID: 11400000, guid: 72f64e8d18aa9ff4aa684b31021b7768, type: 2}
 --- !u!1 &1104550933
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,14 +24,17 @@ public class PLAYER_baseMvt : MonoBehaviour
 
     public Camera cam;
 
-    InputSystem_Actions.PlayerActions actions;
+	InputSystem_Actions actions;
+    InputSystem_Actions.PlayerActions plyrActions;
 
     float lrControl;
 
     public bool grounded;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+	public TOKEN_ControlScheme tokenControlScheme;
+
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
     {
         Setup();
     }
@@ -41,8 +44,10 @@ public class PLAYER_baseMvt : MonoBehaviour
         jumpForce = 4f / jumpTime * jumpHeight;
         grav = -8f / jumpTime / jumpTime * jumpHeight;
 
-        actions = new InputSystem_Actions().player;
-        actions.Enable();
+		actions = new InputSystem_Actions();
+		actions.bindingMask = InputBinding.MaskByGroup(tokenControlScheme.GetScheme(actions).bindingGroup);
+		plyrActions = actions.player;
+        plyrActions.Enable();
 
         rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<PLAYER_anim>();
@@ -75,10 +80,10 @@ public class PLAYER_baseMvt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lrControl = actions.lr.ReadValue<float>();
-        if (actions.jump.IsPressed() && grounded)
+        lrControl = plyrActions.lr.ReadValue<float>();
+        if (plyrActions.jump.IsPressed() && grounded)
         {
-            Jump();
+			Jump();
         }
 
         rb.gravityScale = grav * gravityMult / Physics2D.gravity.y;

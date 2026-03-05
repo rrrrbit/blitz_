@@ -56,7 +56,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _NOISE: 0
     - _ZWrite: 0
-    - _seed: 13.705659
+    - _seed: 22.565357
     - _time_mult: 100
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

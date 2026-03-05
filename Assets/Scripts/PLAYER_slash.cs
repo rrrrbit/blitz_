@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PLAYER_slash : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class PLAYER_slash : MonoBehaviour
     bool checking;
     bool flipAnim;
 
-    InputSystem_Actions.PlayerActions actions;
+	public TOKEN_ControlScheme tokenControlScheme;
+
+	InputSystem_Actions actions;
+	InputSystem_Actions.PlayerActions plyrActions;
 
     void Slash()
     {
@@ -45,8 +49,10 @@ public class PLAYER_slash : MonoBehaviour
 
     void Setup()
     {
-        actions = new InputSystem_Actions().player;
-        actions.Enable();
+        actions = new InputSystem_Actions();
+		actions.bindingMask = InputBinding.MaskByGroup(tokenControlScheme.GetScheme(actions).bindingGroup);
+		plyrActions = actions.player;
+        plyrActions.Enable();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -58,7 +64,7 @@ public class PLAYER_slash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (actions.slash.WasPressedThisFrame())
+        if (plyrActions.slash.WasPressedThisFrame())
         {
             Slash();
         }

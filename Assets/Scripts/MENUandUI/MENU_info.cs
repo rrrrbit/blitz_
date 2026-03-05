@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class MENU_info : MonoBehaviour
 {
@@ -10,15 +10,20 @@ public class MENU_info : MonoBehaviour
 
 	public float timer;
 
-    InputSystem_Actions.MenuActions actions;
+	public TOKEN_ControlScheme tokenControlScheme;
+
+	InputSystem_Actions actions;
+	InputSystem_Actions.MenuActions menuActions;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
     {
-        actions = new InputSystem_Actions().menu;
-        actions.Enable();
-    }
+		actions = new InputSystem_Actions();
+		actions.bindingMask = InputBinding.MaskByGroup(tokenControlScheme.GetScheme(actions).bindingGroup);
+		menuActions = actions.menu;
+		menuActions.Enable();
+	}
 
 	public void Enable()
 	{
@@ -40,7 +45,7 @@ public class MENU_info : MonoBehaviour
 
 		menu.GetComponent <CanvasGroup>().alpha = timer * opacity;
 
-		if (actions.info.WasPressedThisFrame())
+		if (menuActions.info.WasPressedThisFrame())
 		{
 			showInfo = !showInfo;
 		}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MENU_death : MonoBehaviour
 {
@@ -6,27 +7,34 @@ public class MENU_death : MonoBehaviour
     [SerializeField] float padding;
 
     Vector3 corner;
-    InputSystem_Actions.MenuActions actions;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        actions = new InputSystem_Actions().menu;
-        actions.Enable();
-    }
+	public TOKEN_ControlScheme tokenControlScheme;
 
-    // Update is called once per frame
-    void Update()
+	InputSystem_Actions actions;
+	InputSystem_Actions.MenuActions menuActions;
+
+
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
+	{
+		actions = new InputSystem_Actions();
+		actions.bindingMask = InputBinding.MaskByGroup(tokenControlScheme.GetScheme(actions).bindingGroup);
+		menuActions = actions.menu;
+		menuActions.Enable();
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         UpdatePos();
 
         if (GetComponent<Canvas>().enabled)
         {
-            if (actions.play.WasPressedThisFrame())
+            if (menuActions.play.WasPressedThisFrame())
             {
                 GAME.instance.Reload();
             }
 
-            if (actions.info.WasPressedThisFrame())
+            if (menuActions.info.WasPressedThisFrame())
             {
                 GAME.instance.SaveAndExit   ();
             }
