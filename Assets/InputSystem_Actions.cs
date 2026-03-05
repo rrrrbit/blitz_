@@ -357,6 +357,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""dcd78905-90e5-4d1b-9d93-32eeb6eadbce"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""play"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd444efc-ffd1-4953-8710-52264589b25c"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""play"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6d88fca6-bded-4a36-a0e2-fa9bd98b4035"",
                     ""path"": ""<Keyboard>/5"",
                     ""interactions"": """",
@@ -381,28 +403,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""7207b562-0189-4349-8d76-7aefe42b822b"",
                     ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""info"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dcd78905-90e5-4d1b-9d93-32eeb6eadbce"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""info"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cd444efc-ffd1-4953-8710-52264589b25c"",
-                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",

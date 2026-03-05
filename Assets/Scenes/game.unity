@@ -717,7 +717,7 @@ MonoBehaviour:
   debugDraw: 1
   deleteThreshhold: -100
   start: 40
-  grace: 0
+  grace: 5
   padding: 4
   maxObjs: 50
   maxNpObjs: 15
